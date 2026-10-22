@@ -1,0 +1,30 @@
+## Interface: 11508, 11509, 20505, 20506, 38002, 50503, 50504, 16001, 120000, 120001, 120005, 120007, 120100, 120105, 120107
+## Title: |cffe3b55bConfigManager|r
+## Notes: Copy key bindings, action bars, macros, game and chat settings between all WoW versions.
+## Notes-deDE: Tastenbelegung, Leisten, Makros, Spiel- und Chat-Einstellungen zwischen allen WoW-Versionen kopieren.
+## Author: psappz
+## Version: @project-version@
+## AddonCompartmentFunc: ConfigManager_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: ConfigManager_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: ConfigManager_OnAddonCompartmentLeave
+## SavedVariables: ConfigManagerDB
+## SavedVariablesPerCharacter: ConfigManagerCharDB
+## IconTexture: Interface\AddOns\ConfigManager\Media\ConfigManager
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+Locale.lua
+Util.lua
+Layouts.lua
+Data.lua
+Settings.lua
+Chat.lua
+Presets.lua
+UI_Widgets.lua
+UI_Main.lua
+UI_Dialogs.lua
+UI_Profiles.lua
+Init.lua

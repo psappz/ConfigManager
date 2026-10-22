@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="CONFIGMANAGER_TOGGLE" header="CONFIGMANAGER" category="ADDONS">
+		ConfigManagerToggle()
+	</Binding>
+</Bindings>
