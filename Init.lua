@@ -135,6 +135,9 @@ function handlers.ADDON_LOADED(arg1)
   if arg1 == ADDON then
     D.InitDB()
     ns.ApplyLocale(ns.db.language)
+    -- create the minimap button as early as other addons do, so minimap collectors
+    -- (MinimapButtonButton, EllesmereUI, ...) see it on their first scan
+    ns.Dialogs.CreateMinimap()
   elseif arg1 == "Blizzard_Settings" or arg1 == "Blizzard_BindingUI" then
     ns.Dialogs.HookBlizzard()
   end

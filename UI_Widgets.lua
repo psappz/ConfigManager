@@ -214,22 +214,13 @@ function W.CloseMenu()
   if menu and menu:IsShown() then menu:Hide() end
 end
 
--- Escape closes the frame without UISpecialFrames (which would let addon code run
--- inside Blizzard's Escape handling). In combat the key is always passed on.
+-- Escape closes the frame through UISpecialFrames: Blizzard calls CloseSpecialWindows
+-- via securecall, so the Escape key path stays untainted. (Own keyboard handlers on
+-- frames would run addon code inside every key press and taint Blizzard's key handling.)
 function W.EscClose(frame)
-  frame:EnableKeyboard(true)
-  if frame.SetPropagateKeyboardInput then frame:SetPropagateKeyboardInput(true) end
-  frame:SetScript("OnKeyDown", function(self, key)
-    if InCombatLockdown() then return end
-    if key == "ESCAPE" then
-      if self.SetPropagateKeyboardInput then self:SetPropagateKeyboardInput(false) end
-      self:Hide()
-    elseif self.SetPropagateKeyboardInput then
-      self:SetPropagateKeyboardInput(true)
-    end
-  end)
-  frame:HookScript("OnShow", function(self)
-    if self.SetPropagateKeyboardInput and not InCombatLockdown() then self:SetPropagateKeyboardInput(true) end
-  end)
+  local name = frame:GetName()
+  if name and UISpecialFrames then
+    for _, n in ipairs(UISpecialFrames) do if n == name then return end end
+    tinsert(UISpecialFrames, name)
+  end
 end
-

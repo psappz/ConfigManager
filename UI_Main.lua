@@ -689,7 +689,6 @@ function M.StartCapture(cmd, oldChord, button)
   if InCombatLockdown() then U.Print(L.IN_COMBAT); return end
   M.captureCmd, M.captureOld, M.captureButton = cmd, oldChord, button
   M.capture:Show()
-  if M.capture.SetPropagateKeyboardInput then M.capture:SetPropagateKeyboardInput(false) end
   M.RefreshList()
 end
 
