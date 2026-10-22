@@ -2,7 +2,7 @@
 
 Copy your key bindings, action bar contents, macros, game settings and chat setup between World of Warcraft versions – Classic Era, TBC Anniversary, MoP Classic, WoW Forever and Midnight – with one export string. Includes per-spec profiles.
 
-- Download: CurseForge (link follows)
+- Download: [CurseForge](https://www.curseforge.com/wow/addons/configmanager)
 - Slash command: `/cfgm`
 - Full description: [docs/curseforge-description.md](docs/curseforge-description.md)
 - License: [MIT](LICENSE)
