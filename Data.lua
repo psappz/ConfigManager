@@ -256,7 +256,8 @@ end
 
 function D.SpecLabel(info)
   info = info or D.PlayerSpec()
-  if info.specName then return (info.className or "") .. " · " .. info.specName end
+  -- WoW Forever reports the class name as the (only) spec name
+  if info.specName and info.specName ~= info.className then return (info.className or "") .. " · " .. info.specName end
   return info.className or ns.L.NO_SPEC
 end
 
