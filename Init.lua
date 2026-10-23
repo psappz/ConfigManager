@@ -135,16 +135,12 @@ function handlers.ADDON_LOADED(arg1)
   if arg1 == ADDON then
     D.InitDB()
     ns.ApplyLocale(ns.db.language)
-    -- create the minimap button as early as other addons do, so minimap collectors
-    -- (MinimapButtonButton, EllesmereUI, ...) see it on their first scan
-    ns.Dialogs.CreateMinimap()
   elseif arg1 == "Blizzard_Settings" or arg1 == "Blizzard_BindingUI" then
     ns.Dialogs.HookBlizzard()
   end
 end
 
 function handlers.PLAYER_LOGIN(self)
-  ns.Dialogs.CreateMinimap()
   ns.Dialogs.HookBlizzard()
   ns.lastSpec = D.SpecKey()
   schedule("login", 5, function()
@@ -186,6 +182,13 @@ function handlers.PLAYER_REGEN_ENABLED() if ns.queuedSpec then handleSpecChange(
 function handlers.PLAYER_LEAVING_WORLD() ns.leaving = true; due.cache = nil end
 function handlers.PLAYER_ENTERING_WORLD()
   ns.leaving = false
+  -- The minimap button is created late on purpose (like Questie does): button
+  -- collectors such as MinimapButtonButton take it over the moment LibDBIcon creates
+  -- it, before minimap skins (EllesmereUI) rescan the minimap and hide its children.
+  if not ns.minimapScheduled then
+    ns.minimapScheduled = true
+    schedule("minimap", 2, ns.Dialogs.CreateMinimap)
+  end
   schedule("cache", 3, ns.RefreshCache)
 end
 
