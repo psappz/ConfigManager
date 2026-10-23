@@ -492,6 +492,33 @@ function DL.CreateMinimap()
   DL.UpdateMinimap()
 end
 
+-- /cfgm minimap: prints where the button is and why it may be invisible.
+-- /cfgm minimapfix: forces it visible on the minimap.
+function DL.MinimapDiagnose(fix)
+  local P = function(...) U.Print(table.concat({ ... }, " ")) end
+  local LDB = LibStub and LibStub("LibDataBroker-1.1", true)
+  local DBI = LibStub and LibStub("LibDBIcon-1.0", true)
+  P("LibStub:", tostring(LibStub ~= nil), "LDB:", tostring(LDB ~= nil), "LibDBIcon:", DBI and tostring(DBI.minor or "?") or "missing")
+  P("registered:", tostring(DL.ldbIcon ~= nil), "scheduled:", tostring(ns.minimapScheduled == true),
+    "setting show:", tostring(ns.db.minimap.show ~= false), "hide:", tostring(ns.db.minimap.hide))
+  local b = (DBI and DBI.GetMinimapButton and DBI:GetMinimapButton("ConfigManager")) or _G.LibDBIcon10_ConfigManager or DL.mini
+  if not b then
+    P("button: none")
+    if fix then DL.CreateMinimap(); b = (DBI and DBI:GetMinimapButton("ConfigManager")) or DL.mini; P("created now:", tostring(b ~= nil)) end
+    if not b then return end
+  end
+  local par = b:GetParent()
+  local x, y = b:GetCenter()
+  P("button:", b:GetName() or "?", "parent:", par and (par:GetName() or "unnamed") or "none",
+    "shown:", tostring(b:IsShown()), "visible:", tostring(b:IsVisible()), "alpha:", ("%.2f"):format(b:GetAlpha() or -1),
+    "size:", ("%dx%d"):format(b:GetWidth() or 0, b:GetHeight() or 0), "pos:", x and ("%d,%d"):format(x, y) or "none")
+  if fix then
+    if DBI and DL.ldbIcon then ns.db.minimap.show = true; ns.db.minimap.hide = false; DBI:Show("ConfigManager") end
+    b:SetAlpha(1); b:Show()
+    P("forced visible – alpha:", ("%.2f"):format(b:GetAlpha() or -1), "shown:", tostring(b:IsShown()))
+  end
+end
+
 function DL.UpdateMinimap()
   local show = ns.db.minimap.show ~= false
   if DL.ldbIcon then

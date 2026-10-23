@@ -126,6 +126,8 @@ SlashCmdList.CONFIGMANAGER = function(msg)
   elseif msg == "profiles" or msg == "profile" then ns.Dialogs.OpenProfileManager()
   elseif msg == "spec" then ns.Dialogs.ShowSpecPrompt()
   elseif msg == "errors" or msg == "fehler" then ns.Dialogs.ShowErrors()
+  elseif msg == "minimap" then ns.Dialogs.MinimapDiagnose(false)
+  elseif msg == "minimapfix" then ns.Dialogs.MinimapDiagnose(true)
   else ns.Main.Toggle() end
 end
 
