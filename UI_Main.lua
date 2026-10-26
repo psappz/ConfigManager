@@ -168,6 +168,12 @@ function M.BuildKeyboardView()
     prev = b
   end
   local search = W.Edit(v, 240, L.SEARCH_ACTION); search:SetPoint("TOPRIGHT", -24, -18)
+  -- current keyboard, click to change it (same dialog as on first start)
+  M.kbButton = W.Button(v, "", 250, 32)
+  M.kbButton:SetPoint("RIGHT", search, "LEFT", -10, 0)
+  M.kbButton.text:SetFont(W.BodyFont(), 11, "")
+  M.kbButton.tip = L.KB_OPEN
+  M.kbButton:SetScript("OnClick", function() ns.Dialogs.ShowKeyboardPrompt() end)
   search.edit:HookScript("OnTextChanged", function(self) M.state.kbSearch = self:GetText():lower(); M.RefreshKeyboard() end)
 
   M.board = W.Frame(v, C.panel, C.border)
@@ -252,6 +258,7 @@ function M.RebuildKeyboard()
     b:Show()
   end
   M.board:SetSize(width * unit - gap + 28, rows * unit - gap + 28)
+  if M.RefreshKeyboardButton then M.RefreshKeyboardButton() end
 
   local mtokens = {}
   for i = 3, 2 + (ns.db.mouseButtons or 3) do mtokens[#mtokens + 1] = "BUTTON" .. i end
@@ -273,6 +280,17 @@ end
 
 local function paintKey(b, bg, border, shade)
   W.Paint(b, bg, border)
+end
+
+function M.KeyboardText()
+  if not D.KeyboardChosen() then return L.NOT_SET end
+  local sizeKey = { full = "SIZE_FULL", tkl = "SIZE_TKL", ["75"] = "SIZE_75", ["65"] = "SIZE_65", ["60"] = "SIZE_60" }
+  local sz = L[sizeKey[ns.db.size]]:match("^[^%(（]+"):gsub("%s+$", "")
+  return LY.Get(ns.db.layout).name .. " · " .. sz
+end
+
+function M.RefreshKeyboardButton()
+  if M.kbButton then M.kbButton.text:SetText(M.KeyboardText()) end
 end
 
 function M.RefreshKeyboard()
@@ -331,6 +349,7 @@ function M.RefreshKeyboard()
   for _, b in ipairs(M.mouseButtons) do if b:IsShown() then paint(b) end end
   for _, lb in ipairs(M.layerButtons) do lb:SetStyle(lb.code == layer and "active" or "default") end
   M.stats:SetText(L.STATS_LAYER:format(bound, layerName(layer)))
+  M.RefreshKeyboardButton()
 end
 
 ---------------------------------------------------------------------------
