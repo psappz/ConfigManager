@@ -131,6 +131,7 @@ function LY.BuildKeys(layoutId, size, frow)
     -- ISO Enter: 1.5 wide in the top row, 1.25 wide in the home row (L-shape)
     r2[#r2 + 1] = { "ENTER", 1.5, h = 2, iso = true }
     r3[#r3 + 1] = P(L, "C12")
+    r3[#r3 + 1] = { "_", 1.25 }   -- room for the lower part of the ISO Enter
     r4 = { { "LSHIFT", 1.25 }, P(L, "B00") }
   else
     r2[#r2 + 1] = P(L, "C12", 1.5)
