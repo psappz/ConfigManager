@@ -48,21 +48,20 @@ for _, d in ipairs(DEFS) do
   LY.list[#LY.list + 1] = L
 end
 
-local LOCALE_DEFAULT = { deDE = "de", frFR = "fr", esES = "es", esMX = "la", itIT = "it", ptBR = "br", ruRU = "ru", enGB = "uk" }
-
-function LY.Detect()
-  local loc = GetLocale and GetLocale() or "enUS"
-  return LOCALE_DEFAULT[loc] or "us"
+-- No guessing: client language and region say nothing about the physical keyboard
+-- (e.g. an English client on a German keyboard in Spain). Until the player has chosen
+-- a layout, "us" is used only as neutral geometry for drawing, never for converting.
+function LY.IsChosen(id)
+  return id ~= nil and LY.byId[id] ~= nil
 end
 
 function LY.Get(id)
-  if id == "auto" or not LY.byId[id] then id = LY.Detect() end
-  return LY.byId[id]
+  return LY.byId[id] or LY.byId.us
 end
 
 -- Moves a chord from one layout to another, keeping the physical key.
 function LY.Remap(chord, fromId, toId)
-  if not fromId or not toId or fromId == toId then return chord end
+  if not LY.IsChosen(fromId) or not LY.IsChosen(toId) or fromId == toId then return chord end
   local from, to = LY.Get(fromId), LY.Get(toId)
   if from.id == to.id then return chord end
   local mods, key = ns.U.SplitChord(chord)
@@ -181,7 +180,7 @@ function LY.ChordLabel(chord)
   if mods.ALT then parts[#parts + 1] = ns.L.MOD_ALT end
   if mods.CTRL then parts[#parts + 1] = ns.L.MOD_CTRL end
   if mods.SHIFT then parts[#parts + 1] = ns.L.MOD_SHIFT end
-  local lay = LY.Get(ns.db and ns.db.layout or "auto")
+  local lay = LY.Get(ns.db and ns.db.layout)
   local p = lay.pos[key]
   parts[#parts + 1] = (p and lay.labels[p]) or LY.KeyLabel(key)
   return table.concat(parts, "+")

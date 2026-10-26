@@ -126,6 +126,7 @@ SlashCmdList.CONFIGMANAGER = function(msg)
   elseif msg == "profiles" or msg == "profile" then ns.Dialogs.OpenProfileManager()
   elseif msg == "spec" then ns.Dialogs.ShowSpecPrompt()
   elseif msg == "errors" or msg == "fehler" then ns.Dialogs.ShowErrors()
+  elseif msg == "keyboard" or msg == "tastatur" then ns.Dialogs.ShowKeyboardPrompt()
   elseif msg == "minimap" then ns.Dialogs.MinimapDiagnose(false)
   elseif msg == "minimapfix" then ns.Dialogs.MinimapDiagnose(true)
   else ns.Main.Toggle() end
@@ -147,7 +148,11 @@ function handlers.PLAYER_LOGIN(self)
   ns.lastSpec = D.SpecKey()
   schedule("login", 5, function()
     ns.RefreshCache()
-    checkPrompt(D.PlayerSpec())
+    if D.KeyboardChosen() then
+      checkPrompt(D.PlayerSpec())
+    else
+      ns.Dialogs.ShowKeyboardPrompt(function() checkPrompt(D.PlayerSpec()) end)
+    end
     if ns.db.unseenErrors then U.Print(ns.L.ERRORS_PENDING) end
   end)
   for _, e in ipairs({ "PLAYER_SPECIALIZATION_CHANGED", "ACTIVE_TALENT_GROUP_CHANGED", "CHARACTER_POINTS_CHANGED", "PLAYER_TALENT_UPDATE",

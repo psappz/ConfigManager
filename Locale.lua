@@ -5,6 +5,7 @@ ns = ns or {}
 local LOCALES = {}
 
 LOCALES.enUS = {
+  KB_TITLE = "Your keyboard", KB_TEXT = "ConfigManager needs to know your physical keyboard to show and convert key bindings correctly. Your game language or region is no indication – please pick both.", KB_LAYOUT = "Layout", KB_SIZE = "Size", KB_CHECK = "Check against your keyboard", KB_CONFIRM = "Use this keyboard", KB_LATER = "Later", KB_HINT = "Do these keys match your keyboard?", KB_PICK = "Pick a layout to see a preview.", KB_OPEN = "Choose keyboard…", NOT_SET = "Not set",
   YES = "Yes",
   MANAGE_PROFILES = "Manage profiles…", PM_TITLE = "Manage profiles", SORT_BY = "Sort by", SORT_NAME = "Name", SORT_DATE = "Date", SORT_CLASS = "Class", SEL_ALL = "All", SEL_NONE = "None", DELETE_SELECTED = "Delete selected (%d)", CONFIRM_DELETE = "Delete %d profiles permanently?", RENAME = "Rename", LOAD = "Load", SELECTED_N = "%d of %d selected", TYPE_SPEC = "Spec profile", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Import", TYPE_OTHER = "Profile", ACTIVE = "active", MOVE_UP = "Move up", MOVE_DOWN = "Move down", ERRORS_TITLE = "Error log", ERRORS_NONE = "No errors recorded.", ERRORS_CLEAR = "Clear log", ERRORS_PENDING = "An error was recorded in the last session – /cfgm errors shows details.",
   INC_CONTROLS = "Controls", INC_BARSET = "Action bar options", INC_INTERFACE = "Interface", INC_CHAT = "Chat", IMPORT_SCOPE = "Apply", PREVIEW_SETTINGS = "settings", PREVIEW_CHAT = "chat windows", PREVIEW_CLIENT = "From: %s", PREVIEW_NA = "%d not available in this version", IMPORT_DONE2 = "%d settings and %d chat windows applied.",
@@ -62,6 +63,7 @@ LOCALES.enUS = {
 }
 
 LOCALES.deDE = {
+  KB_TITLE = "Deine Tastatur", KB_TEXT = "ConfigManager muss deine physische Tastatur kennen, um Tastenbelegungen richtig anzuzeigen und umzurechnen. Spielsprache oder Region sagen darüber nichts aus – bitte wähle beides aus.", KB_LAYOUT = "Layout", KB_SIZE = "Größe", KB_CHECK = "Mit deiner Tastatur vergleichen", KB_CONFIRM = "Diese Tastatur verwenden", KB_LATER = "Später", KB_HINT = "Stimmen diese Tasten mit deiner Tastatur überein?", KB_PICK = "Wähle ein Layout für die Vorschau.", KB_OPEN = "Tastatur wählen…", NOT_SET = "Nicht gewählt",
   YES = "Ja",
   MANAGE_PROFILES = "Profile verwalten…", PM_TITLE = "Profile verwalten", SORT_BY = "Sortieren", SORT_NAME = "Name", SORT_DATE = "Datum", SORT_CLASS = "Klasse", SEL_ALL = "Alle", SEL_NONE = "Keine", DELETE_SELECTED = "Ausgewählte löschen (%d)", CONFIRM_DELETE = "%d Profile endgültig löschen?", RENAME = "Umbenennen", LOAD = "Laden", SELECTED_N = "%d von %d ausgewählt", TYPE_SPEC = "Spec-Profil", TYPE_BACKUP = "Sicherung", TYPE_IMPORT = "Import", TYPE_OTHER = "Profil", ACTIVE = "aktiv", MOVE_UP = "Nach oben", MOVE_DOWN = "Nach unten", ERRORS_TITLE = "Fehlerprotokoll", ERRORS_NONE = "Keine Fehler aufgezeichnet.", ERRORS_CLEAR = "Protokoll leeren", ERRORS_PENDING = "In der letzten Sitzung wurde ein Fehler aufgezeichnet – /cfgm errors zeigt Details.",
   INC_CONTROLS = "Steuerung", INC_BARSET = "Leisten-Optionen", INC_INTERFACE = "Interface", INC_CHAT = "Chat", IMPORT_SCOPE = "Übernehmen", PREVIEW_SETTINGS = "Einstellungen", PREVIEW_CHAT = "Chatfenster", PREVIEW_CLIENT = "Aus: %s", PREVIEW_NA = "%d in dieser Version nicht vorhanden", IMPORT_DONE2 = "%d Einstellungen und %d Chatfenster übernommen.",
@@ -119,6 +121,7 @@ LOCALES.deDE = {
 }
 
 LOCALES.frFR = {
+  KB_TITLE = "Votre clavier", KB_TEXT = "ConfigManager doit connaître votre clavier physique pour afficher et convertir correctement les raccourcis. La langue du jeu ou la région ne l'indiquent pas – choisissez les deux.", KB_LAYOUT = "Disposition", KB_SIZE = "Taille", KB_CHECK = "Comparer avec votre clavier", KB_CONFIRM = "Utiliser ce clavier", KB_LATER = "Plus tard", KB_HINT = "Ces touches correspondent-elles à votre clavier ?", KB_PICK = "Choisissez une disposition pour l'aperçu.", KB_OPEN = "Choisir le clavier…", NOT_SET = "Non défini",
   YES = "Oui",
   MANAGE_PROFILES = "Gérer les profils…", PM_TITLE = "Gérer les profils", SORT_BY = "Trier par", SORT_NAME = "Nom", SORT_DATE = "Date", SORT_CLASS = "Classe", SEL_ALL = "Tout", SEL_NONE = "Aucun", DELETE_SELECTED = "Supprimer la sélection (%d)", CONFIRM_DELETE = "Supprimer définitivement %d profils ?", RENAME = "Renommer", LOAD = "Charger", SELECTED_N = "%d sur %d sélectionnés", TYPE_SPEC = "Profil de spécialisation", TYPE_BACKUP = "Sauvegarde", TYPE_IMPORT = "Import", TYPE_OTHER = "Profil", ACTIVE = "actif", MOVE_UP = "Monter", MOVE_DOWN = "Descendre", ERRORS_TITLE = "Journal des erreurs", ERRORS_NONE = "Aucune erreur enregistrée.", ERRORS_CLEAR = "Vider le journal", ERRORS_PENDING = "Une erreur a été enregistrée lors de la dernière session – /cfgm errors affiche les détails.",
   INC_CONTROLS = "Commandes", INC_BARSET = "Options des barres", INC_INTERFACE = "Interface", INC_CHAT = "Discussion", IMPORT_SCOPE = "Appliquer", PREVIEW_SETTINGS = "options", PREVIEW_CHAT = "fenêtres de discussion", PREVIEW_CLIENT = "Source : %s", PREVIEW_NA = "%d indisponibles dans cette version", IMPORT_DONE2 = "%d options et %d fenêtres de discussion appliquées.",
@@ -170,6 +173,7 @@ LOCALES.frFR = {
 }
 
 LOCALES.esES = {
+  KB_TITLE = "Tu teclado", KB_TEXT = "ConfigManager necesita conocer tu teclado físico para mostrar y convertir bien las asignaciones. El idioma del juego o la región no lo indican: elige ambas opciones.", KB_LAYOUT = "Distribución", KB_SIZE = "Tamaño", KB_CHECK = "Compara con tu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Más tarde", KB_HINT = "¿Coinciden estas teclas con tu teclado?", KB_PICK = "Elige una distribución para ver la vista previa.", KB_OPEN = "Elegir teclado…", NOT_SET = "Sin definir",
   YES = "Sí",
   MANAGE_PROFILES = "Gestionar perfiles…", PM_TITLE = "Gestionar perfiles", SORT_BY = "Ordenar por", SORT_NAME = "Nombre", SORT_DATE = "Fecha", SORT_CLASS = "Clase", SEL_ALL = "Todos", SEL_NONE = "Ninguno", DELETE_SELECTED = "Borrar selección (%d)", CONFIRM_DELETE = "¿Borrar %d perfiles definitivamente?", RENAME = "Renombrar", LOAD = "Cargar", SELECTED_N = "%d de %d seleccionados", TYPE_SPEC = "Perfil de especialización", TYPE_BACKUP = "Copia de seguridad", TYPE_IMPORT = "Importación", TYPE_OTHER = "Perfil", ACTIVE = "activo", MOVE_UP = "Subir", MOVE_DOWN = "Bajar", ERRORS_TITLE = "Registro de errores", ERRORS_NONE = "No hay errores registrados.", ERRORS_CLEAR = "Vaciar registro", ERRORS_PENDING = "Se registró un error en la última sesión – /cfgm errors muestra los detalles.",
   INC_CONTROLS = "Controles", INC_BARSET = "Opciones de barras", INC_INTERFACE = "Interfaz", INC_CHAT = "Chat", IMPORT_SCOPE = "Aplicar", PREVIEW_SETTINGS = "opciones", PREVIEW_CHAT = "ventanas de chat", PREVIEW_CLIENT = "Origen: %s", PREVIEW_NA = "%d no disponibles en esta versión", IMPORT_DONE2 = "%d opciones y %d ventanas de chat aplicadas.",
@@ -212,6 +216,7 @@ LOCALES.esES = {
 }
 
 LOCALES.itIT = {
+  KB_TITLE = "La tua tastiera", KB_TEXT = "ConfigManager deve conoscere la tua tastiera fisica per mostrare e convertire correttamente i tasti. Lingua del gioco o regione non lo indicano: scegli entrambe le opzioni.", KB_LAYOUT = "Layout", KB_SIZE = "Dimensione", KB_CHECK = "Confronta con la tua tastiera", KB_CONFIRM = "Usa questa tastiera", KB_LATER = "Più tardi", KB_HINT = "Questi tasti corrispondono alla tua tastiera?", KB_PICK = "Scegli un layout per l'anteprima.", KB_OPEN = "Scegli tastiera…", NOT_SET = "Non impostato",
   YES = "Sì",
   MANAGE_PROFILES = "Gestisci profili…", PM_TITLE = "Gestisci profili", SORT_BY = "Ordina per", SORT_NAME = "Nome", SORT_DATE = "Data", SORT_CLASS = "Classe", SEL_ALL = "Tutti", SEL_NONE = "Nessuno", DELETE_SELECTED = "Elimina selezionati (%d)", CONFIRM_DELETE = "Eliminare definitivamente %d profili?", RENAME = "Rinomina", LOAD = "Carica", SELECTED_N = "%d di %d selezionati", TYPE_SPEC = "Profilo specializzazione", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Importazione", TYPE_OTHER = "Profilo", ACTIVE = "attivo", MOVE_UP = "Sposta su", MOVE_DOWN = "Sposta giù", ERRORS_TITLE = "Registro errori", ERRORS_NONE = "Nessun errore registrato.", ERRORS_CLEAR = "Svuota registro", ERRORS_PENDING = "È stato registrato un errore nell'ultima sessione – /cfgm errors mostra i dettagli.",
   INC_CONTROLS = "Controlli", INC_BARSET = "Opzioni barre", INC_INTERFACE = "Interfaccia", INC_CHAT = "Chat", IMPORT_SCOPE = "Applica", PREVIEW_SETTINGS = "impostazioni", PREVIEW_CHAT = "finestre chat", PREVIEW_CLIENT = "Origine: %s", PREVIEW_NA = "%d non disponibili in questa versione", IMPORT_DONE2 = "%d impostazioni e %d finestre chat applicate.",
@@ -254,6 +259,7 @@ LOCALES.itIT = {
 }
 
 LOCALES.ptBR = {
+  KB_TITLE = "Seu teclado", KB_TEXT = "O ConfigManager precisa conhecer seu teclado físico para mostrar e converter as teclas corretamente. O idioma do jogo ou a região não indicam isso – escolha as duas opções.", KB_LAYOUT = "Layout", KB_SIZE = "Tamanho", KB_CHECK = "Compare com seu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Depois", KB_HINT = "Estas teclas correspondem ao seu teclado?", KB_PICK = "Escolha um layout para ver a prévia.", KB_OPEN = "Escolher teclado…", NOT_SET = "Não definido",
   YES = "Sim",
   MANAGE_PROFILES = "Gerenciar perfis…", PM_TITLE = "Gerenciar perfis", SORT_BY = "Ordenar por", SORT_NAME = "Nome", SORT_DATE = "Data", SORT_CLASS = "Classe", SEL_ALL = "Todos", SEL_NONE = "Nenhum", DELETE_SELECTED = "Excluir selecionados (%d)", CONFIRM_DELETE = "Excluir %d perfis permanentemente?", RENAME = "Renomear", LOAD = "Carregar", SELECTED_N = "%d de %d selecionados", TYPE_SPEC = "Perfil de especialização", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Importação", TYPE_OTHER = "Perfil", ACTIVE = "ativo", MOVE_UP = "Mover para cima", MOVE_DOWN = "Mover para baixo", ERRORS_TITLE = "Registro de erros", ERRORS_NONE = "Nenhum erro registrado.", ERRORS_CLEAR = "Limpar registro", ERRORS_PENDING = "Um erro foi registrado na última sessão – /cfgm errors mostra os detalhes.",
   INC_CONTROLS = "Controles", INC_BARSET = "Opções das barras", INC_INTERFACE = "Interface", INC_CHAT = "Bate-papo", IMPORT_SCOPE = "Aplicar", PREVIEW_SETTINGS = "configurações", PREVIEW_CHAT = "janelas de bate-papo", PREVIEW_CLIENT = "Origem: %s", PREVIEW_NA = "%d indisponíveis nesta versão", IMPORT_DONE2 = "%d configurações e %d janelas de bate-papo aplicadas.",
@@ -296,6 +302,7 @@ LOCALES.ptBR = {
 }
 
 LOCALES.ruRU = {
+  KB_TITLE = "Ваша клавиатура", KB_TEXT = "ConfigManager нужно знать вашу физическую клавиатуру, чтобы правильно показывать и переносить назначения. Язык игры или регион об этом не говорят – выберите оба параметра.", KB_LAYOUT = "Раскладка", KB_SIZE = "Размер", KB_CHECK = "Сравните со своей клавиатурой", KB_CONFIRM = "Использовать эту клавиатуру", KB_LATER = "Позже", KB_HINT = "Совпадают ли эти клавиши с вашей клавиатурой?", KB_PICK = "Выберите раскладку для предпросмотра.", KB_OPEN = "Выбрать клавиатуру…", NOT_SET = "Не выбрано",
   YES = "Да",
   MANAGE_PROFILES = "Управление профилями…", PM_TITLE = "Управление профилями", SORT_BY = "Сортировка", SORT_NAME = "Имя", SORT_DATE = "Дата", SORT_CLASS = "Класс", SEL_ALL = "Все", SEL_NONE = "Ничего", DELETE_SELECTED = "Удалить выбранные (%d)", CONFIRM_DELETE = "Удалить профили навсегда: %d?", RENAME = "Переименовать", LOAD = "Загрузить", SELECTED_N = "Выбрано %d из %d", TYPE_SPEC = "Профиль специализации", TYPE_BACKUP = "Резервная копия", TYPE_IMPORT = "Импорт", TYPE_OTHER = "Профиль", ACTIVE = "активен", MOVE_UP = "Вверх", MOVE_DOWN = "Вниз", ERRORS_TITLE = "Журнал ошибок", ERRORS_NONE = "Ошибок не записано.", ERRORS_CLEAR = "Очистить журнал", ERRORS_PENDING = "В прошлом сеансе была записана ошибка – подробности: /cfgm errors.",
   INC_CONTROLS = "Управление", INC_BARSET = "Параметры панелей", INC_INTERFACE = "Интерфейс", INC_CHAT = "Чат", IMPORT_SCOPE = "Применить", PREVIEW_SETTINGS = "настроек", PREVIEW_CHAT = "окон чата", PREVIEW_CLIENT = "Источник: %s", PREVIEW_NA = "%d недоступно в этой версии", IMPORT_DONE2 = "Применено настроек: %d, окон чата: %d.",
@@ -338,6 +345,7 @@ LOCALES.ruRU = {
 }
 
 LOCALES.koKR = {
+  KB_TITLE = "키보드 선택", KB_TEXT = "단축키를 올바르게 표시하고 변환하려면 실제 키보드를 알아야 합니다. 게임 언어나 지역으로는 알 수 없으니 둘 다 선택하세요.", KB_LAYOUT = "배열", KB_SIZE = "크기", KB_CHECK = "실제 키보드와 비교", KB_CONFIRM = "이 키보드 사용", KB_LATER = "나중에", KB_HINT = "이 키가 키보드와 일치합니까?", KB_PICK = "배열을 선택하면 미리보기가 표시됩니다.", KB_OPEN = "키보드 선택…", NOT_SET = "선택 안 됨",
   YES = "예",
   MANAGE_PROFILES = "프로필 관리…", PM_TITLE = "프로필 관리", SORT_BY = "정렬", SORT_NAME = "이름", SORT_DATE = "날짜", SORT_CLASS = "직업", SEL_ALL = "전체", SEL_NONE = "없음", DELETE_SELECTED = "선택 항목 삭제 (%d)", CONFIRM_DELETE = "프로필 %d개를 영구 삭제할까요?", RENAME = "이름 변경", LOAD = "불러오기", SELECTED_N = "%d / %d 선택됨", TYPE_SPEC = "전문화 프로필", TYPE_BACKUP = "백업", TYPE_IMPORT = "가져오기", TYPE_OTHER = "프로필", ACTIVE = "활성", MOVE_UP = "위로", MOVE_DOWN = "아래로", ERRORS_TITLE = "오류 기록", ERRORS_NONE = "기록된 오류가 없습니다.", ERRORS_CLEAR = "기록 지우기", ERRORS_PENDING = "지난 세션에서 오류가 기록되었습니다 – /cfgm errors로 확인하세요.",
   INC_CONTROLS = "조작", INC_BARSET = "단축바 옵션", INC_INTERFACE = "인터페이스", INC_CHAT = "대화", IMPORT_SCOPE = "적용", PREVIEW_SETTINGS = "설정", PREVIEW_CHAT = "대화창", PREVIEW_CLIENT = "출처: %s", PREVIEW_NA = "이 버전에 없음: %d", IMPORT_DONE2 = "설정 %d개, 대화창 %d개 적용됨.",
@@ -376,6 +384,7 @@ LOCALES.koKR = {
 }
 
 LOCALES.zhCN = {
+  KB_TITLE = "你的键盘", KB_TEXT = "ConfigManager 需要知道你的实体键盘，才能正确显示和转换按键绑定。游戏语言或地区无法说明这一点——请选择布局和尺寸。", KB_LAYOUT = "布局", KB_SIZE = "尺寸", KB_CHECK = "与你的键盘对照", KB_CONFIRM = "使用此键盘", KB_LATER = "稍后", KB_HINT = "这些按键与你的键盘一致吗？", KB_PICK = "选择布局后显示预览。", KB_OPEN = "选择键盘…", NOT_SET = "未设置",
   YES = "是",
   MANAGE_PROFILES = "管理配置…", PM_TITLE = "管理配置", SORT_BY = "排序", SORT_NAME = "名称", SORT_DATE = "日期", SORT_CLASS = "职业", SEL_ALL = "全选", SEL_NONE = "全不选", DELETE_SELECTED = "删除所选 (%d)", CONFIRM_DELETE = "永久删除 %d 个配置？", RENAME = "重命名", LOAD = "加载", SELECTED_N = "已选 %d / %d", TYPE_SPEC = "专精配置", TYPE_BACKUP = "备份", TYPE_IMPORT = "导入", TYPE_OTHER = "配置", ACTIVE = "当前", MOVE_UP = "上移", MOVE_DOWN = "下移", ERRORS_TITLE = "错误日志", ERRORS_NONE = "没有记录到错误。", ERRORS_CLEAR = "清空日志", ERRORS_PENDING = "上次会话记录到一个错误 – 输入 /cfgm errors 查看详情。",
   INC_CONTROLS = "控制", INC_BARSET = "动作条选项", INC_INTERFACE = "界面", INC_CHAT = "聊天", IMPORT_SCOPE = "应用", PREVIEW_SETTINGS = "项设置", PREVIEW_CHAT = "个聊天窗口", PREVIEW_CLIENT = "来源：%s", PREVIEW_NA = "%d 项在此版本中不可用", IMPORT_DONE2 = "已应用 %d 项设置和 %d 个聊天窗口。",
@@ -413,6 +422,7 @@ LOCALES.zhCN = {
 }
 
 LOCALES.zhTW = {
+  KB_TITLE = "你的鍵盤", KB_TEXT = "ConfigManager 需要知道你的實體鍵盤，才能正確顯示和轉換按鍵綁定。遊戲語言或地區無法說明這一點——請選擇配置和尺寸。", KB_LAYOUT = "配置", KB_SIZE = "尺寸", KB_CHECK = "與你的鍵盤對照", KB_CONFIRM = "使用此鍵盤", KB_LATER = "稍後", KB_HINT = "這些按鍵與你的鍵盤一致嗎？", KB_PICK = "選擇配置後顯示預覽。", KB_OPEN = "選擇鍵盤…", NOT_SET = "未設定",
   YES = "是",
   MANAGE_PROFILES = "管理設定檔…", PM_TITLE = "管理設定檔", SORT_BY = "排序", SORT_NAME = "名稱", SORT_DATE = "日期", SORT_CLASS = "職業", SEL_ALL = "全選", SEL_NONE = "全不選", DELETE_SELECTED = "刪除所選 (%d)", CONFIRM_DELETE = "永久刪除 %d 個設定檔？", RENAME = "重新命名", LOAD = "載入", SELECTED_N = "已選 %d / %d", TYPE_SPEC = "專精設定檔", TYPE_BACKUP = "備份", TYPE_IMPORT = "匯入", TYPE_OTHER = "設定檔", ACTIVE = "目前", MOVE_UP = "上移", MOVE_DOWN = "下移", ERRORS_TITLE = "錯誤記錄", ERRORS_NONE = "沒有記錄到錯誤。", ERRORS_CLEAR = "清除記錄", ERRORS_PENDING = "上次工作階段記錄到一個錯誤 – 輸入 /cfgm errors 查看詳情。",
   INC_CONTROLS = "控制", INC_BARSET = "快捷列選項", INC_INTERFACE = "介面", INC_CHAT = "聊天", IMPORT_SCOPE = "套用", PREVIEW_SETTINGS = "項設定", PREVIEW_CHAT = "個聊天視窗", PREVIEW_CLIENT = "來源：%s", PREVIEW_NA = "%d 項在此版本中不可用", IMPORT_DONE2 = "已套用 %d 項設定和 %d 個聊天視窗。",

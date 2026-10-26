@@ -28,4 +28,5 @@ UI_Widgets.lua
 UI_Main.lua
 UI_Dialogs.lua
 UI_Profiles.lua
+UI_Keyboard.lua
 Init.lua

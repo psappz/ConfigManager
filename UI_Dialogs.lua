@@ -218,14 +218,16 @@ function DL.ToggleSettings()
     label(L.SET_LANGUAGE, col1, -70)
     f.lang = W.Cycle(f, 330, langs, function() return ns.db.language end, function(v) ns.db.language = v; ns.ApplyLocale(v); U.Print(L.RELOAD_LANG) end)
     f.lang:SetPoint("TOPLEFT", col1, -92)
-    local lays = { { "auto", L.LANG_AUTO .. " (" .. LY.Get("auto").name .. ")" } }
+    local lays = { { "none", L.NOT_SET } }
     for _, l in ipairs(LY.list) do lays[#lays + 1] = { l.id, l.name } end
     label(L.SET_LAYOUT, col2, -70)
-    f.layout = W.Cycle(f, 330, lays, function() return ns.db.layout end, function(v) ns.db.layout = v; rebuild() end)
+    f.layout = W.Cycle(f, 330, lays, function() return LY.IsChosen(ns.db.layout) and ns.db.layout or "none" end,
+      function(v) if v ~= "none" then ns.db.layout = v; ns.db.keyboardConfirmed = ns.db.size ~= nil; rebuild() end end)
     f.layout:SetPoint("TOPLEFT", col2, -92)
     label(L.SET_SIZE, col1, -146)
-    f.size = W.Cycle(f, 330, { { "full", L.SIZE_FULL }, { "tkl", L.SIZE_TKL }, { "60", L.SIZE_60 } },
-      function() return ns.db.size end, function(v) ns.db.size = v; rebuild() end)
+    f.size = W.Cycle(f, 330, { { "none", L.NOT_SET }, { "full", L.SIZE_FULL }, { "tkl", L.SIZE_TKL }, { "60", L.SIZE_60 } },
+      function() return ns.db.size or "none" end,
+      function(v) if v ~= "none" then ns.db.size = v; ns.db.keyboardConfirmed = LY.IsChosen(ns.db.layout); rebuild() end end)
     f.size:SetPoint("TOPLEFT", col1, -168)
     local mb = {}
     for i = 0, 12 do mb[#mb + 1] = { i, tostring(i) } end
@@ -253,6 +255,8 @@ function DL.ToggleSettings()
     f.c2 = check(L.SET_ASK, "ask")
     f.c3 = check(L.SET_AUTOSAVE, "autosave")
     f.mm = mm
+    local kbb = W.Button(f, L.KB_OPEN, 220, 30); kbb:SetPoint("TOPLEFT", col2, -290)
+    kbb:SetScript("OnClick", function() DL.ShowKeyboardPrompt() end)
     local note = W.Text(f, 11, C.muted); note:SetPoint("BOTTOMLEFT", 26, 24); note:SetText(L.RELOAD_LANG)
     local done = W.Button(f, "OK", 110, 34, "primary"); done:SetPoint("BOTTOMRIGHT", -24, 18)
     done:SetScript("OnClick", function() f:Hide() end)

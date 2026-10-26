@@ -4,7 +4,7 @@ local D = {}
 ns.Data = D
 
 local DEFAULTS = {
-  language = "auto", layout = "auto", size = "tkl", mouseButtons = 3, remap = "pos", scale = 0.9,
+  language = "auto", layout = nil, size = nil, mouseButtons = 3, remap = "pos", scale = 0.9,
   minimap = { show = true, angle = 215 }, autosave = true, ask = true,
   sections = { binds = true, bars = true, macros = true, controls = true, barset = true, interface = true, chat = true },
   importSections = { binds = true, bars = true, macros = true, controls = true, barset = true, interface = true, chat = true },
@@ -14,6 +14,10 @@ local DEFAULTS = {
 
 function D.InitDB()
   ConfigManagerDB = ConfigManagerDB or {}
+  -- "auto" was the old default and was based on the client language: discard it,
+  -- the player is asked instead
+  if ConfigManagerDB.layout == "auto" then ConfigManagerDB.layout = nil end
+  if not ConfigManagerDB.keyboardConfirmed then ConfigManagerDB.size = nil end
   for k, v in pairs(DEFAULTS) do
     if ConfigManagerDB[k] == nil then ConfigManagerDB[k] = U.CopyTable(v) end
   end
@@ -304,8 +308,13 @@ function D.ClientLabel()
   return name .. " " .. tostring(v) .. (build and ("." .. tostring(build)) or "")
 end
 
+-- nil until the player has picked a layout (old "auto" values count as not picked)
 function D.CurrentLayoutId()
-  return LY.Get(ns.db.layout).id
+  if LY.IsChosen(ns.db.layout) then return ns.db.layout end
+end
+
+function D.KeyboardChosen()
+  return LY.IsChosen(ns.db.layout) and (ns.db.size == "full" or ns.db.size == "tkl" or ns.db.size == "60")
 end
 
 function D.Snapshot(opts)
@@ -336,7 +345,7 @@ function D.Snapshot(opts)
 end
 
 local function remapKey(key, data)
-  if ns.db.remap == "pos" and data.layout then return LY.Remap(key, data.layout, D.CurrentLayoutId()) end
+  if ns.db.remap == "pos" then return LY.Remap(key, data.layout, D.CurrentLayoutId()) end
   return key
 end
 

@@ -109,7 +109,10 @@ function M.Create()
   M.BuildListView()
   M.BuildCapture()
 
-  f:SetScript("OnShow", function() M.Refresh() end)
+  f:SetScript("OnShow", function()
+    M.Refresh()
+    if not D.KeyboardChosen() then ns.Dialogs.ShowKeyboardPrompt() end
+  end)
   f:SetScript("OnHide", function() W.CloseMenu() end)
   f:RegisterEvent("MODIFIER_STATE_CHANGED")
   f:SetScript("OnEvent", function(_, ev)
