@@ -145,21 +145,47 @@ function U.FromBase64(s)
 end
 
 ---------------------------------------------------------------------------
--- Export strings: "!CM1D!" = deflate+base64 (client codec), "!CM1P!" = plain base64.
+-- Export strings: "!CM1D!" = raw DEFLATE + base64, "!CM1P!" = plain base64 (old).
+-- Compression uses the client codec where it exists (Forever, Midnight) and the
+-- bundled LibDeflate everywhere else, so every version can read every string.
 ---------------------------------------------------------------------------
 local function nativeCodec()
   return C_EncodingUtil and C_EncodingUtil.CompressString and C_EncodingUtil.DecompressString
     and Enum and Enum.CompressionMethod and Enum.CompressionMethod.Deflate
 end
 
-function U.Encode(tbl)
-  local raw = U.Serialize(tbl)
+local function libDeflate()
+  return LibStub and LibStub("LibDeflate", true)
+end
+
+function U.Compress(raw)
   if nativeCodec() then
     local ok, packed = pcall(C_EncodingUtil.CompressString, raw, Enum.CompressionMethod.Deflate)
-    if ok and type(packed) == "string" then
-      return "!CM1D!" .. U.ToBase64(packed)
-    end
+    if ok and type(packed) == "string" then return packed end
   end
+  local LD = libDeflate()
+  if LD then
+    local ok, packed = pcall(LD.CompressDeflate, LD, raw)
+    if ok and type(packed) == "string" then return packed end
+  end
+end
+
+function U.Decompress(bin)
+  if nativeCodec() then
+    local ok, raw = pcall(C_EncodingUtil.DecompressString, bin, Enum.CompressionMethod.Deflate)
+    if ok and type(raw) == "string" and #raw > 0 then return raw end
+  end
+  local LD = libDeflate()
+  if LD then
+    local ok, raw = pcall(LD.DecompressDeflate, LD, bin)
+    if ok and type(raw) == "string" then return raw end
+  end
+end
+
+function U.Encode(tbl)
+  local raw = U.Serialize(tbl)
+  local packed = U.Compress(raw)
+  if packed then return "!CM1D!" .. U.ToBase64(packed) end
   return "!CM1P!" .. U.ToBase64(raw)
 end
 
@@ -171,10 +197,8 @@ function U.Decode(str)
   local bin = U.FromBase64(body)
   if not bin then return nil, "base64" end
   if kind == "D" then
-    if not nativeCodec() then return nil, "codec" end
-    local ok, raw = pcall(C_EncodingUtil.DecompressString, bin, Enum.CompressionMethod.Deflate)
-    if not ok or type(raw) ~= "string" then return nil, "inflate" end
-    bin = raw
+    bin = U.Decompress(bin)
+    if not bin then return nil, "inflate" end
   end
   local t, err = U.Deserialize(bin)
   if type(t) ~= "table" or t.v ~= 1 then return nil, err or "format" end

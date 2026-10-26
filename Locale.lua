@@ -5,6 +5,9 @@ ns = ns or {}
 local LOCALES = {}
 
 LOCALES.enUS = {
+  SPEC_PRESET_SUB = "Class preset: key bindings + action bars", PRESET_CLASS = "Class presets", PRESET_ROLES = "Role presets (key bindings only)", PRESET_CONFIRM = "Load preset “%s”?\n\nKey bindings and action bars are changed (merge). A backup is created first.", CHECK_MISSING = "%s: %d of %d spells unknown to this character: %s", CHECK_OK = "%s: all %d spells known.", CHECK_HEAD = "Presets for %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Save bindings:", IMPORT_SET = "Key bindings are saved: %s", CONFIRM_TO_ACCOUNT = "Switch to account-wide bindings? The character-specific bindings of this character are discarded.",
+  LOAD_SECTIONS = "Apply when loading a profile",
   SIZE_FULL = "100 % (with numpad)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-row, arrows)", SIZE_65 = "65 % (arrows)", SIZE_60 = "60 %", KB_FROW = "Has F-row (F1–F12)",
   KB_TITLE = "Your keyboard", KB_TEXT = "ConfigManager needs to know your physical keyboard to show and convert key bindings correctly. Your game language or region is no indication – please pick both.", KB_LAYOUT = "Layout", KB_SIZE = "Size", KB_CHECK = "Check against your keyboard", KB_CONFIRM = "Use this keyboard", KB_LATER = "Later", KB_HINT = "Do these keys match your keyboard?", KB_PICK = "Pick a layout to see a preview.", KB_OPEN = "Choose keyboard…", NOT_SET = "Not set",
   YES = "Yes",
@@ -63,6 +66,9 @@ LOCALES.enUS = {
 }
 
 LOCALES.deDE = {
+  SPEC_PRESET_SUB = "Klassen-Vorlage: Tastenbelegung + Leisten", PRESET_CLASS = "Klassen-Vorlagen", PRESET_ROLES = "Rollen-Vorlagen (nur Tastenbelegung)", PRESET_CONFIRM = "Vorlage „%s“ laden?\n\nTastenbelegung und Leisten werden geändert (zusammenführen). Vorher wird eine Sicherung angelegt.", CHECK_MISSING = "%s: %d von %d Zaubern sind diesem Charakter unbekannt: %s", CHECK_OK = "%s: alle %d Zauber bekannt.", CHECK_HEAD = "Vorlagen für %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Belegung speichern:", IMPORT_SET = "Tastenbelegung wird gespeichert: %s", CONFIRM_TO_ACCOUNT = "Zu kontoweiter Belegung wechseln? Die charakterspezifische Belegung dieses Charakters wird verworfen.",
+  LOAD_SECTIONS = "Beim Laden eines Profils übernehmen",
   SIZE_FULL = "100 % (mit Ziffernblock)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-Reihe, Pfeile)", SIZE_65 = "65 % (Pfeile)", SIZE_60 = "60 %", KB_FROW = "Mit F-Reihe (F1–F12)",
   KB_TITLE = "Deine Tastatur", KB_TEXT = "ConfigManager muss deine physische Tastatur kennen, um Tastenbelegungen richtig anzuzeigen und umzurechnen. Spielsprache oder Region sagen darüber nichts aus – bitte wähle beides aus.", KB_LAYOUT = "Layout", KB_SIZE = "Größe", KB_CHECK = "Mit deiner Tastatur vergleichen", KB_CONFIRM = "Diese Tastatur verwenden", KB_LATER = "Später", KB_HINT = "Stimmen diese Tasten mit deiner Tastatur überein?", KB_PICK = "Wähle ein Layout für die Vorschau.", KB_OPEN = "Tastatur wählen…", NOT_SET = "Nicht gewählt",
   YES = "Ja",
@@ -121,6 +127,9 @@ LOCALES.deDE = {
 }
 
 LOCALES.frFR = {
+  SPEC_PRESET_SUB = "Modèle de classe : raccourcis + barres", PRESET_CLASS = "Modèles de classe", PRESET_ROLES = "Modèles de rôle (raccourcis seulement)", PRESET_CONFIRM = "Charger le modèle « %s » ?\n\nLes raccourcis et les barres sont modifiés (fusion). Une sauvegarde est créée avant.", CHECK_MISSING = "%s : %d sorts sur %d inconnus de ce personnage : %s", CHECK_OK = "%s : les %d sorts sont connus.", CHECK_HEAD = "Modèles pour %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Enregistrer :", IMPORT_SET = "Raccourcis enregistrés : %s", CONFIRM_TO_ACCOUNT = "Passer aux raccourcis du compte ? Les raccourcis propres à ce personnage seront supprimés.",
+  LOAD_SECTIONS = "Appliquer au chargement d'un profil",
   SIZE_FULL = "100 % (pavé numérique)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (touches F, flèches)", SIZE_65 = "65 % (flèches)", SIZE_60 = "60 %", KB_FROW = "Avec rangée F (F1–F12)",
   KB_TITLE = "Votre clavier", KB_TEXT = "ConfigManager doit connaître votre clavier physique pour afficher et convertir correctement les raccourcis. La langue du jeu ou la région ne l'indiquent pas – choisissez les deux.", KB_LAYOUT = "Disposition", KB_SIZE = "Taille", KB_CHECK = "Comparer avec votre clavier", KB_CONFIRM = "Utiliser ce clavier", KB_LATER = "Plus tard", KB_HINT = "Ces touches correspondent-elles à votre clavier ?", KB_PICK = "Choisissez une disposition pour l'aperçu.", KB_OPEN = "Choisir le clavier…", NOT_SET = "Non défini",
   YES = "Oui",
@@ -173,6 +182,9 @@ LOCALES.frFR = {
 }
 
 LOCALES.esES = {
+  SPEC_PRESET_SUB = "Plantilla de clase: asignaciones + barras", PRESET_CLASS = "Plantillas de clase", PRESET_ROLES = "Plantillas de rol (solo asignaciones)", PRESET_CONFIRM = "¿Cargar la plantilla «%s»?\n\nSe cambian asignaciones y barras (combinar). Antes se crea una copia de seguridad.", CHECK_MISSING = "%s: %d de %d hechizos desconocidos para este personaje: %s", CHECK_OK = "%s: los %d hechizos son conocidos.", CHECK_HEAD = "Plantillas para %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Guardar asignaciones:", IMPORT_SET = "Las asignaciones se guardan: %s", CONFIRM_TO_ACCOUNT = "¿Cambiar a asignaciones de cuenta? Se descartarán las de este personaje.",
+  LOAD_SECTIONS = "Aplicar al cargar un perfil",
   SIZE_FULL = "100 % (con numérico)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, flechas)", SIZE_65 = "65 % (flechas)", SIZE_60 = "60 %", KB_FROW = "Con fila F (F1–F12)",
   KB_TITLE = "Tu teclado", KB_TEXT = "ConfigManager necesita conocer tu teclado físico para mostrar y convertir bien las asignaciones. El idioma del juego o la región no lo indican: elige ambas opciones.", KB_LAYOUT = "Distribución", KB_SIZE = "Tamaño", KB_CHECK = "Compara con tu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Más tarde", KB_HINT = "¿Coinciden estas teclas con tu teclado?", KB_PICK = "Elige una distribución para ver la vista previa.", KB_OPEN = "Elegir teclado…", NOT_SET = "Sin definir",
   YES = "Sí",
@@ -217,6 +229,9 @@ LOCALES.esES = {
 }
 
 LOCALES.itIT = {
+  SPEC_PRESET_SUB = "Modello di classe: assegnazioni + barre", PRESET_CLASS = "Modelli di classe", PRESET_ROLES = "Modelli di ruolo (solo assegnazioni)", PRESET_CONFIRM = "Caricare il modello «%s»?\n\nAssegnazioni e barre vengono modificate (unione). Prima viene creato un backup.", CHECK_MISSING = "%s: %d incantesimi su %d sconosciuti a questo personaggio: %s", CHECK_OK = "%s: tutti i %d incantesimi sono noti.", CHECK_HEAD = "Modelli per %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Salva assegnazioni:", IMPORT_SET = "Le assegnazioni vengono salvate: %s", CONFIRM_TO_ACCOUNT = "Passare alle assegnazioni dell'account? Quelle di questo personaggio verranno scartate.",
+  LOAD_SECTIONS = "Applica al caricamento di un profilo",
   SIZE_FULL = "100 % (con tastierino)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, frecce)", SIZE_65 = "65 % (frecce)", SIZE_60 = "60 %", KB_FROW = "Con fila F (F1–F12)",
   KB_TITLE = "La tua tastiera", KB_TEXT = "ConfigManager deve conoscere la tua tastiera fisica per mostrare e convertire correttamente i tasti. Lingua del gioco o regione non lo indicano: scegli entrambe le opzioni.", KB_LAYOUT = "Layout", KB_SIZE = "Dimensione", KB_CHECK = "Confronta con la tua tastiera", KB_CONFIRM = "Usa questa tastiera", KB_LATER = "Più tardi", KB_HINT = "Questi tasti corrispondono alla tua tastiera?", KB_PICK = "Scegli un layout per l'anteprima.", KB_OPEN = "Scegli tastiera…", NOT_SET = "Non impostato",
   YES = "Sì",
@@ -261,6 +276,9 @@ LOCALES.itIT = {
 }
 
 LOCALES.ptBR = {
+  SPEC_PRESET_SUB = "Modelo de classe: atribuições + barras", PRESET_CLASS = "Modelos de classe", PRESET_ROLES = "Modelos de função (só atribuições)", PRESET_CONFIRM = "Carregar o modelo “%s”?\n\nAtribuições e barras serão alteradas (mesclar). Antes é criado um backup.", CHECK_MISSING = "%s: %d de %d feitiços desconhecidos para este personagem: %s", CHECK_OK = "%s: todos os %d feitiços conhecidos.", CHECK_HEAD = "Modelos para %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Salvar atribuições:", IMPORT_SET = "As atribuições são salvas: %s", CONFIRM_TO_ACCOUNT = "Mudar para atribuições da conta? As deste personagem serão descartadas.",
+  LOAD_SECTIONS = "Aplicar ao carregar um perfil",
   SIZE_FULL = "100 % (com numérico)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, setas)", SIZE_65 = "65 % (setas)", SIZE_60 = "60 %", KB_FROW = "Com fila F (F1–F12)",
   KB_TITLE = "Seu teclado", KB_TEXT = "O ConfigManager precisa conhecer seu teclado físico para mostrar e converter as teclas corretamente. O idioma do jogo ou a região não indicam isso – escolha as duas opções.", KB_LAYOUT = "Layout", KB_SIZE = "Tamanho", KB_CHECK = "Compare com seu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Depois", KB_HINT = "Estas teclas correspondem ao seu teclado?", KB_PICK = "Escolha um layout para ver a prévia.", KB_OPEN = "Escolher teclado…", NOT_SET = "Não definido",
   YES = "Sim",
@@ -305,6 +323,9 @@ LOCALES.ptBR = {
 }
 
 LOCALES.ruRU = {
+  SPEC_PRESET_SUB = "Шаблон класса: назначения + панели", PRESET_CLASS = "Шаблоны классов", PRESET_ROLES = "Шаблоны ролей (только назначения)", PRESET_CONFIRM = "Загрузить шаблон «%s»?\n\nНазначения и панели будут изменены (объединение). Сначала создаётся резервная копия.", CHECK_MISSING = "%s: %d из %d заклинаний неизвестны персонажу: %s", CHECK_OK = "%s: все %d заклинаний известны.", CHECK_HEAD = "Шаблоны для %s (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "Сохранять назначения:", IMPORT_SET = "Назначения сохраняются: %s", CONFIRM_TO_ACCOUNT = "Перейти на назначения учётной записи? Назначения этого персонажа будут удалены.",
+  LOAD_SECTIONS = "Применять при загрузке профиля",
   SIZE_FULL = "100 % (с цифровым блоком)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-ряд, стрелки)", SIZE_65 = "65 % (стрелки)", SIZE_60 = "60 %", KB_FROW = "Есть F-ряд (F1–F12)",
   KB_TITLE = "Ваша клавиатура", KB_TEXT = "ConfigManager нужно знать вашу физическую клавиатуру, чтобы правильно показывать и переносить назначения. Язык игры или регион об этом не говорят – выберите оба параметра.", KB_LAYOUT = "Раскладка", KB_SIZE = "Размер", KB_CHECK = "Сравните со своей клавиатурой", KB_CONFIRM = "Использовать эту клавиатуру", KB_LATER = "Позже", KB_HINT = "Совпадают ли эти клавиши с вашей клавиатурой?", KB_PICK = "Выберите раскладку для предпросмотра.", KB_OPEN = "Выбрать клавиатуру…", NOT_SET = "Не выбрано",
   YES = "Да",
@@ -349,6 +370,9 @@ LOCALES.ruRU = {
 }
 
 LOCALES.koKR = {
+  SPEC_PRESET_SUB = "직업 템플릿: 단축키 + 행동 단축바", PRESET_CLASS = "직업 템플릿", PRESET_ROLES = "역할 템플릿 (단축키만)", PRESET_CONFIRM = "“%s” 템플릿을 불러올까요?\n\n단축키와 행동 단축바가 변경됩니다(병합). 먼저 백업이 만들어집니다.", CHECK_MISSING = "%s: 주문 %d/%d개를 이 캐릭터가 모릅니다: %s", CHECK_OK = "%s: 주문 %d개 모두 알고 있습니다.", CHECK_HEAD = "%s 템플릿 (Icy Veins / Wowhead, TBC)",
+  SAVE_IN = "단축키 저장:", IMPORT_SET = "단축키 저장 위치: %s", CONFIRM_TO_ACCOUNT = "계정 공통 단축키로 바꿀까요? 이 캐릭터의 단축키는 삭제됩니다.",
+  LOAD_SECTIONS = "프로필 불러올 때 적용",
   SIZE_FULL = "100 % (숫자패드 포함)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F열, 방향키)", SIZE_65 = "65 % (방향키)", SIZE_60 = "60 %", KB_FROW = "F열 있음 (F1–F12)",
   KB_TITLE = "키보드 선택", KB_TEXT = "단축키를 올바르게 표시하고 변환하려면 실제 키보드를 알아야 합니다. 게임 언어나 지역으로는 알 수 없으니 둘 다 선택하세요.", KB_LAYOUT = "배열", KB_SIZE = "크기", KB_CHECK = "실제 키보드와 비교", KB_CONFIRM = "이 키보드 사용", KB_LATER = "나중에", KB_HINT = "이 키가 키보드와 일치합니까?", KB_PICK = "배열을 선택하면 미리보기가 표시됩니다.", KB_OPEN = "키보드 선택…", NOT_SET = "선택 안 됨",
   YES = "예",
@@ -388,6 +412,9 @@ LOCALES.koKR = {
 }
 
 LOCALES.zhCN = {
+  SPEC_PRESET_SUB = "职业模板：按键 + 动作条", PRESET_CLASS = "职业模板", PRESET_ROLES = "职责模板（仅按键）", PRESET_CONFIRM = "加载模板“%s”？\n\n将修改按键和动作条（合并）。会先创建备份。", CHECK_MISSING = "%s：%d/%d 个法术此角色尚未学会：%s", CHECK_OK = "%s：%d 个法术全部已学会。", CHECK_HEAD = "%s 的模板（Icy Veins / Wowhead，TBC）",
+  SAVE_IN = "保存按键：", IMPORT_SET = "按键绑定保存为：%s", CONFIRM_TO_ACCOUNT = "切换为账号通用绑定？此角色的专用绑定将被丢弃。",
+  LOAD_SECTIONS = "加载配置时应用",
   SIZE_FULL = "100 %（含小键盘）", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 %（F 键、方向键）", SIZE_65 = "65 %（方向键）", SIZE_60 = "60 %", KB_FROW = "有 F 键行 (F1–F12)",
   KB_TITLE = "你的键盘", KB_TEXT = "ConfigManager 需要知道你的实体键盘，才能正确显示和转换按键绑定。游戏语言或地区无法说明这一点——请选择布局和尺寸。", KB_LAYOUT = "布局", KB_SIZE = "尺寸", KB_CHECK = "与你的键盘对照", KB_CONFIRM = "使用此键盘", KB_LATER = "稍后", KB_HINT = "这些按键与你的键盘一致吗？", KB_PICK = "选择布局后显示预览。", KB_OPEN = "选择键盘…", NOT_SET = "未设置",
   YES = "是",
@@ -426,6 +453,9 @@ LOCALES.zhCN = {
 }
 
 LOCALES.zhTW = {
+  SPEC_PRESET_SUB = "職業範本：按鍵 + 快捷列", PRESET_CLASS = "職業範本", PRESET_ROLES = "職責範本（僅按鍵）", PRESET_CONFIRM = "載入範本「%s」？\n\n將修改按鍵與快捷列（合併）。會先建立備份。", CHECK_MISSING = "%s：%d/%d 個法術此角色尚未學會：%s", CHECK_OK = "%s：%d 個法術全部已學會。", CHECK_HEAD = "%s 的範本（Icy Veins / Wowhead，TBC）",
+  SAVE_IN = "儲存按鍵：", IMPORT_SET = "按鍵綁定儲存為：%s", CONFIRM_TO_ACCOUNT = "切換為帳號共用綁定？此角色的專用綁定將被捨棄。",
+  LOAD_SECTIONS = "載入設定檔時套用",
   SIZE_FULL = "100 %（含數字鍵盤）", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 %（F 鍵、方向鍵）", SIZE_65 = "65 %（方向鍵）", SIZE_60 = "60 %", KB_FROW = "有 F 鍵列 (F1–F12)",
   KB_TITLE = "你的鍵盤", KB_TEXT = "ConfigManager 需要知道你的實體鍵盤，才能正確顯示和轉換按鍵綁定。遊戲語言或地區無法說明這一點——請選擇配置和尺寸。", KB_LAYOUT = "配置", KB_SIZE = "尺寸", KB_CHECK = "與你的鍵盤對照", KB_CONFIRM = "使用此鍵盤", KB_LATER = "稍後", KB_HINT = "這些按鍵與你的鍵盤一致嗎？", KB_PICK = "選擇配置後顯示預覽。", KB_OPEN = "選擇鍵盤…", NOT_SET = "未設定",
   YES = "是",

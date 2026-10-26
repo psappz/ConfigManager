@@ -20,7 +20,7 @@ end
 function DL.OpenProfileManager()
   local f = DL.pm
   if not f then
-    f = DL.Dialog("ConfigManagerProfileFrame", 820, 640, L.PM_TITLE)
+    f = DL.Dialog("ConfigManagerProfileFrame", 820, 730, L.PM_TITLE)
     DL.pm = f
     f.selected, f.offset = {}, 0
     local sortLab = W.Text(f, 11, C.muted); sortLab:SetPoint("TOPLEFT", 26, -66); sortLab:SetText(L.SORT_BY:upper())
@@ -36,8 +36,10 @@ function DL.OpenProfileManager()
     local all = W.Button(f, L.SEL_ALL, 90, 28); all:SetPoint("RIGHT", none, "LEFT", -6, 0)
     all:SetScript("OnClick", function() for _, it in ipairs(D.ListProfiles()) do f.selected[it.key] = true end; DL.RefreshProfileManager() end)
 
+    local loadLab = W.Text(f, 11, C.muted); loadLab:SetPoint("TOPLEFT", 26, -104); loadLab:SetText(L.LOAD_SECTIONS:upper())
+    f.sectionBoxes = DL.SectionGrid(f, loadLab, "profileSections", nil, 4, 192)
     local box = W.Frame(f, C.panel, C.border)
-    box:SetPoint("TOPLEFT", 26, -100); box:SetPoint("TOPRIGHT", -26, -100); box:SetHeight(VISIBLE * ROW_H + 8)
+    box:SetPoint("TOPLEFT", 26, -186); box:SetPoint("TOPRIGHT", -26, -186); box:SetHeight(VISIBLE * ROW_H + 8)
     box:EnableMouseWheel(true)
     box:SetScript("OnMouseWheel", function(_, d) f.offset = math.max(0, f.offset - d * 2); DL.RefreshProfileManager() end)
     f.rows = {}
@@ -69,7 +71,7 @@ function DL.OpenProfileManager()
       end)
       r.load:SetScript("OnClick", function()
         local p = r.key and ns.db.profiles[r.key]
-        if p then DL.ApplyData(p.data, { mode = "exact" }, p.name) end
+        if p then DL.ApplyData(p.data, DL.ProfileOpts(), p.name) end
       end)
       f.rows[i] = r
     end
@@ -88,6 +90,7 @@ function DL.OpenProfileManager()
   end
   f:SetScale(ns.db.scale or 0.9)
   f.renaming = nil
+  for _, c in ipairs(f.sectionBoxes) do c:Refresh() end
   f:Show()
   DL.RefreshProfileManager()
 end

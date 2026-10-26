@@ -23,4 +23,5 @@ SOFTWARE.
 ---------------------------------------------------------------------------
 Third-party libraries in the Libs/ folder keep their own licenses:
 LibStub (public domain), CallbackHandler-1.0 (BSD), LibDataBroker-1.1 and
-LibDBIcon-1.0 (Ace3-style BSD). See the headers of the respective files.
+LibDBIcon-1.0 (Ace3-style BSD), LibDeflate (zlib license).
+See the headers of the respective files.

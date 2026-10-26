@@ -264,3 +264,54 @@ function W.PaintKey(frame, bg, border)
   end
 end
 
+-- Vertical scrollbar: track + draggable thumb. onScroll(offset) is called with the
+-- new first visible index (0-based). SetRange(total, visible, offset) updates it.
+function W.ScrollBar(parent, onScroll)
+  local bar = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+  W.Paint(bar, { 0.071, 0.067, 0.082 }, C.border)
+  bar:SetWidth(10)
+  bar:EnableMouse(true)
+  local thumb = CreateFrame("Button", nil, bar, "BackdropTemplate")
+  W.Paint(thumb, C.goldDark, C.goldDark)
+  thumb:SetWidth(8)
+  thumb:RegisterForDrag("LeftButton")
+  bar.thumb, bar.total, bar.visible, bar.offset = thumb, 0, 1, 0
+  local function maxOffset() return math.max(0, bar.total - bar.visible) end
+  local function layout()
+    local h = bar:GetHeight() or 100
+    local frac = bar.total > 0 and math.min(1, bar.visible / bar.total) or 1
+    local th = math.max(24, (h - 2) * frac)
+    thumb:SetHeight(th)
+    local m = maxOffset()
+    local y = m > 0 and (h - 2 - th) * (bar.offset / m) or 0
+    thumb:ClearAllPoints(); thumb:SetPoint("TOP", bar, "TOP", 0, -1 - y)
+    thumb:SetShown(m > 0)
+  end
+  function bar:SetRange(total, visible, offset)
+    self.total, self.visible, self.offset = total or 0, visible or 1, offset or 0
+    layout()
+  end
+  local function fromCursor(grab)
+    local _, cy = GetCursorPosition()
+    local s = bar:GetEffectiveScale()
+    local top = bar:GetTop() or 0
+    local h = bar:GetHeight() or 1
+    local th = thumb:GetHeight() or 24
+    local y = top - cy / s - (grab or th / 2)
+    local m = maxOffset()
+    local off = math.floor(math.max(0, math.min(1, y / math.max(1, h - th))) * m + 0.5)
+    if off ~= bar.offset then bar.offset = off; layout(); onScroll(off) end
+  end
+  thumb:SetScript("OnDragStart", function(self)
+    local _, cy = GetCursorPosition()
+    local grab = (self:GetTop() or 0) - cy / self:GetEffectiveScale()
+    self:SetScript("OnUpdate", function() fromCursor(grab) end)
+  end)
+  thumb:SetScript("OnDragStop", function(self) self:SetScript("OnUpdate", nil) end)
+  thumb:SetScript("OnEnter", function(self) W.Paint(self, C.gold, C.gold) end)
+  thumb:SetScript("OnLeave", function(self) W.Paint(self, C.goldDark, C.goldDark) end)
+  bar:SetScript("OnMouseDown", function() fromCursor() end)
+  bar:SetScript("OnSizeChanged", layout)
+  return bar
+end
+

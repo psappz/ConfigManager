@@ -98,6 +98,10 @@ function M.Create()
   M.pendDot = W.Tex(foot, C.gold); M.pendDot:SetSize(8, 8); M.pendDot:SetPoint("LEFT", 20, 0)
   M.pendText = W.Text(foot, 12, C.text); M.pendText:SetPoint("LEFT", M.pendDot, "RIGHT", 10, 0)
   M.setText = W.Text(foot, 12, C.muted); M.setText:SetPoint("LEFT", M.pendText, "RIGHT", 16, 0)
+  -- account-wide <-> character-specific, like the checkbox in Blizzard's key binding menu
+  M.setButton = W.Button(foot, "", 200, 30)
+  M.setButton:SetPoint("LEFT", M.setText, "RIGHT", 8, 0)
+  M.setButton:SetScript("OnClick", function() ns.Dialogs.ToggleBindingSet() end)
   local apply = W.Button(foot, L.APPLY, 120, 32, "primary"); apply:SetPoint("RIGHT", -16, 0)
   apply:SetScript("OnClick", function() D.SaveBindings(); ns.OnStateSaved(); M.Refresh() end)
   local discard = W.Button(foot, L.DISCARD, 110, 32); discard:SetPoint("RIGHT", apply, "LEFT", -8, 0)
@@ -553,7 +557,7 @@ function M.BuildListView()
   M.listRows = {}
   for i = 1, VISIBLE do
     local r = CreateFrame("Frame", nil, tbl, "BackdropTemplate")
-    r:SetHeight(ROW_H); r:SetPoint("TOPLEFT", 1, -33 - (i - 1) * ROW_H); r:SetPoint("RIGHT", -10, 0)
+    r:SetHeight(ROW_H); r:SetPoint("TOPLEFT", 1, -33 - (i - 1) * ROW_H); r:SetPoint("RIGHT", -18, 0)
     r.hdrStripe = W.Tex(r); r.hdrStripe:SetSize(4, 14); r.hdrStripe:SetPoint("LEFT", 16, 0)
     r.hdrText = W.Text(r, 13, C.text, "LEFT", true); r.hdrText:SetPoint("LEFT", 28, 0)
     r.iconBg = W.Frame(r, { 0.071, 0.067, 0.082 }, C.border); r.iconBg:SetSize(30, 30); r.iconBg:SetPoint("LEFT", 14, 0)
@@ -580,6 +584,8 @@ function M.BuildListView()
     r.status = W.Text(r, 11, C.muted); r.status:SetPoint("LEFT", 880, 0)
     M.listRows[i] = r
   end
+  M.listScroll = W.ScrollBar(tbl, function(off) M.state.offset = off; M.RefreshList() end)
+  M.listScroll:SetPoint("TOPRIGHT", -4, -36); M.listScroll:SetPoint("BOTTOMRIGHT", -4, 4)
   tbl:EnableMouseWheel(true)
   tbl:SetScript("OnMouseWheel", function(_, d) M.state.offset = math.max(0, M.state.offset - d * 3); M.RefreshList() end)
   M.scrollInfo = W.Text(main, 11, C.muted, "RIGHT"); M.scrollInfo:SetPoint("BOTTOMRIGHT", 0, 4)
@@ -675,6 +681,7 @@ function M.RefreshList()
       end
     end
   end
+  M.listScroll:SetRange(#items, VISIBLE, st.offset)
   M.scrollInfo:SetText(#items > 0 and ("%d-%d / %d"):format(st.offset + 1, math.min(#items, st.offset + VISIBLE), #items) or "")
 end
 
@@ -736,7 +743,9 @@ function M.RefreshHeader()
   local n = ns.pending or 0
   M.pendText:SetText(n > 0 and L.PENDING:format(n) or L.NO_PENDING)
   M.pendDot:SetShown(n > 0)
-  M.setText:SetText(L.SAVE_AS:format(D.BindingSet() == 2 and L.SET_CHARACTER or L.SET_ACCOUNT))
+  M.setText:SetText(L.SAVE_IN)
+  M.setButton.text:SetText(D.BindingSet() == 2 and L.SET_CHARACTER or L.SET_ACCOUNT)
+  M.setButton:SetWidth(M.setButton.text:GetStringWidth() + 32)
   M.applyBtn:SetDisabled(n == 0); M.discardBtn:SetDisabled(n == 0)
 end
 

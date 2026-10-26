@@ -8,6 +8,7 @@ local DEFAULTS = {
   minimap = { show = true, angle = 215 }, autosave = true, ask = true,
   sections = { binds = true, bars = true, macros = true, controls = true, barset = true, interface = true, chat = true },
   importSections = { binds = true, bars = true, macros = true, controls = true, barset = true, interface = true, chat = true },
+  profileSections = { binds = true, bars = true, macros = true, controls = true, barset = true, interface = true, chat = true },
   importMode = "merge", importBackup = true,
   profiles = {}, nextId = 1,
 }
@@ -172,6 +173,39 @@ end
 ---------------------------------------------------------------------------
 -- Macros
 ---------------------------------------------------------------------------
+-- Icons that exist in this client: everything the macro icon picker offers.
+-- An icon from another version that this client does not know becomes the "?"
+-- (INV_Misc_QuestionMark), so imported macros never end up without a picture.
+local QUESTION_MARK = 134400
+local iconSet
+
+local function addIcons(fn, set)
+  if type(fn) ~= "function" then return end
+  local list = {}
+  local ok = pcall(fn, list)
+  if ok then for _, v in ipairs(list) do set[v] = true; if type(v) == "string" then set[v:lower()] = true end end end
+end
+
+function D.ValidIcons()
+  if iconSet then return iconSet end
+  local set, n = {}, 0
+  addIcons(GetMacroIcons, set); addIcons(GetMacroItemIcons, set)
+  for _ in pairs(set) do n = n + 1 end
+  iconSet = n > 0 and set or false
+  return iconSet
+end
+
+function D.MacroIcon(icon)
+  local num = tonumber(icon)
+  if icon == nil or icon == "" then return QUESTION_MARK end
+  local set = D.ValidIcons()
+  if not set then return num or icon end          -- no icon list available: keep it
+  if num then return set[num] and num or QUESTION_MARK end
+  local name = tostring(icon):gsub("^[Ii]nterface\\[Ii]cons\\", "")
+  if set[name] or set[name:lower()] or set[icon] then return icon end
+  return QUESTION_MARK
+end
+
 local function macroLimits()
   return MAX_ACCOUNT_MACROS or 120, MAX_CHARACTER_MACROS or 18
 end
@@ -369,10 +403,56 @@ function D.Preview(data)
   return p
 end
 
+-- Spell ID of the highest rank with this name in the player's spellbook (nil if unknown).
+-- Used for name-only entries (presets): picking up by name can be ambiguous for names
+-- like "Mangle (Cat)", and by ID would pick a fixed rank.
+function D.BookSpell(name)
+  if not name then return nil end
+  local found
+  if C_SpellBook and C_SpellBook.GetNumSpellBookSkillLines and C_SpellBook.GetSpellBookItemInfo then
+    local bank = Enum and Enum.SpellBookSpellBank and Enum.SpellBookSpellBank.Player or 0
+    local okN, n = pcall(C_SpellBook.GetNumSpellBookSkillLines)
+    for i = 1, (okN and n or 0) do
+      local okL, line = pcall(C_SpellBook.GetSpellBookSkillLineInfo, i)
+      if okL and line and line.itemIndexOffset then
+        for slot = line.itemIndexOffset + 1, line.itemIndexOffset + (line.numSpellBookItems or 0) do
+          local okI, info = pcall(C_SpellBook.GetSpellBookItemInfo, slot, bank)
+          if okI and info and info.name == name and (info.spellID or info.actionID) and not info.isPassive then
+            found = info.spellID or info.actionID
+          end
+        end
+      end
+    end
+  elseif GetNumSpellTabs and GetSpellTabInfo and (GetSpellBookItemName or GetSpellName) then
+    local nameOf = GetSpellBookItemName or GetSpellName
+    for tab = 1, (GetNumSpellTabs() or 0) do
+      local ok, _, _, offset, num = pcall(GetSpellTabInfo, tab)
+      if ok and offset and num then
+        for slot = offset + 1, offset + num do
+          local okN, n = pcall(nameOf, slot, BOOKTYPE_SPELL or "spell")
+          if okN and n == name then
+            local id
+            if GetSpellBookItemInfo then
+              local okI, kind, sid = pcall(GetSpellBookItemInfo, slot, BOOKTYPE_SPELL or "spell")
+              if okI and kind ~= "FUTURESPELL" then id = sid end
+            end
+            found = id or found
+          end
+        end
+      end
+    end
+  end
+  return found
+end
+
 local function pickup(a)
   if a.t == "s" then
     local pick = (C_Spell and C_Spell.PickupSpell) or PickupSpell
     if pick and a.id then pcall(pick, a.id) end
+    if not a.id and a.n then
+      local bid = D.BookSpell(a.n)
+      if bid and pick then pcall(pick, bid) end
+    end
     if not (GetCursorInfo and GetCursorInfo()) and pick and a.n then pcall(pick, a.n) end
   elseif a.t == "m" then
     local idx = a.n and GetMacroIndexByName and GetMacroIndexByName(a.n)
@@ -389,6 +469,7 @@ local function sameAction(slot, a)
   if not cur then return false end
   if cur.t ~= a.t then return false end
   if a.t == "m" then return cur.n == a.n end
+  if a.id == nil and a.t == "s" then return cur.n ~= nil and cur.n == a.n end
   return cur.id == a.id
 end
 
@@ -405,7 +486,7 @@ function D.Apply(data, opts)
     for _, m in ipairs(data.macros) do
       if m.n and m.n ~= "" then
         local idx = GetMacroIndexByName and GetMacroIndexByName(m.n) or 0
-        local icon = tonumber(m.i) or m.i or 134400
+        local icon = D.MacroIcon(m.i)
         if idx and idx > 0 then
           pcall(EditMacro, idx, m.n, icon, m.b or "")
           stats.macros = stats.macros + 1
@@ -499,6 +580,21 @@ end
 
 function D.BindingSet()
   return (GetCurrentBindingSet and GetCurrentBindingSet()) or 1
+end
+
+-- 1 = account-wide, 2 = character-specific (same behaviour as Blizzard's menu):
+-- switching to character copies the current bindings into the character set,
+-- switching back loads the account set again and drops the character set.
+function D.SetBindingSet(set)
+  if InCombatLockdown and InCombatLockdown() then return false end
+  if set == 2 then
+    if SaveBindings then SaveBindings(CHARACTER_BINDINGS or 2) end
+  else
+    if LoadBindings then LoadBindings(ACCOUNT_BINDINGS or 1) end
+    if SaveBindings then SaveBindings(ACCOUNT_BINDINGS or 1) end
+  end
+  ns.pending, ns.changed = 0, {}
+  return true
 end
 
 function D.SaveBindings()

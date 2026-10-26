@@ -54,15 +54,23 @@ local SECTION_LABELS = { binds = "INC_BINDS", bars = "INC_BARS", macros = "INC_M
   barset = "INC_BARSET", interface = "INC_INTERFACE", chat = "INC_CHAT" }
 
 -- 2-column grid of section checkboxes bound to db[key][section]
-local function sectionGrid(parent, anchor, key, onChange)
+local function sectionGrid(parent, anchor, key, onChange, cols, colW)
+  cols, colW = cols or 2, colW or 230
   local boxes = {}
   for i, sec in ipairs(D.SECTIONS) do
     local c = W.Check(parent, L[SECTION_LABELS[sec]], function() return ns.db[key][sec] end,
       function(v) ns.db[key][sec] = v; if onChange then onChange() end end)
-    c:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", ((i - 1) % 2) * 230, -8 - math.floor((i - 1) / 2) * 26)
+    c:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", ((i - 1) % cols) * colW, -8 - math.floor((i - 1) / cols) * 26)
     boxes[#boxes + 1] = c
   end
   return boxes
+end
+DL.SectionGrid = sectionGrid
+
+-- Sections used when a saved profile is loaded (profile menu, profile manager,
+-- automatic spec switch, spec suggestion)
+function DL.ProfileOpts()
+  return { mode = "exact", sections = U.CopyTable(ns.db.profileSections) }
 end
 
 function DL.CreateIO()
@@ -121,6 +129,7 @@ function DL.CreateIO()
   f.r2 = radio("replace", L.MODE_REPLACE, f.r1)
   local bk = W.Check(im, L.BACKUP, function() return ns.db.importBackup end, function(v) ns.db.importBackup = v end)
   bk:SetPoint("TOPLEFT", f.r2, "BOTTOMLEFT", 0, -2)
+  f.setInfo = W.Text(im, 11, C.muted); f.setInfo:SetPoint("TOPLEFT", bk, "BOTTOMLEFT", 0, -6)
 
   local go = W.Button(im, L.DO_IMPORT, 130, 34, "primary"); go:SetPoint("BOTTOMRIGHT", -22, 18)
   local save = W.Button(im, L.SAVE_AS_PROFILE, 170, 34); save:SetPoint("RIGHT", go, "LEFT", -8, 0)
@@ -186,6 +195,13 @@ function DL.UpdatePreview()
   if missing > 0 then client = client .. "  |cfff0a07e" .. L.PREVIEW_NA:format(missing) .. "|r" end
   f.pvClient:SetText(client)
   f.goBtn:SetDisabled(false); f.saveBtn:SetDisabled(false)
+end
+
+local baseUpdatePreview = DL.UpdatePreview
+function DL.UpdatePreview()
+  baseUpdatePreview()
+  local f = DL.io
+  if f and f.setInfo then f.setInfo:SetText(L.IMPORT_SET:format(D.BindingSet() == 2 and L.SET_CHARACTER or L.SET_ACCOUNT)) end
 end
 
 function DL.OpenIO(focus)
@@ -324,16 +340,20 @@ function DL.ShowSpecPrompt(info)
   end
   local entries = {
     { title = D.SpecLabel(info), sub = specProf and L.SPEC_SUB_SPEC or L.NOT_AVAILABLE, color = { r, g, b }, ok = specProf ~= nil,
-      action = function() applyData(specProf.data, { mode = "exact" }); done(specProf.name) end },
+      action = function() applyData(specProf.data, DL.ProfileOpts()); done(specProf.name) end },
     { title = info.className or "?", sub = classProf and (L.SPEC_SUB_CLASS .. ": " .. classProf.p.name) or L.NOT_AVAILABLE, color = { r, g, b },
-      ok = classProf ~= nil, action = function() applyData(classProf.p.data, { mode = "exact" }); done(classProf.p.name) end },
+      ok = classProf ~= nil, action = function() applyData(classProf.p.data, DL.ProfileOpts()); done(classProf.p.name) end },
   }
   for _, role in ipairs({ "TANK", "HEALER", "DAMAGER" }) do
-    local p = ns.Presets.ForRole(role)
+    -- Class preset of this spec (or another spec with that role) first, generic role preset otherwise.
+    local cp = ns.Presets.ForSpec(info, role)
+    local p = cp or ns.Presets.ForRole(role)
     local can = roles[role] and p ~= nil
     local col = role == "TANK" and U.CAT_COLORS.MOVEMENT or (role == "HEALER" and U.CAT_COLORS.OTHER or U.CAT_COLORS.TARGETING)
-    entries[#entries + 1] = { title = L[p.nameKey], sub = can and L.ROLE_SUB or L.NOT_AVAILABLE, color = col, ok = can,
-      action = function() applyData(p.data, { mode = "merge", bars = false, macros = false }); done(ns.Presets.Name(p)) end }
+    local roleKey = role == "TANK" and "ROLE_TANK" or (role == "HEALER" and "ROLE_HEALER" or "ROLE_DPS")
+    local sub = not can and L.NOT_AVAILABLE or (cp and (ns.Presets.Name(cp) .. " · " .. L.SPEC_PRESET_SUB) or L.ROLE_SUB)
+    entries[#entries + 1] = { title = L[roleKey], sub = sub, color = col, ok = can,
+      action = function() applyData(p.data, { mode = "merge", sections = p.sections }); done(ns.Presets.Name(p)) end }
   end
   entries[#entries + 1] = { title = L.NO, sub = L.NO_SUB, color = C.dim, ok = true, action = function() ns.cdb.asked[key] = true end }
   for i, e in ipairs(entries) do
@@ -373,6 +393,16 @@ local function confirm(text, fn)
 end
 DL.Confirm, DL.Dialog = confirm, dialog
 
+function DL.ToggleBindingSet()
+  if InCombatLockdown() then U.Print(L.IN_COMBAT); return end
+  local function done() if ns.Main then ns.Main.Refresh() end; if DL.io and DL.io:IsShown() then DL.UpdatePreview() end end
+  if D.BindingSet() == 2 then
+    confirm(L.CONFIRM_TO_ACCOUNT, function() D.SetBindingSet(1); done() end)
+  else
+    D.SetBindingSet(2); done()
+  end
+end
+
 function DL.ProfileMenu(owner)
   local info = D.PlayerSpec()
   local specKey = D.SpecKey(info)
@@ -387,23 +417,52 @@ function DL.ProfileMenu(owner)
     local p = it.p
     local mark = it.key == specKey and "  |cffe3b55b•|r" or ""
     items[#items + 1] = { text = (p.name or it.key) .. mark .. "  |cff6e685f" .. (p.saved or "") .. "|r",
-      func = function() applyData(p.data, { mode = "exact" }, p.name) end }
+      func = function() applyData(p.data, DL.ProfileOpts(), p.name) end }
   end
   items[#items + 1] = { text = L.MANAGE_PROFILES, color = C.gold, func = function() DL.OpenProfileManager() end }
   W.Menu(owner, items)
 end
 
+local function loadPreset(p)
+  local name = ns.Presets.Name(p)
+  confirm(L.PRESET_CONFIRM:format(name), function()
+    applyData(p.data, { mode = "merge", sections = p.sections }, name)
+  end)
+end
+DL.LoadPreset = loadPreset
+
 function DL.PresetMenu(owner)
-  local items = { { text = L.PRESET_LIST:upper(), title = true } }
+  local info = D.PlayerSpec()
+  local items = {}
+  local own = ns.Presets.ForClass(info.class)
+  if #own > 0 then
+    items[#items + 1] = { text = L.PRESET_CLASS:upper(), title = true }
+    local cur = ns.Presets.ForSpec(info)
+    for _, p in ipairs(own) do
+      local mark = (cur == p) and "  |cffe3b55b•|r" or ""
+      items[#items + 1] = { text = ns.Presets.Name(p) .. mark, func = function() loadPreset(p) end }
+    end
+  end
+  items[#items + 1] = { text = L.PRESET_ROLES:upper(), title = true }
   for _, p in ipairs(ns.Presets.list) do
-    local name = ns.Presets.Name(p)
-    items[#items + 1] = { text = name, func = function()
-      confirm(name .. "\n\n" .. (p.mode == "replace" and L.MODE_REPLACE or L.MODE_MERGE) .. "?", function()
-        applyData(p.data, { mode = p.mode or "merge" }, name)
-      end)
-    end }
+    items[#items + 1] = { text = ns.Presets.Name(p), func = function() loadPreset(p) end }
   end
   W.Menu(owner, items)
+end
+
+-- /cfgm checkpresets: which preset spells this character does not know.
+function DL.CheckPresets()
+  local info = D.PlayerSpec()
+  local own = ns.Presets.ForClass(info.class)
+  U.Print(L.CHECK_HEAD:format(info.className or info.class or "?"))
+  for _, p in ipairs(own) do
+    local missing, total = ns.Presets.Missing(p)
+    if #missing == 0 then
+      U.Print(L.CHECK_OK:format(ns.Presets.Name(p), total))
+    else
+      U.Print(L.CHECK_MISSING:format(ns.Presets.Name(p), #missing, total, table.concat(missing, ", ")))
+    end
+  end
 end
 
 ---------------------------------------------------------------------------

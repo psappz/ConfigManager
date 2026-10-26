@@ -92,7 +92,7 @@ local function handleSpecChange()
   end
   local prof = ns.db.profiles[key]
   if prof then
-    local stats = D.Apply(prof.data, { mode = "exact" })
+    local stats = D.Apply(prof.data, ns.Dialogs.ProfileOpts())
     if stats then U.Print(ns.L.PROFILE_LOADED:format(prof.name)) end
   else
     checkPrompt(info)
@@ -129,6 +129,7 @@ SlashCmdList.CONFIGMANAGER = function(msg)
   elseif msg == "keyboard" or msg == "tastatur" then ns.Dialogs.ShowKeyboardPrompt()
   elseif msg == "minimap" then ns.Dialogs.MinimapDiagnose(false)
   elseif msg == "minimapfix" then ns.Dialogs.MinimapDiagnose(true)
+  elseif msg == "checkpresets" or msg == "presets" then ns.Dialogs.CheckPresets()
   else ns.Main.Toggle() end
 end
 
