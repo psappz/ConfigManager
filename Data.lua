@@ -314,7 +314,9 @@ function D.CurrentLayoutId()
 end
 
 function D.KeyboardChosen()
-  return LY.IsChosen(ns.db.layout) and (ns.db.size == "full" or ns.db.size == "tkl" or ns.db.size == "60")
+  local okSize = false
+  for _, sz in ipairs(LY.SIZES) do if sz == ns.db.size then okSize = true end end
+  return LY.IsChosen(ns.db.layout) and okSize
 end
 
 function D.Snapshot(opts)

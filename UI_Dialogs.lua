@@ -225,7 +225,7 @@ function DL.ToggleSettings()
       function(v) if v ~= "none" then ns.db.layout = v; ns.db.keyboardConfirmed = ns.db.size ~= nil; rebuild() end end)
     f.layout:SetPoint("TOPLEFT", col2, -92)
     label(L.SET_SIZE, col1, -146)
-    f.size = W.Cycle(f, 330, { { "none", L.NOT_SET }, { "full", L.SIZE_FULL }, { "tkl", L.SIZE_TKL }, { "60", L.SIZE_60 } },
+    f.size = W.Cycle(f, 330, { { "none", L.NOT_SET }, { "full", L.SIZE_FULL }, { "tkl", L.SIZE_TKL }, { "75", L.SIZE_75 }, { "65", L.SIZE_65 }, { "60", L.SIZE_60 } },
       function() return ns.db.size or "none" end,
       function(v) if v ~= "none" then ns.db.size = v; ns.db.keyboardConfirmed = LY.IsChosen(ns.db.layout); rebuild() end end)
     f.size:SetPoint("TOPLEFT", col1, -168)
@@ -252,6 +252,9 @@ function DL.ToggleSettings()
     local mm = W.Check(f, L.SET_MINIMAP, function() return ns.db.minimap.show end, function(v) ns.db.minimap.show = v; DL.UpdateMinimap() end)
     mm:SetPoint("TOPLEFT", col1, -310)
     y = -344
+    f.frow = W.Check(f, L.KB_FROW, function() return LY.HasFRow(ns.db.size, ns.db.frow) end,
+      function(v) ns.db.frow = v; rebuild() end)
+    f.frow:SetPoint("TOPLEFT", col1, -284)
     f.c2 = check(L.SET_ASK, "ask")
     f.c3 = check(L.SET_AUTOSAVE, "autosave")
     f.mm = mm
@@ -264,7 +267,7 @@ function DL.ToggleSettings()
   if f:IsShown() then f:Hide(); return end
   f:SetScale(ns.db.scale or 0.9)
   for _, k in ipairs({ "lang", "layout", "size", "mouse", "remap", "scale" }) do f[k]:Refresh() end
-  f.mm:Refresh(); f.c2:Refresh(); f.c3:Refresh()
+  f.mm:Refresh(); f.c2:Refresh(); f.c3:Refresh(); f.frow:Refresh()
   f:Show()
 end
 

@@ -231,7 +231,7 @@ function M.RebuildKeyboard()
   if not M.board then return end
   for _, b in ipairs(M.keyButtons) do b:Hide() end
   for _, b in ipairs(M.mouseButtons) do b:Hide() end
-  local keys, width, rows = LY.BuildKeys(ns.db.layout, ns.db.size)
+  local keys, width, rows = LY.BuildKeys(ns.db.layout, ns.db.size, ns.db.frow)
   local avail = (FRAME_W - DETAIL_W) - 48 - 28
   local unit = math.min(52, math.floor(avail / width))
   local gap = 4

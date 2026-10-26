@@ -5,7 +5,7 @@ local L = ns.L
 local DL = ns.Dialogs
 
 local PREVIEW_W, PREVIEW_H = 848, 262
-local SIZES = { { "full", "SIZE_FULL" }, { "tkl", "SIZE_TKL" }, { "60", "SIZE_60" } }
+local SIZES = { { "full", "SIZE_FULL" }, { "tkl", "SIZE_TKL" }, { "75", "SIZE_75" }, { "65", "SIZE_65" }, { "60", "SIZE_60" } }
 
 ---------------------------------------------------------------------------
 -- "Which keyboard do you use?" – shown until the player has confirmed one.
@@ -14,7 +14,7 @@ local SIZES = { { "full", "SIZE_FULL" }, { "tkl", "SIZE_TKL" }, { "60", "SIZE_60
 function DL.ShowKeyboardPrompt(onDone)
   local f = DL.kb
   if not f then
-    f = DL.Dialog("ConfigManagerKeyboardFrame", 900, 790, L.KB_TITLE)
+    f = DL.Dialog("ConfigManagerKeyboardFrame", 900, 820, L.KB_TITLE)
     DL.kb = f
     local intro = W.Text(f, 13, { 0.81, 0.78, 0.73 }); intro:SetPoint("TOPLEFT", 26, -58); intro:SetPoint("RIGHT", -26, 0)
     intro:SetWordWrap(true); intro:SetText(L.KB_TEXT)
@@ -32,12 +32,17 @@ function DL.ShowKeyboardPrompt(onDone)
     local s2 = W.Text(f, 10, C.muted); s2:SetPoint("TOPLEFT", 26, rowsY); s2:SetText(L.KB_SIZE:upper())
     f.sizeButtons = {}
     for i, sz in ipairs(SIZES) do
-      local b = W.Button(f, L[sz[2]], 270, 30)
-      b:SetPoint("TOPLEFT", 26 + (i - 1) * 284, rowsY - 18)
-      b:SetScript("OnClick", function() f.size = sz[1]; DL.RefreshKeyboardPrompt() end)
+      local b = W.Button(f, L[sz[2]], 163, 30)
+      b:SetPoint("TOPLEFT", 26 + (i - 1) * 171, rowsY - 18)
+      b.text:SetFont(W.BodyFont(), 11, "")
+      b:SetScript("OnClick", function() f.size = sz[1]; f.frow = nil; DL.RefreshKeyboardPrompt() end)
       b.id = sz[1]
       f.sizeButtons[i] = b
     end
+    f.frowCheck = W.Check(f, L.KB_FROW, function() return LY.HasFRow(f.size, f.frow) end,
+      function(v) f.frow = v; DL.RefreshKeyboardPrompt() end)
+    f.frowCheck:SetPoint("TOPLEFT", 26, rowsY - 56)
+    rowsY = rowsY - 30
     local s3 = W.Text(f, 10, C.muted); s3:SetPoint("TOPLEFT", 26, rowsY - 66); s3:SetText(L.KB_CHECK:upper())
     f.preview = W.Frame(f, C.panel, C.border)
     f.preview:SetPoint("TOPLEFT", 26, rowsY - 84); f.preview:SetPoint("RIGHT", -26, 0); f.preview:SetHeight(PREVIEW_H)
@@ -47,6 +52,7 @@ function DL.ShowKeyboardPrompt(onDone)
     f.ok:SetScript("OnClick", function()
       if not (f.layout and f.size) then return end
       ns.db.layout, ns.db.size, ns.db.keyboardConfirmed = f.layout, f.size, true
+      ns.db.frow = f.frow
       f:Hide()
       if ns.Main and ns.Main.frame then ns.Main.RebuildKeyboard(); ns.Main.Refresh() end
       if DL.settings and DL.settings:IsShown() then DL.settings.layout:Refresh(); DL.settings.size:Refresh() end
@@ -58,6 +64,7 @@ function DL.ShowKeyboardPrompt(onDone)
   end
   f.layout = LY.IsChosen(ns.db.layout) and ns.db.layout or nil
   f.size = ns.db.keyboardConfirmed and ns.db.size or nil
+  f.frow = ns.db.keyboardConfirmed and ns.db.frow or nil
   f.onDone = onDone
   f:SetScale(ns.db.scale or 0.9)
   f:Show()
@@ -73,7 +80,7 @@ function DL.RefreshKeyboardPrompt()
   if lay then
     -- same geometry as the keyboard view: F-row, modifiers, navigation block and
     -- numpad follow the chosen size (full size while no size is picked yet)
-    local keys, width, rows = LY.BuildKeys(f.layout, f.size or "full")
+    local keys, width, rows = LY.BuildKeys(f.layout, f.size or "full", f.frow)
     local unit = math.floor(math.min((PREVIEW_W - 28) / width, (PREVIEW_H - 40) / rows))
     for i, key in ipairs(keys) do
       local k = f.caps[i]
@@ -96,5 +103,6 @@ function DL.RefreshKeyboardPrompt()
     end
   end
   f.hint:SetText(lay and L.KB_HINT or L.KB_PICK)
+  f.frowCheck:Refresh()
   f.ok:SetDisabled(not (f.layout and f.size))
 end

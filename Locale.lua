@@ -5,6 +5,7 @@ ns = ns or {}
 local LOCALES = {}
 
 LOCALES.enUS = {
+  SIZE_FULL = "100 % (with numpad)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-row, arrows)", SIZE_65 = "65 % (arrows)", SIZE_60 = "60 %", KB_FROW = "Has F-row (F1–F12)",
   KB_TITLE = "Your keyboard", KB_TEXT = "ConfigManager needs to know your physical keyboard to show and convert key bindings correctly. Your game language or region is no indication – please pick both.", KB_LAYOUT = "Layout", KB_SIZE = "Size", KB_CHECK = "Check against your keyboard", KB_CONFIRM = "Use this keyboard", KB_LATER = "Later", KB_HINT = "Do these keys match your keyboard?", KB_PICK = "Pick a layout to see a preview.", KB_OPEN = "Choose keyboard…", NOT_SET = "Not set",
   YES = "Yes",
   MANAGE_PROFILES = "Manage profiles…", PM_TITLE = "Manage profiles", SORT_BY = "Sort by", SORT_NAME = "Name", SORT_DATE = "Date", SORT_CLASS = "Class", SEL_ALL = "All", SEL_NONE = "None", DELETE_SELECTED = "Delete selected (%d)", CONFIRM_DELETE = "Delete %d profiles permanently?", RENAME = "Rename", LOAD = "Load", SELECTED_N = "%d of %d selected", TYPE_SPEC = "Spec profile", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Import", TYPE_OTHER = "Profile", ACTIVE = "active", MOVE_UP = "Move up", MOVE_DOWN = "Move down", ERRORS_TITLE = "Error log", ERRORS_NONE = "No errors recorded.", ERRORS_CLEAR = "Clear log", ERRORS_PENDING = "An error was recorded in the last session – /cfgm errors shows details.",
@@ -39,8 +40,7 @@ LOCALES.enUS = {
   IN_COMBAT = "Not possible in combat – try again afterwards.",
   MACRO_LIMIT = "Macro limit reached – %d macros were skipped.",
   SETTINGS_TITLE = "Settings", SET_LANGUAGE = "Addon language", LANG_AUTO = "Automatic (client)",
-  SET_LAYOUT = "Keyboard layout", SET_SIZE = "Keyboard size", SIZE_FULL = "Full size with numpad",
-  SIZE_TKL = "Without numpad (TKL)", SIZE_60 = "Compact (60 %, no F-row)", SET_MOUSE = "Extra mouse buttons",
+  SET_LAYOUT = "Keyboard layout", SET_SIZE = "Keyboard size", SET_MOUSE = "Extra mouse buttons",
   SET_REMAP = "Strings from other layouts", REMAP_POS = "Keep physical position (recommended)", REMAP_NAME = "Keep key name",
   SET_SCALE = "Window scale", SET_MINIMAP = "Show minimap button",
   SET_AUTOSAVE = "Save bindings to the spec profile automatically when switching spec",
@@ -63,6 +63,7 @@ LOCALES.enUS = {
 }
 
 LOCALES.deDE = {
+  SIZE_FULL = "100 % (mit Ziffernblock)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-Reihe, Pfeile)", SIZE_65 = "65 % (Pfeile)", SIZE_60 = "60 %", KB_FROW = "Mit F-Reihe (F1–F12)",
   KB_TITLE = "Deine Tastatur", KB_TEXT = "ConfigManager muss deine physische Tastatur kennen, um Tastenbelegungen richtig anzuzeigen und umzurechnen. Spielsprache oder Region sagen darüber nichts aus – bitte wähle beides aus.", KB_LAYOUT = "Layout", KB_SIZE = "Größe", KB_CHECK = "Mit deiner Tastatur vergleichen", KB_CONFIRM = "Diese Tastatur verwenden", KB_LATER = "Später", KB_HINT = "Stimmen diese Tasten mit deiner Tastatur überein?", KB_PICK = "Wähle ein Layout für die Vorschau.", KB_OPEN = "Tastatur wählen…", NOT_SET = "Nicht gewählt",
   YES = "Ja",
   MANAGE_PROFILES = "Profile verwalten…", PM_TITLE = "Profile verwalten", SORT_BY = "Sortieren", SORT_NAME = "Name", SORT_DATE = "Datum", SORT_CLASS = "Klasse", SEL_ALL = "Alle", SEL_NONE = "Keine", DELETE_SELECTED = "Ausgewählte löschen (%d)", CONFIRM_DELETE = "%d Profile endgültig löschen?", RENAME = "Umbenennen", LOAD = "Laden", SELECTED_N = "%d von %d ausgewählt", TYPE_SPEC = "Spec-Profil", TYPE_BACKUP = "Sicherung", TYPE_IMPORT = "Import", TYPE_OTHER = "Profil", ACTIVE = "aktiv", MOVE_UP = "Nach oben", MOVE_DOWN = "Nach unten", ERRORS_TITLE = "Fehlerprotokoll", ERRORS_NONE = "Keine Fehler aufgezeichnet.", ERRORS_CLEAR = "Protokoll leeren", ERRORS_PENDING = "In der letzten Sitzung wurde ein Fehler aufgezeichnet – /cfgm errors zeigt Details.",
@@ -97,8 +98,7 @@ LOCALES.deDE = {
   IN_COMBAT = "Im Kampf nicht möglich – bitte danach erneut versuchen.",
   MACRO_LIMIT = "Makro-Limit erreicht – %d Makros wurden übersprungen.",
   SETTINGS_TITLE = "Einstellungen", SET_LANGUAGE = "Addon-Sprache", LANG_AUTO = "Automatisch (Client)",
-  SET_LAYOUT = "Tastaturlayout", SET_SIZE = "Tastaturgröße", SIZE_FULL = "Vollständig mit Ziffernblock",
-  SIZE_TKL = "Ohne Ziffernblock (TKL)", SIZE_60 = "Kompakt (60 %, ohne F-Reihe)", SET_MOUSE = "Zusätzliche Maustasten",
+  SET_LAYOUT = "Tastaturlayout", SET_SIZE = "Tastaturgröße", SET_MOUSE = "Zusätzliche Maustasten",
   SET_REMAP = "Strings aus anderen Layouts", REMAP_POS = "Physische Position beibehalten (empfohlen)", REMAP_NAME = "Tastenname beibehalten",
   SET_SCALE = "Fenstergröße", SET_MINIMAP = "Minimap-Button anzeigen",
   SET_AUTOSAVE = "Beim Spec-Wechsel Belegung automatisch im Spec-Profil sichern",
@@ -121,6 +121,7 @@ LOCALES.deDE = {
 }
 
 LOCALES.frFR = {
+  SIZE_FULL = "100 % (pavé numérique)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (touches F, flèches)", SIZE_65 = "65 % (flèches)", SIZE_60 = "60 %", KB_FROW = "Avec rangée F (F1–F12)",
   KB_TITLE = "Votre clavier", KB_TEXT = "ConfigManager doit connaître votre clavier physique pour afficher et convertir correctement les raccourcis. La langue du jeu ou la région ne l'indiquent pas – choisissez les deux.", KB_LAYOUT = "Disposition", KB_SIZE = "Taille", KB_CHECK = "Comparer avec votre clavier", KB_CONFIRM = "Utiliser ce clavier", KB_LATER = "Plus tard", KB_HINT = "Ces touches correspondent-elles à votre clavier ?", KB_PICK = "Choisissez une disposition pour l'aperçu.", KB_OPEN = "Choisir le clavier…", NOT_SET = "Non défini",
   YES = "Oui",
   MANAGE_PROFILES = "Gérer les profils…", PM_TITLE = "Gérer les profils", SORT_BY = "Trier par", SORT_NAME = "Nom", SORT_DATE = "Date", SORT_CLASS = "Classe", SEL_ALL = "Tout", SEL_NONE = "Aucun", DELETE_SELECTED = "Supprimer la sélection (%d)", CONFIRM_DELETE = "Supprimer définitivement %d profils ?", RENAME = "Renommer", LOAD = "Charger", SELECTED_N = "%d sur %d sélectionnés", TYPE_SPEC = "Profil de spécialisation", TYPE_BACKUP = "Sauvegarde", TYPE_IMPORT = "Import", TYPE_OTHER = "Profil", ACTIVE = "actif", MOVE_UP = "Monter", MOVE_DOWN = "Descendre", ERRORS_TITLE = "Journal des erreurs", ERRORS_NONE = "Aucune erreur enregistrée.", ERRORS_CLEAR = "Vider le journal", ERRORS_PENDING = "Une erreur a été enregistrée lors de la dernière session – /cfgm errors affiche les détails.",
@@ -153,8 +154,7 @@ LOCALES.frFR = {
   IMPORT_SKIPPED = "%d entrées ignorées (inconnues sur ce personnage).",
   IN_COMBAT = "Impossible en combat.", MACRO_LIMIT = "Limite de macros atteinte – %d ignorées.",
   SETTINGS_TITLE = "Options", SET_LANGUAGE = "Langue", LANG_AUTO = "Automatique (client)",
-  SET_LAYOUT = "Disposition du clavier", SET_SIZE = "Taille du clavier", SIZE_FULL = "Complet avec pavé numérique",
-  SIZE_TKL = "Sans pavé numérique (TKL)", SIZE_60 = "Compact (60 %)", SET_MOUSE = "Boutons de souris supplémentaires",
+  SET_LAYOUT = "Disposition du clavier", SET_SIZE = "Taille du clavier", SET_MOUSE = "Boutons de souris supplémentaires",
   SET_REMAP = "Chaînes d'autres dispositions", REMAP_POS = "Garder la position physique (recommandé)", REMAP_NAME = "Garder le nom de touche",
   SET_SCALE = "Échelle", SET_MINIMAP = "Bouton de minicarte",
   SET_AUTOSAVE = "Enregistrer automatiquement au changement de spécialisation", SET_ASK = "Proposer des raccourcis pour une nouvelle spécialisation",
@@ -173,6 +173,7 @@ LOCALES.frFR = {
 }
 
 LOCALES.esES = {
+  SIZE_FULL = "100 % (con numérico)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, flechas)", SIZE_65 = "65 % (flechas)", SIZE_60 = "60 %", KB_FROW = "Con fila F (F1–F12)",
   KB_TITLE = "Tu teclado", KB_TEXT = "ConfigManager necesita conocer tu teclado físico para mostrar y convertir bien las asignaciones. El idioma del juego o la región no lo indican: elige ambas opciones.", KB_LAYOUT = "Distribución", KB_SIZE = "Tamaño", KB_CHECK = "Compara con tu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Más tarde", KB_HINT = "¿Coinciden estas teclas con tu teclado?", KB_PICK = "Elige una distribución para ver la vista previa.", KB_OPEN = "Elegir teclado…", NOT_SET = "Sin definir",
   YES = "Sí",
   MANAGE_PROFILES = "Gestionar perfiles…", PM_TITLE = "Gestionar perfiles", SORT_BY = "Ordenar por", SORT_NAME = "Nombre", SORT_DATE = "Fecha", SORT_CLASS = "Clase", SEL_ALL = "Todos", SEL_NONE = "Ninguno", DELETE_SELECTED = "Borrar selección (%d)", CONFIRM_DELETE = "¿Borrar %d perfiles definitivamente?", RENAME = "Renombrar", LOAD = "Cargar", SELECTED_N = "%d de %d seleccionados", TYPE_SPEC = "Perfil de especialización", TYPE_BACKUP = "Copia de seguridad", TYPE_IMPORT = "Importación", TYPE_OTHER = "Perfil", ACTIVE = "activo", MOVE_UP = "Subir", MOVE_DOWN = "Bajar", ERRORS_TITLE = "Registro de errores", ERRORS_NONE = "No hay errores registrados.", ERRORS_CLEAR = "Vaciar registro", ERRORS_PENDING = "Se registró un error en la última sesión – /cfgm errors muestra los detalles.",
@@ -201,7 +202,7 @@ LOCALES.esES = {
   IMPORT_DONE = "Importación lista: %d asignaciones, %d huecos, %d macros.", IMPORT_SKIPPED = "%d entradas omitidas (desconocidas).",
   IN_COMBAT = "No es posible en combate.", MACRO_LIMIT = "Límite de macros alcanzado – %d omitidas.",
   SETTINGS_TITLE = "Opciones", SET_LANGUAGE = "Idioma", LANG_AUTO = "Automático (cliente)", SET_LAYOUT = "Distribución del teclado",
-  SET_SIZE = "Tamaño del teclado", SIZE_FULL = "Completo con teclado numérico", SIZE_TKL = "Sin teclado numérico (TKL)", SIZE_60 = "Compacto (60 %)",
+  SET_SIZE = "Tamaño del teclado",
   SET_MOUSE = "Botones extra del ratón", SET_REMAP = "Cadenas de otras distribuciones", REMAP_POS = "Mantener posición física (recomendado)",
   REMAP_NAME = "Mantener nombre de tecla", SET_SCALE = "Escala", SET_MINIMAP = "Botón del minimapa",
   SET_AUTOSAVE = "Guardar automáticamente al cambiar de especialización", SET_ASK = "Sugerir asignaciones para nuevas especializaciones",
@@ -216,6 +217,7 @@ LOCALES.esES = {
 }
 
 LOCALES.itIT = {
+  SIZE_FULL = "100 % (con tastierino)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, frecce)", SIZE_65 = "65 % (frecce)", SIZE_60 = "60 %", KB_FROW = "Con fila F (F1–F12)",
   KB_TITLE = "La tua tastiera", KB_TEXT = "ConfigManager deve conoscere la tua tastiera fisica per mostrare e convertire correttamente i tasti. Lingua del gioco o regione non lo indicano: scegli entrambe le opzioni.", KB_LAYOUT = "Layout", KB_SIZE = "Dimensione", KB_CHECK = "Confronta con la tua tastiera", KB_CONFIRM = "Usa questa tastiera", KB_LATER = "Più tardi", KB_HINT = "Questi tasti corrispondono alla tua tastiera?", KB_PICK = "Scegli un layout per l'anteprima.", KB_OPEN = "Scegli tastiera…", NOT_SET = "Non impostato",
   YES = "Sì",
   MANAGE_PROFILES = "Gestisci profili…", PM_TITLE = "Gestisci profili", SORT_BY = "Ordina per", SORT_NAME = "Nome", SORT_DATE = "Data", SORT_CLASS = "Classe", SEL_ALL = "Tutti", SEL_NONE = "Nessuno", DELETE_SELECTED = "Elimina selezionati (%d)", CONFIRM_DELETE = "Eliminare definitivamente %d profili?", RENAME = "Rinomina", LOAD = "Carica", SELECTED_N = "%d di %d selezionati", TYPE_SPEC = "Profilo specializzazione", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Importazione", TYPE_OTHER = "Profilo", ACTIVE = "attivo", MOVE_UP = "Sposta su", MOVE_DOWN = "Sposta giù", ERRORS_TITLE = "Registro errori", ERRORS_NONE = "Nessun errore registrato.", ERRORS_CLEAR = "Svuota registro", ERRORS_PENDING = "È stato registrato un errore nell'ultima sessione – /cfgm errors mostra i dettagli.",
@@ -244,7 +246,7 @@ LOCALES.itIT = {
   IMPORT_DONE = "Importazione completata: %d assegnazioni, %d slot, %d macro.", IMPORT_SKIPPED = "%d voci saltate (sconosciute).",
   IN_COMBAT = "Non possibile in combattimento.", MACRO_LIMIT = "Limite macro raggiunto – %d saltate.",
   SETTINGS_TITLE = "Impostazioni", SET_LANGUAGE = "Lingua", LANG_AUTO = "Automatica (client)", SET_LAYOUT = "Layout tastiera",
-  SET_SIZE = "Dimensione tastiera", SIZE_FULL = "Completa con tastierino", SIZE_TKL = "Senza tastierino (TKL)", SIZE_60 = "Compatta (60 %)",
+  SET_SIZE = "Dimensione tastiera",
   SET_MOUSE = "Tasti mouse extra", SET_REMAP = "Stringhe da altri layout", REMAP_POS = "Mantieni posizione fisica (consigliato)", REMAP_NAME = "Mantieni nome tasto",
   SET_SCALE = "Scala", SET_MINIMAP = "Pulsante minimappa", SET_AUTOSAVE = "Salva automaticamente al cambio di specializzazione",
   SET_ASK = "Suggerisci assegnazioni per nuove specializzazioni", RELOAD_LANG = "Alcuni testi cambiano dopo /reload.",
@@ -259,6 +261,7 @@ LOCALES.itIT = {
 }
 
 LOCALES.ptBR = {
+  SIZE_FULL = "100 % (com numérico)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (fila F, setas)", SIZE_65 = "65 % (setas)", SIZE_60 = "60 %", KB_FROW = "Com fila F (F1–F12)",
   KB_TITLE = "Seu teclado", KB_TEXT = "O ConfigManager precisa conhecer seu teclado físico para mostrar e converter as teclas corretamente. O idioma do jogo ou a região não indicam isso – escolha as duas opções.", KB_LAYOUT = "Layout", KB_SIZE = "Tamanho", KB_CHECK = "Compare com seu teclado", KB_CONFIRM = "Usar este teclado", KB_LATER = "Depois", KB_HINT = "Estas teclas correspondem ao seu teclado?", KB_PICK = "Escolha um layout para ver a prévia.", KB_OPEN = "Escolher teclado…", NOT_SET = "Não definido",
   YES = "Sim",
   MANAGE_PROFILES = "Gerenciar perfis…", PM_TITLE = "Gerenciar perfis", SORT_BY = "Ordenar por", SORT_NAME = "Nome", SORT_DATE = "Data", SORT_CLASS = "Classe", SEL_ALL = "Todos", SEL_NONE = "Nenhum", DELETE_SELECTED = "Excluir selecionados (%d)", CONFIRM_DELETE = "Excluir %d perfis permanentemente?", RENAME = "Renomear", LOAD = "Carregar", SELECTED_N = "%d de %d selecionados", TYPE_SPEC = "Perfil de especialização", TYPE_BACKUP = "Backup", TYPE_IMPORT = "Importação", TYPE_OTHER = "Perfil", ACTIVE = "ativo", MOVE_UP = "Mover para cima", MOVE_DOWN = "Mover para baixo", ERRORS_TITLE = "Registro de erros", ERRORS_NONE = "Nenhum erro registrado.", ERRORS_CLEAR = "Limpar registro", ERRORS_PENDING = "Um erro foi registrado na última sessão – /cfgm errors mostra os detalhes.",
@@ -287,7 +290,7 @@ LOCALES.ptBR = {
   IMPORT_DONE = "Importação concluída: %d atribuições, %d espaços, %d macros.", IMPORT_SKIPPED = "%d entradas ignoradas (desconhecidas).",
   IN_COMBAT = "Impossível em combate.", MACRO_LIMIT = "Limite de macros atingido – %d ignoradas.",
   SETTINGS_TITLE = "Configurações", SET_LANGUAGE = "Idioma", LANG_AUTO = "Automático (cliente)", SET_LAYOUT = "Layout do teclado",
-  SET_SIZE = "Tamanho do teclado", SIZE_FULL = "Completo com teclado numérico", SIZE_TKL = "Sem teclado numérico (TKL)", SIZE_60 = "Compacto (60 %)",
+  SET_SIZE = "Tamanho do teclado",
   SET_MOUSE = "Botões extras do mouse", SET_REMAP = "Textos de outros layouts", REMAP_POS = "Manter posição física (recomendado)", REMAP_NAME = "Manter nome da tecla",
   SET_SCALE = "Escala", SET_MINIMAP = "Botão do minimapa", SET_AUTOSAVE = "Salvar automaticamente ao trocar de especialização",
   SET_ASK = "Sugerir atribuições para novas especializações", RELOAD_LANG = "Alguns textos mudam após /reload.",
@@ -302,6 +305,7 @@ LOCALES.ptBR = {
 }
 
 LOCALES.ruRU = {
+  SIZE_FULL = "100 % (с цифровым блоком)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F-ряд, стрелки)", SIZE_65 = "65 % (стрелки)", SIZE_60 = "60 %", KB_FROW = "Есть F-ряд (F1–F12)",
   KB_TITLE = "Ваша клавиатура", KB_TEXT = "ConfigManager нужно знать вашу физическую клавиатуру, чтобы правильно показывать и переносить назначения. Язык игры или регион об этом не говорят – выберите оба параметра.", KB_LAYOUT = "Раскладка", KB_SIZE = "Размер", KB_CHECK = "Сравните со своей клавиатурой", KB_CONFIRM = "Использовать эту клавиатуру", KB_LATER = "Позже", KB_HINT = "Совпадают ли эти клавиши с вашей клавиатурой?", KB_PICK = "Выберите раскладку для предпросмотра.", KB_OPEN = "Выбрать клавиатуру…", NOT_SET = "Не выбрано",
   YES = "Да",
   MANAGE_PROFILES = "Управление профилями…", PM_TITLE = "Управление профилями", SORT_BY = "Сортировка", SORT_NAME = "Имя", SORT_DATE = "Дата", SORT_CLASS = "Класс", SEL_ALL = "Все", SEL_NONE = "Ничего", DELETE_SELECTED = "Удалить выбранные (%d)", CONFIRM_DELETE = "Удалить профили навсегда: %d?", RENAME = "Переименовать", LOAD = "Загрузить", SELECTED_N = "Выбрано %d из %d", TYPE_SPEC = "Профиль специализации", TYPE_BACKUP = "Резервная копия", TYPE_IMPORT = "Импорт", TYPE_OTHER = "Профиль", ACTIVE = "активен", MOVE_UP = "Вверх", MOVE_DOWN = "Вниз", ERRORS_TITLE = "Журнал ошибок", ERRORS_NONE = "Ошибок не записано.", ERRORS_CLEAR = "Очистить журнал", ERRORS_PENDING = "В прошлом сеансе была записана ошибка – подробности: /cfgm errors.",
@@ -330,7 +334,7 @@ LOCALES.ruRU = {
   IMPORT_DONE = "Импорт завершён: назначений %d, ячеек %d, макросов %d.", IMPORT_SKIPPED = "Пропущено записей: %d (неизвестны).",
   IN_COMBAT = "Недоступно в бою.", MACRO_LIMIT = "Достигнут лимит макросов – пропущено: %d.",
   SETTINGS_TITLE = "Настройки", SET_LANGUAGE = "Язык", LANG_AUTO = "Автоматически (клиент)", SET_LAYOUT = "Раскладка",
-  SET_SIZE = "Размер клавиатуры", SIZE_FULL = "Полная с цифровым блоком", SIZE_TKL = "Без цифрового блока (TKL)", SIZE_60 = "Компактная (60 %)",
+  SET_SIZE = "Размер клавиатуры",
   SET_MOUSE = "Доп. кнопки мыши", SET_REMAP = "Строки из других раскладок", REMAP_POS = "Сохранять физическое положение (рекомендуется)", REMAP_NAME = "Сохранять имя клавиши",
   SET_SCALE = "Масштаб", SET_MINIMAP = "Кнопка у миникарты", SET_AUTOSAVE = "Сохранять автоматически при смене специализации",
   SET_ASK = "Предлагать назначения для новых специализаций", RELOAD_LANG = "Некоторые тексты изменятся после /reload.",
@@ -345,6 +349,7 @@ LOCALES.ruRU = {
 }
 
 LOCALES.koKR = {
+  SIZE_FULL = "100 % (숫자패드 포함)", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 % (F열, 방향키)", SIZE_65 = "65 % (방향키)", SIZE_60 = "60 %", KB_FROW = "F열 있음 (F1–F12)",
   KB_TITLE = "키보드 선택", KB_TEXT = "단축키를 올바르게 표시하고 변환하려면 실제 키보드를 알아야 합니다. 게임 언어나 지역으로는 알 수 없으니 둘 다 선택하세요.", KB_LAYOUT = "배열", KB_SIZE = "크기", KB_CHECK = "실제 키보드와 비교", KB_CONFIRM = "이 키보드 사용", KB_LATER = "나중에", KB_HINT = "이 키가 키보드와 일치합니까?", KB_PICK = "배열을 선택하면 미리보기가 표시됩니다.", KB_OPEN = "키보드 선택…", NOT_SET = "선택 안 됨",
   YES = "예",
   MANAGE_PROFILES = "프로필 관리…", PM_TITLE = "프로필 관리", SORT_BY = "정렬", SORT_NAME = "이름", SORT_DATE = "날짜", SORT_CLASS = "직업", SEL_ALL = "전체", SEL_NONE = "없음", DELETE_SELECTED = "선택 항목 삭제 (%d)", CONFIRM_DELETE = "프로필 %d개를 영구 삭제할까요?", RENAME = "이름 변경", LOAD = "불러오기", SELECTED_N = "%d / %d 선택됨", TYPE_SPEC = "전문화 프로필", TYPE_BACKUP = "백업", TYPE_IMPORT = "가져오기", TYPE_OTHER = "프로필", ACTIVE = "활성", MOVE_UP = "위로", MOVE_DOWN = "아래로", ERRORS_TITLE = "오류 기록", ERRORS_NONE = "기록된 오류가 없습니다.", ERRORS_CLEAR = "기록 지우기", ERRORS_PENDING = "지난 세션에서 오류가 기록되었습니다 – /cfgm errors로 확인하세요.",
@@ -370,8 +375,7 @@ LOCALES.koKR = {
   SAVE_AS_PROFILE = "프로필로 저장", DO_IMPORT = "가져오기", CANCEL = "취소",
   IMPORT_DONE = "가져오기 완료: 단축키 %d, 칸 %d, 매크로 %d.", IMPORT_SKIPPED = "%d개 항목 건너뜀(알 수 없음).",
   IN_COMBAT = "전투 중에는 불가능합니다.", MACRO_LIMIT = "매크로 한도 도달 – %d개 건너뜀.",
-  SETTINGS_TITLE = "설정", SET_LANGUAGE = "언어", LANG_AUTO = "자동(클라이언트)", SET_LAYOUT = "키보드 배열", SET_SIZE = "키보드 크기",
-  SIZE_FULL = "숫자패드 포함", SIZE_TKL = "숫자패드 없음(TKL)", SIZE_60 = "컴팩트(60 %)", SET_MOUSE = "추가 마우스 버튼",
+  SETTINGS_TITLE = "설정", SET_LANGUAGE = "언어", LANG_AUTO = "자동(클라이언트)", SET_LAYOUT = "키보드 배열", SET_SIZE = "키보드 크기", SET_MOUSE = "추가 마우스 버튼",
   SET_REMAP = "다른 배열의 문자열", REMAP_POS = "물리적 위치 유지(권장)", REMAP_NAME = "키 이름 유지", SET_SCALE = "창 크기", SET_MINIMAP = "미니맵 버튼",
   SET_AUTOSAVE = "전문화 변경 시 자동 저장", SET_ASK = "새 전문화에 단축키 제안", RELOAD_LANG = "일부 문자는 /reload 후 바뀝니다.",
   SPEC_TITLE = "새 전문화 감지", SPEC_TEXT = "%s에 저장된 단축키가 없습니다. 무엇을 불러올까요?",
@@ -384,6 +388,7 @@ LOCALES.koKR = {
 }
 
 LOCALES.zhCN = {
+  SIZE_FULL = "100 %（含小键盘）", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 %（F 键、方向键）", SIZE_65 = "65 %（方向键）", SIZE_60 = "60 %", KB_FROW = "有 F 键行 (F1–F12)",
   KB_TITLE = "你的键盘", KB_TEXT = "ConfigManager 需要知道你的实体键盘，才能正确显示和转换按键绑定。游戏语言或地区无法说明这一点——请选择布局和尺寸。", KB_LAYOUT = "布局", KB_SIZE = "尺寸", KB_CHECK = "与你的键盘对照", KB_CONFIRM = "使用此键盘", KB_LATER = "稍后", KB_HINT = "这些按键与你的键盘一致吗？", KB_PICK = "选择布局后显示预览。", KB_OPEN = "选择键盘…", NOT_SET = "未设置",
   YES = "是",
   MANAGE_PROFILES = "管理配置…", PM_TITLE = "管理配置", SORT_BY = "排序", SORT_NAME = "名称", SORT_DATE = "日期", SORT_CLASS = "职业", SEL_ALL = "全选", SEL_NONE = "全不选", DELETE_SELECTED = "删除所选 (%d)", CONFIRM_DELETE = "永久删除 %d 个配置？", RENAME = "重命名", LOAD = "加载", SELECTED_N = "已选 %d / %d", TYPE_SPEC = "专精配置", TYPE_BACKUP = "备份", TYPE_IMPORT = "导入", TYPE_OTHER = "配置", ACTIVE = "当前", MOVE_UP = "上移", MOVE_DOWN = "下移", ERRORS_TITLE = "错误日志", ERRORS_NONE = "没有记录到错误。", ERRORS_CLEAR = "清空日志", ERRORS_PENDING = "上次会话记录到一个错误 – 输入 /cfgm errors 查看详情。",
@@ -408,8 +413,7 @@ LOCALES.zhCN = {
   SAVE_AS_PROFILE = "另存为配置", DO_IMPORT = "导入", CANCEL = "取消",
   IMPORT_DONE = "导入完成：%d 个绑定，%d 个栏位，%d 个宏。", IMPORT_SKIPPED = "跳过 %d 项（此角色未知）。",
   IN_COMBAT = "战斗中无法进行。", MACRO_LIMIT = "宏数量已达上限 – 跳过 %d 个。",
-  SETTINGS_TITLE = "设置", SET_LANGUAGE = "语言", LANG_AUTO = "自动（客户端）", SET_LAYOUT = "键盘布局", SET_SIZE = "键盘尺寸",
-  SIZE_FULL = "全尺寸含小键盘", SIZE_TKL = "无小键盘（TKL）", SIZE_60 = "紧凑（60%）", SET_MOUSE = "额外鼠标按键",
+  SETTINGS_TITLE = "设置", SET_LANGUAGE = "语言", LANG_AUTO = "自动（客户端）", SET_LAYOUT = "键盘布局", SET_SIZE = "键盘尺寸", SET_MOUSE = "额外鼠标按键",
   SET_REMAP = "来自其他布局的字符串", REMAP_POS = "保持物理位置（推荐）", REMAP_NAME = "保持按键名称", SET_SCALE = "窗口缩放", SET_MINIMAP = "小地图按钮",
   SET_AUTOSAVE = "切换专精时自动保存", SET_ASK = "新专精时推荐绑定", RELOAD_LANG = "部分文字需 /reload 后更新。",
   SPEC_TITLE = "检测到新专精", SPEC_TEXT = "%s 尚未保存按键绑定。要加载哪一套？",
@@ -422,6 +426,7 @@ LOCALES.zhCN = {
 }
 
 LOCALES.zhTW = {
+  SIZE_FULL = "100 %（含數字鍵盤）", SIZE_TKL = "TKL (80 %)", SIZE_75 = "75 %（F 鍵、方向鍵）", SIZE_65 = "65 %（方向鍵）", SIZE_60 = "60 %", KB_FROW = "有 F 鍵列 (F1–F12)",
   KB_TITLE = "你的鍵盤", KB_TEXT = "ConfigManager 需要知道你的實體鍵盤，才能正確顯示和轉換按鍵綁定。遊戲語言或地區無法說明這一點——請選擇配置和尺寸。", KB_LAYOUT = "配置", KB_SIZE = "尺寸", KB_CHECK = "與你的鍵盤對照", KB_CONFIRM = "使用此鍵盤", KB_LATER = "稍後", KB_HINT = "這些按鍵與你的鍵盤一致嗎？", KB_PICK = "選擇配置後顯示預覽。", KB_OPEN = "選擇鍵盤…", NOT_SET = "未設定",
   YES = "是",
   MANAGE_PROFILES = "管理設定檔…", PM_TITLE = "管理設定檔", SORT_BY = "排序", SORT_NAME = "名稱", SORT_DATE = "日期", SORT_CLASS = "職業", SEL_ALL = "全選", SEL_NONE = "全不選", DELETE_SELECTED = "刪除所選 (%d)", CONFIRM_DELETE = "永久刪除 %d 個設定檔？", RENAME = "重新命名", LOAD = "載入", SELECTED_N = "已選 %d / %d", TYPE_SPEC = "專精設定檔", TYPE_BACKUP = "備份", TYPE_IMPORT = "匯入", TYPE_OTHER = "設定檔", ACTIVE = "目前", MOVE_UP = "上移", MOVE_DOWN = "下移", ERRORS_TITLE = "錯誤記錄", ERRORS_NONE = "沒有記錄到錯誤。", ERRORS_CLEAR = "清除記錄", ERRORS_PENDING = "上次工作階段記錄到一個錯誤 – 輸入 /cfgm errors 查看詳情。",
@@ -446,8 +451,7 @@ LOCALES.zhTW = {
   SAVE_AS_PROFILE = "另存為設定檔", DO_IMPORT = "匯入", CANCEL = "取消",
   IMPORT_DONE = "匯入完成：%d 個綁定，%d 個欄位，%d 個巨集。", IMPORT_SKIPPED = "略過 %d 項（此角色未知）。",
   IN_COMBAT = "戰鬥中無法進行。", MACRO_LIMIT = "巨集數量已達上限 – 略過 %d 個。",
-  SETTINGS_TITLE = "設定", SET_LANGUAGE = "語言", LANG_AUTO = "自動（用戶端）", SET_LAYOUT = "鍵盤配置", SET_SIZE = "鍵盤尺寸",
-  SIZE_FULL = "全尺寸含數字鍵盤", SIZE_TKL = "無數字鍵盤（TKL）", SIZE_60 = "精簡（60%）", SET_MOUSE = "額外滑鼠按鍵",
+  SETTINGS_TITLE = "設定", SET_LANGUAGE = "語言", LANG_AUTO = "自動（用戶端）", SET_LAYOUT = "鍵盤配置", SET_SIZE = "鍵盤尺寸", SET_MOUSE = "額外滑鼠按鍵",
   SET_REMAP = "來自其他配置的字串", REMAP_POS = "保持實體位置（建議）", REMAP_NAME = "保持按鍵名稱", SET_SCALE = "視窗縮放", SET_MINIMAP = "小地圖按鈕",
   SET_AUTOSAVE = "切換專精時自動儲存", SET_ASK = "新專精時推薦綁定", RELOAD_LANG = "部分文字需 /reload 後更新。",
   SPEC_TITLE = "偵測到新專精", SPEC_TEXT = "%s 尚未儲存按鍵綁定。要載入哪一套？",

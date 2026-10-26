@@ -86,19 +86,41 @@ end
 
 local function P(layout, p, w) return { layout.tok[p], w or 1, pos = p } end
 
-function LY.BuildKeys(layoutId, size)
+LY.SIZES = { "full", "tkl", "75", "65", "60" }
+local COMPACT = { ["75"] = true, ["65"] = true, ["60"] = true }
+
+-- F-row is independent of the size; nil means the usual default for that size
+function LY.HasFRow(size, frow)
+  if frow ~= nil then return frow end
+  return size == "full" or size == "tkl" or size == "75" or size == nil
+end
+
+-- size: "full" (100 %), "tkl" (80 %), "75", "65", "60"; frow: true/false/nil
+function LY.BuildKeys(layoutId, size, frow)
   local L = LY.Get(layoutId)
+  size = size or "full"
+  frow = LY.HasFRow(size, frow)
   local keys = {}
   local y = 0
-  if size ~= "60" then
-    row({ { "ESCAPE" }, { "_", 1 }, { "F1" }, { "F2" }, { "F3" }, { "F4" }, { "_", .5 }, { "F5" }, { "F6" }, { "F7" }, { "F8" }, { "_", .5 },
-      { "F9" }, { "F10" }, { "F11" }, { "F12" } }, 0, keys)
-    y = 1.25
+  local compact = COMPACT[size]
+  local rightCol = size == "75" or size == "65"   -- 1-unit column right of the main block
+  if frow then
+    if compact then
+      local f = { { "ESCAPE" } }
+      for i = 1, 12 do f[#f + 1] = { "F" .. i } end
+      if size == "75" then f[#f + 1] = { "PRINTSCREEN" }; f[#f + 1] = { "PAUSE" }; f[#f + 1] = { "DELETE" } end
+      row(f, 0, keys)
+    else
+      row({ { "ESCAPE" }, { "_", 1 }, { "F1" }, { "F2" }, { "F3" }, { "F4" }, { "_", .5 }, { "F5" }, { "F6" }, { "F7" }, { "F8" }, { "_", .5 },
+        { "F9" }, { "F10" }, { "F11" }, { "F12" } }, 0, keys)
+    end
+    y = compact and 1 or 1.25
   end
   local r1 = {}
   for _, p in ipairs({ "E00", "E01", "E02", "E03", "E04", "E05", "E06", "E07", "E08", "E09", "E10", "E11", "E12" }) do r1[#r1 + 1] = P(L, p) end
-  if size == "60" then r1[1] = { "ESCAPE" } end
+  if not frow then r1[1] = { "ESCAPE" } end
   r1[#r1 + 1] = { "BACKSPACE", 2 }
+  if rightCol then r1[#r1 + 1] = { size == "75" and "HOME" or "DELETE" } end
   row(r1, y, keys)
   local r2 = { { "TAB", 1.5 } }
   for _, p in ipairs({ "D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09", "D10", "D11", "D12" }) do r2[#r2 + 1] = P(L, p) end
@@ -115,15 +137,25 @@ function LY.BuildKeys(layoutId, size)
     r3[#r3 + 1] = { "ENTER", 2.25 }
     r4 = { { "LSHIFT", 2.25 } }
   end
+  if rightCol then r2[#r2 + 1] = { "PAGEUP" }; r3[#r3 + 1] = { "PAGEDOWN" } end
   for _, p in ipairs({ "B01", "B02", "B03", "B04", "B05", "B06", "B07", "B08", "B09", "B10" }) do r4[#r4 + 1] = P(L, p) end
-  r4[#r4 + 1] = { "RSHIFT", 2.75 }
+  if rightCol then
+    r4[#r4 + 1] = { "RSHIFT", 1.75 }; r4[#r4 + 1] = { "UP" }; r4[#r4 + 1] = { "END" }
+  else
+    r4[#r4 + 1] = { "RSHIFT", 2.75 }
+  end
   row(r2, y + 1, keys); row(r3, y + 2, keys); row(r4, y + 3, keys)
-  row({ { "LCTRL", 1.5 }, { "", 1.25, label = "" }, { "LALT", 1.25 }, { "SPACE", 6.5 }, { "RALT", 1.25 }, { "", 1.25, label = "" }, { "RCTRL", 2 } }, y + 4, keys)
+  if rightCol then
+    row({ { "LCTRL", 1.25 }, { "", 1.25, label = "" }, { "LALT", 1.25 }, { "SPACE", 6.25 }, { "RALT" }, { "", 1, label = "" }, { "RCTRL" },
+      { "LEFT" }, { "DOWN" }, { "RIGHT" } }, y + 4, keys)
+  else
+    row({ { "LCTRL", 1.5 }, { "", 1.25, label = "" }, { "LALT", 1.25 }, { "SPACE", 6.5 }, { "RALT", 1.25 }, { "", 1.25, label = "" }, { "RCTRL", 2 } }, y + 4, keys)
+  end
 
-  local width = 15
-  if size ~= "60" then
+  local width = rightCol and 16 or 15
+  if not compact then
     local nx = 15.5
-    row({ { "PRINTSCREEN" }, { "SCROLLLOCK" }, { "PAUSE" } }, 0, keys, nx, "nav")
+    if frow then row({ { "PRINTSCREEN" }, { "SCROLLLOCK" }, { "PAUSE" } }, 0, keys, nx, "nav") end
     row({ { "INSERT" }, { "HOME" }, { "PAGEUP" } }, y, keys, nx, "nav")
     row({ { "DELETE" }, { "END" }, { "PAGEDOWN" } }, y + 1, keys, nx, "nav")
     row({ { "_" }, { "UP" } }, y + 3, keys, nx, "nav")
