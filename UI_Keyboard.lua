@@ -69,7 +69,7 @@ function DL.RefreshKeyboardPrompt()
   for _, b in ipairs(f.layoutButtons) do b:SetStyle(b.id == f.layout and "active" or "default") end
   for _, b in ipairs(f.sizeButtons) do b:SetStyle(b.id == f.size and "active" or "default") end
   local lay = f.layout and LY.byId[f.layout]
-  for _, k in ipairs(f.caps) do k:Hide() end
+  for _, k in ipairs(f.caps) do k:Hide(); if k.isoLower then k.isoLower:Hide() end end
   if lay then
     -- same geometry as the keyboard view: F-row, modifiers, navigation block and
     -- numpad follow the chosen size (full size while no size is picked yet)
@@ -84,11 +84,12 @@ function DL.RefreshKeyboardPrompt()
       end
       k:SetSize(key.w * unit - 3, key.h * unit - 3)
       k:ClearAllPoints(); k:SetPoint("TOPLEFT", 14 + key.x * unit, -12 - key.y * unit)
+      if key.iso then W.IsoEnter(k, unit, 3, false) elseif k.isoLower then k.isoLower:Hide() end
       local label = key.label or (key.token and LY.KeyLabel(key.token)) or ""
       k.t:SetText(label)
       k.t:SetFont(W.BodyFont(), (#label > 3 or key.w > 1.4) and 9 or 12, "")
       local isLetter = key.pos ~= nil
-      W.Paint(k, isLetter and C.key or C.keyEmpty, C.border)
+      W.PaintKey(k, isLetter and C.key or C.keyEmpty, C.border)
       local col = isLetter and C.text or C.muted
       k.t:SetTextColor(col[1], col[2], col[3])
       k:Show()

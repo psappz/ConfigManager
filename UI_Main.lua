@@ -242,6 +242,12 @@ function M.RebuildKeyboard()
     b:SetSize(k.w * unit - gap, k.h * unit - gap)
     b:ClearAllPoints()
     b:SetPoint("TOPLEFT", 14 + k.x * unit, -14 - k.y * unit)
+    if k.iso then W.IsoEnter(b, unit, gap, true) elseif b.isoLower then b.isoLower:Hide() end
+    -- category stripe at the very bottom of the key (the lower part for an ISO Enter)
+    local base = (k.iso and b.isoLower) or b
+    b.stripe:ClearAllPoints()
+    b.stripe:SetPoint("BOTTOMLEFT", base, "BOTTOMLEFT", 5, 3); b.stripe:SetPoint("BOTTOMRIGHT", base, "BOTTOMRIGHT", -5, 3)
+    if b.stripe.SetDrawLayer then b.stripe:SetParent(base); b.stripe:SetDrawLayer("OVERLAY", 2) end
     b.token, b.spec = k.token, k
     b:Show()
   end
@@ -280,7 +286,7 @@ function M.RefreshKeyboard()
   local function paint(b)
     local tok = b.token
     if not tok then
-      W.Paint(b, C.keyEmpty, C.border); b.label:SetText(b.spec and b.spec.label or ""); b.action:SetText("")
+      W.PaintKey(b, C.keyEmpty, C.border); b.label:SetText(b.spec and b.spec.label or ""); b.action:SetText("")
       b.stripe:Hide(); b.icon:Hide(); b:SetAlpha(0.6); return
     end
     local label = (b.spec and b.spec.label) or LY.KeyLabel(tok)
@@ -288,7 +294,7 @@ function M.RefreshKeyboard()
     local mod = MODMAP[tok]
     if mod then
       local on = layer:find(mod) ~= nil
-      W.Paint(b, on and C.selBg or C.keyEmpty, on and C.goldDark or C.border)
+      W.PaintKey(b, on and C.selBg or C.keyEmpty, on and C.goldDark or C.border)
       b.label:SetTextColor((on and C.goldLight or C.muted)[1], (on and C.goldLight or C.muted)[2], (on and C.goldLight or C.muted)[3])
       b.action:SetText(""); b.stripe:Hide(); b.icon:Hide(); b:SetAlpha(1)
       b.chordLabel, b.desc, b.sub = LY.KeyLabel(tok), nil, nil
@@ -303,11 +309,11 @@ function M.RefreshKeyboard()
     local isSel = M.state.sel == tok
     local match = q == "" or (desc and desc:lower():find(q, 1, true)) or (e and e.name:lower():find(q, 1, true))
     if isSel then
-      W.Paint(b, C.selBg, C.gold)
+      W.PaintKey(b, C.selBg, C.gold)
     elseif q ~= "" and match and e then
-      W.Paint(b, C.key, C.goldDark)
+      W.PaintKey(b, C.key, C.goldDark)
     else
-      W.Paint(b, e and C.key or C.keyEmpty, C.border)
+      W.PaintKey(b, e and C.key or C.keyEmpty, C.border)
     end
     b:SetAlpha((q ~= "" and not (match and e)) and 0.35 or 1)
     local lc = isSel and C.goldLight or (e and C.muted or C.dim)

@@ -78,7 +78,7 @@ local function row(keys, y, list, x0, block)
   for _, k in ipairs(keys) do
     local tok, w = k[1], k[2] or 1
     if tok ~= "_" then
-      list[#list + 1] = { token = tok ~= "" and tok or nil, pos = k.pos, x = x, y = y, w = w, h = k.h or 1, block = block or "main", label = k.label }
+      list[#list + 1] = { token = tok ~= "" and tok or nil, pos = k.pos, x = x, y = y, w = w, h = k.h or 1, block = block or "main", label = k.label, iso = k.iso }
     end
     x = x + w
   end
@@ -106,9 +106,9 @@ function LY.BuildKeys(layoutId, size)
   for _, p in ipairs({ "C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "C09", "C10", "C11" }) do r3[#r3 + 1] = P(L, p) end
   local r4
   if L.iso then
-    r2[#r2 + 1] = { "ENTER", 1.5 }
+    -- ISO Enter: 1.5 wide in the top row, 1.25 wide in the home row (L-shape)
+    r2[#r2 + 1] = { "ENTER", 1.5, h = 2, iso = true }
     r3[#r3 + 1] = P(L, "C12")
-    r3[#r3 + 1] = { "", 1.25, label = "" }
     r4 = { { "LSHIFT", 1.25 }, P(L, "B00") }
   else
     r2[#r2 + 1] = P(L, "C12", 1.5)

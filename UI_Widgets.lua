@@ -224,3 +224,43 @@ function W.EscClose(frame)
     tinsert(UISpecialFrames, name)
   end
 end
+
+-- ISO Enter: the frame itself is the wide upper part; a child frame forms the
+-- narrower lower part (inset by a quarter key on the left). A strip in the key
+-- colour covers the seam so both parts read as one key.
+function W.IsoEnter(frame, unit, gap, forwardMouse)
+  local lower = frame.isoLower
+  if not lower then
+    lower = CreateFrame(forwardMouse and "Button" or "Frame", nil, frame, "BackdropTemplate")
+    lower.seam = lower:CreateTexture(nil, "OVERLAY")
+    lower.seam:SetTexture("Interface\\Buttons\\WHITE8X8")
+    if forwardMouse then
+      lower:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+      lower:SetScript("OnClick", function(_, btn) local f = frame:GetScript("OnClick"); if f then f(frame, btn) end end)
+      lower:SetScript("OnEnter", function() local f = frame:GetScript("OnEnter"); if f then f(frame) end end)
+      lower:SetScript("OnLeave", function() local f = frame:GetScript("OnLeave"); if f then f(frame) end end)
+    end
+    frame.isoLower = lower
+  end
+  frame:SetSize(1.5 * unit - gap, unit - gap)
+  lower:ClearAllPoints()
+  lower:SetPoint("TOPLEFT", frame, "TOPLEFT", 0.25 * unit, -(unit - gap - 2))
+  lower:SetSize(1.25 * unit - gap, unit + 2)
+  lower.seam:ClearAllPoints()
+  lower.seam:SetPoint("TOPLEFT", lower, "TOPLEFT", 1, 3)
+  lower.seam:SetPoint("TOPRIGHT", lower, "TOPRIGHT", -1, 3)
+  lower.seam:SetHeight(6)
+  lower:Show()
+  return lower
+end
+
+-- Paints a key and, for an ISO Enter, its lower part and seam in the same colours.
+function W.PaintKey(frame, bg, border)
+  W.Paint(frame, bg, border)
+  local lower = frame.isoLower
+  if lower and lower:IsShown() then
+    W.Paint(lower, bg, border)
+    lower.seam:SetVertexColor(bg[1], bg[2], bg[3], 1)
+  end
+end
+
