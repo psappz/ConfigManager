@@ -187,7 +187,7 @@ function M.BuildKeyboardView()
   local ml = W.Text(M.mouseBoard, 11, C.muted); ml:SetPoint("TOPLEFT", 14, -10); ml:SetText(L.MOUSE:upper())
 
   M.legend = CreateFrame("Frame", nil, v)
-  M.legend:SetPoint("TOPLEFT", M.mouseBoard, "TOPRIGHT", 24, -4); M.legend:SetSize(400, 80)
+  M.legend:SetPoint("TOPLEFT", M.mouseBoard, "TOPRIGHT", 24, -4); M.legend:SetPoint("RIGHT", v, "RIGHT", -24, 0); M.legend:SetHeight(80)
   local cl = W.Text(M.legend, 11, C.muted); cl:SetPoint("TOPLEFT"); cl:SetText(L.CATEGORIES:upper())
   local x, y = 0, -22
   for i, cat in ipairs(CAT_ORDER) do
@@ -196,7 +196,7 @@ function M.BuildKeyboardView()
     x = x + 30 + t:GetStringWidth()
     if i == 3 then x, y = 0, y - 20 end
   end
-  M.stats = W.Text(M.legend, 11, C.muted); M.stats:SetPoint("TOPLEFT", 0, -68); M.stats:SetWidth(560); M.stats:SetWordWrap(true)
+  M.stats = W.Text(M.legend, 11, C.muted); M.stats:SetPoint("TOPLEFT", 0, -68); M.stats:SetPoint("RIGHT", M.legend, "RIGHT", 0, 0); M.stats:SetWordWrap(true)
 
   M.keyButtons, M.mouseButtons = {}, {}
   M.RebuildKeyboard()
@@ -506,7 +506,13 @@ end
 ---------------------------------------------------------------------------
 -- List view
 ---------------------------------------------------------------------------
-local ROW_H, VISIBLE = 44, 13
+local ROW_H, MAX_ROWS = 44, 24
+-- Rows that fit into the table (depends on window size and UI scale).
+local function visibleRows()
+  local h = M.listTable and M.listTable:GetHeight()
+  if not h or h <= 0 then return 13 end
+  return math.max(1, math.min(MAX_ROWS, math.floor((h - 34) / ROW_H)))
+end
 
 function M.BuildListView()
   local v = CreateFrame("Frame", nil, M.body)
@@ -550,12 +556,15 @@ function M.BuildListView()
 
   local tbl = W.Frame(main, C.panel, C.border)
   tbl:SetPoint("TOPLEFT", 0, -86); tbl:SetPoint("BOTTOMRIGHT", 0, 26)
+  M.listTable = tbl
+  if tbl.SetClipsChildren then tbl:SetClipsChildren(true) end
+  tbl:SetScript("OnSizeChanged", function() if M.listView and M.listView:IsShown() then M.RefreshList() end end)
   local head = CreateFrame("Frame", nil, tbl); head:SetPoint("TOPLEFT"); head:SetPoint("TOPRIGHT"); head:SetHeight(32)
   local function col(text, x) local fs = W.Text(head, 10, C.muted); fs:SetPoint("LEFT", x, 0); fs:SetText(text:upper()) end
   col(L.COL_ACTION, 56); col(L.COL_KEY1, 560); col(L.COL_KEY2, 720)
   local hl = W.Tex(tbl, C.border); hl:SetPoint("TOPLEFT", 0, -32); hl:SetPoint("TOPRIGHT", 0, -32); hl:SetHeight(1)
   M.listRows = {}
-  for i = 1, VISIBLE do
+  for i = 1, MAX_ROWS do
     local r = CreateFrame("Frame", nil, tbl, "BackdropTemplate")
     r:SetHeight(ROW_H); r:SetPoint("TOPLEFT", 1, -33 - (i - 1) * ROW_H); r:SetPoint("RIGHT", -18, 0)
     r.hdrStripe = W.Tex(r); r.hdrStripe:SetSize(4, 14); r.hdrStripe:SetPoint("LEFT", 16, 0)
@@ -635,9 +644,10 @@ function M.RefreshList()
   end
   for _, c in ipairs(M.chips) do c:SetStyle(c.key == st.filter and "active" or "default") end
   M.listSummary:SetText(("%s: %d\n%s: %d"):format(L.FILTER_BOUND, boundN, L.FILTER_UNBOUND, total - boundN))
+  local VISIBLE = visibleRows()
   st.offset = math.min(st.offset, math.max(0, #items - VISIBLE))
   for i, r in ipairs(M.listRows) do
-    local it = items[i + st.offset]
+    local it = i <= VISIBLE and items[i + st.offset] or nil
     r.e = it and it.e
     if not it then r:Hide()
     else

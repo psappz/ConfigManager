@@ -75,11 +75,11 @@ end
 
 function DL.CreateIO()
   if DL.io then return DL.io end
-  local f = dialog("ConfigManagerIOFrame", 1100, 700)
+  local f = dialog("ConfigManagerIOFrame", 1100, 770)
   DL.io = f
   local function pane(x)
     local p = W.Frame(f, C.panel, C.border)
-    p:SetPoint("TOPLEFT", x, -54); p:SetSize(512, 622)
+    p:SetPoint("TOPLEFT", x, -54); p:SetSize(512, 692)
     return p
   end
   -- Export
@@ -129,7 +129,8 @@ function DL.CreateIO()
   f.r2 = radio("replace", L.MODE_REPLACE, f.r1)
   local bk = W.Check(im, L.BACKUP, function() return ns.db.importBackup end, function(v) ns.db.importBackup = v end)
   bk:SetPoint("TOPLEFT", f.r2, "BOTTOMLEFT", 0, -2)
-  f.setInfo = W.Text(im, 11, C.muted); f.setInfo:SetPoint("TOPLEFT", bk, "BOTTOMLEFT", 0, -6)
+  f.setInfo = W.Text(im, 11, C.muted); f.setInfo:SetPoint("TOPLEFT", bk, "BOTTOMLEFT", 0, -6); f.setInfo:SetPoint("RIGHT", -22, 0)
+  f.setInfo:SetWordWrap(true)
 
   local go = W.Button(im, L.DO_IMPORT, 130, 34, "primary"); go:SetPoint("BOTTOMRIGHT", -22, 18)
   local save = W.Button(im, L.SAVE_AS_PROFILE, 170, 34); save:SetPoint("RIGHT", go, "LEFT", -8, 0)
