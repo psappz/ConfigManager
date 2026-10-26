@@ -39,6 +39,7 @@ local function applyData(data, opts, label)
   if (stats.missing or 0) > 0 then U.Print(L.PREVIEW_NA:format(stats.missing)) end
   if stats.skipped > 0 then U.Print(L.IMPORT_SKIPPED:format(stats.skipped)) end
   if stats.macroLimit > 0 then U.Print(L.MACRO_LIMIT:format(stats.macroLimit)) end
+  if (stats.translated or 0) > 0 then U.Print(L.ML_IMPORTED:format(stats.translated)) end
   if label then U.Print(L.PROFILE_LOADED:format(label)) end
   ns.OnStateSaved()
   if ns.Main then ns.Main.Refresh() end
@@ -464,6 +465,78 @@ function DL.CheckPresets()
       U.Print(L.CHECK_MISSING:format(ns.Presets.Name(p), #missing, total, table.concat(missing, ", ")))
     end
   end
+end
+
+---------------------------------------------------------------------------
+-- Macro language repair
+---------------------------------------------------------------------------
+local function langName(code)
+  for _, l in ipairs(ns.LANGUAGES) do if l[1] == code and l[2] then return l[2] end end
+  return code or "?"
+end
+
+function DL.ShowMacroTranslate(plan, auto)
+  local ML = ns.MacroLocale
+  local f = DL.ml
+  if not f then
+    f = dialog("ConfigManagerMacroLocaleFrame", 640, 520, L.ML_TITLE)
+    f.text = W.Text(f, 13, C.text); f.text:SetPoint("TOPLEFT", 26, -62); f.text:SetPoint("RIGHT", -26, 0); f.text:SetWordWrap(true)
+    f.box = W.MultiEdit(f); f.box:SetPoint("TOPLEFT", 26, -136); f.box:SetPoint("BOTTOMRIGHT", -26, 120)
+    f.box.edit:SetScript("OnTextChanged", function(self, user) if user and f.preview then self:SetText(f.preview) end end)
+    f.note = W.Text(f, 11, C.muted); f.note:SetPoint("TOPLEFT", f.box, "BOTTOMLEFT", 0, -10); f.note:SetPoint("RIGHT", -26, 0)
+    f.note:SetWordWrap(true)
+    f.go = W.Button(f, L.ML_TRANSLATE, 150, 34, "primary"); f.go:SetPoint("BOTTOMRIGHT", -26, 20)
+    f.later = W.Button(f, L.ML_LATER, 120, 34); f.later:SetPoint("RIGHT", f.go, "LEFT", -8, 0)
+    f.no = W.Button(f, L.NO, 100, 34); f.no:SetPoint("RIGHT", f.later, "LEFT", -8, 0)
+    f.later:SetScript("OnClick", function() f:Hide() end)
+    f.no:SetScript("OnClick", function() ML.Dismiss(); f:Hide() end)
+    f.go:SetScript("OnClick", function()
+      local p = f.plan
+      if not p then f:Hide(); return end
+      if InCombatLockdown() then U.Print(L.ML_COMBAT); ns.pendingMacroPlan = p; f:Hide(); return end
+      DL.RunMacroTranslate(p)
+      f:Hide()
+    end)
+    DL.ml = f
+  end
+  f.plan = plan
+  local lines = {}
+  for _, m in ipairs(plan.macros) do
+    local parts = {}
+    for _, c in ipairs(m.changes) do parts[#parts + 1] = c[1] .. " → " .. c[2] end
+    lines[#lines + 1] = m.n .. ": " .. table.concat(parts, ", ") .. (m.tooLong and ("  (" .. L.ML_LONG .. ")") or "")
+  end
+  if #plan.macros == 0 then lines[1] = L.ML_NONE end
+  f.preview = table.concat(lines, "\n")
+  f.box.edit:SetText(f.preview)
+  if auto and plan.from then
+    f.text:SetText(L.ML_TEXT_SWITCH:format(langName(plan.from), langName(plan.to), #plan.macros, plan.names))
+  else
+    f.text:SetText(L.ML_TEXT:format(#plan.macros, plan.names))
+  end
+  local note = L.ML_NOTE
+  if #plan.unresolved > 0 then note = note .. "\n" .. L.ML_UNRESOLVED:format(table.concat(plan.unresolved, ", ")) end
+  f.note:SetText(note)
+  f.go:SetEnabled(#plan.macros > 0)
+  f.no:SetShown(auto and true or false)
+  f:SetScale(ns.db.scale or 0.9)
+  f:Show()
+end
+
+function DL.RunMacroTranslate(plan)
+  if ns.db.importBackup ~= false then D.Backup() end
+  local done, long = ns.MacroLocale.Apply(plan)
+  if not done then U.Print(L.ML_COMBAT); ns.pendingMacroPlan = plan; return end
+  ns.pendingMacroPlan = nil
+  U.Print(L.ML_DONE:format(done))
+  if long > 0 then U.Print(L.ML_TOO_LONG:format(long)) end
+  if ns.Main then ns.Main.Refresh() end
+end
+
+-- /cfgm translatemacros
+function DL.TranslateMacros()
+  local plan = ns.MacroLocale.Plan(ns.db.clientLocale)
+  DL.ShowMacroTranslate(plan, false)
 end
 
 ---------------------------------------------------------------------------

@@ -47,6 +47,7 @@ The game settings deliberately stick to options that **exist in every WoW versio
 - **Missing settings are reported.** The import preview shows exactly how many settings or chat colours don't exist in the current version.
 - **Every export remembers where it came from**, e.g. *Classic Era 1.15.9* or *Forever 1.60.1*, and the import preview shows it.
 - **Compact strings.** Exports are compressed (deflate). The format is the same on every client, so a string made on Midnight imports on Classic Era and vice versa. Older uncompressed strings still import.
+- **Macros survive a language switch.** Macros contain spell and item names as plain text, so they stop working when you change the game language. ConfigManager remembers which spell or item each name stands for and, after the switch, offers to translate your macros into the new language, with a preview and a backup first. Imports from a client in another language are translated automatically. Player and NPC names and chat text stay as they are. ConfigManager needs to see your macros once in the old language first.
 - **Unknown macro icons become "?".** An icon that doesn't exist in the target version is replaced with the question mark instead of leaving an empty macro.
 
 ---
@@ -148,6 +149,7 @@ The import preview shows the source character, class, specialization and game ve
 | `/cfgm settings` | Open the settings |
 | `/cfgm spec` | Show the specialization suggestion again |
 | `/cfgm keyboard` | Choose your keyboard layout and size |
+| `/cfgm translatemacros` | Translate macro spell and item names into the current game language |
 | `/cfgm checkpresets` | List preset spells your character doesn't know yet |
 | `/cfgm minimap` | Check why the minimap button isn't visible |
 | `/cfgm errors` | Show the error log (for bug reports) |
@@ -195,6 +197,9 @@ Yes. It has to read your setup on the source side and write it on the target sid
 
 **Why does ConfigManager ask for my keyboard?**
 Your game language says nothing about the keyboard on your desk. ConfigManager needs the physical layout to show the right keys and to keep bindings on the same physical key when you move between layouts.
+
+**I changed my game language and my macros stopped working.**
+That's how the game stores macros: as text. If ConfigManager was installed before the switch, it offers to translate them on the next login (or type `/cfgm translatemacros`). If not, log in once in the old language with ConfigManager, then switch again.
 
 **Do presets overwrite my bars?**
 Presets merge: only the slots and keys they use are changed, and a backup is created first.

@@ -1,5 +1,15 @@
 # ConfigManager
 
+## 0.9.1
+
+### New
+- **Macros keep working after a language switch.** Macros store spell and item names as text, so they break when the game language is changed (a Blizzard limitation). ConfigManager now remembers which spell or item every macro name stands for. After switching the language it offers to translate all macros into the new language (with preview and a backup first). Works for `#showtooltip`, `/cast`, `/use`, `/castsequence`, `/castrandom`, `/userandom`, `/cancelaura`, `/equip` and `/equipslot`, including conditions and spell ranks. Player and NPC names and chat text are left as they are.
+- `/cfgm translatemacros` runs the translation manually.
+- Exported macros carry the spell and item IDs, so importing into a client with another language translates them automatically.
+
+### Note
+- ConfigManager has to see your macros once in the old language (one login with 0.9.1 is enough) before it can translate them.
+
 ## 0.9.0
 
 ### New

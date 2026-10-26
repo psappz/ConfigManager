@@ -217,7 +217,9 @@ function D.ReadMacros()
   for i = 1, maxAcc + maxChar do
     local ok, name, icon, body = pcall(GetMacroInfo, i)
     if ok and name then
-      list[#list + 1] = { n = name, i = icon, b = body or "", c = i > maxAcc or nil }
+      -- r: spell/item IDs of the names in the body, so another client language can translate them
+      list[#list + 1] = { n = name, i = icon, b = body or "", c = i > maxAcc or nil,
+        r = ns.MacroLocale and ns.MacroLocale.RefsFor(body or "") or nil }
     end
   end
   return list
@@ -487,8 +489,13 @@ function D.Apply(data, opts)
       if m.n and m.n ~= "" then
         local idx = GetMacroIndexByName and GetMacroIndexByName(m.n) or 0
         local icon = D.MacroIcon(m.i)
+        local body = m.b or ""
+        if m.r and ns.MacroLocale then
+          local new, changes = ns.MacroLocale.TranslateBody(body, function(n) return m.r[n] end)
+          if #changes > 0 and #new <= 255 then body = new; stats.translated = (stats.translated or 0) + #changes end
+        end
         if idx and idx > 0 then
-          pcall(EditMacro, idx, m.n, icon, m.b or "")
+          pcall(EditMacro, idx, m.n, icon, body)
           stats.macros = stats.macros + 1
         else
           local numAcc, numChar = GetNumMacros()
@@ -496,7 +503,7 @@ function D.Apply(data, opts)
           if (perChar and numChar >= maxChar) or (not perChar and numAcc >= maxAcc) then
             stats.macroLimit = stats.macroLimit + 1
           else
-            local ok = pcall(CreateMacro, m.n, icon, m.b or "", perChar)
+            local ok = pcall(CreateMacro, m.n, icon, body, perChar)
             if ok then stats.macros = stats.macros + 1 else stats.skipped = stats.skipped + 1 end
           end
         end

@@ -5,6 +5,7 @@ ns = ns or {}
 local LOCALES = {}
 
 LOCALES.enUS = {
+  ML_TITLE = "Translate macros", ML_TEXT_SWITCH = "The game language changed from %s to %s. %d macros still use %d spell or item names of the old language and don't work any more. Translate them now? A backup is created first.", ML_TEXT = "%d macros use %d spell or item names of another game language. Translate them? A backup is created first.", ML_NONE = "Nothing to translate: all known names already match the game language.", ML_NOTE = "Only spell and item names are translated. Player and NPC names and chat text stay as they are.", ML_UNRESOLVED = "Not translated yet (item not loaded – try again later): %s", ML_TRANSLATE = "Translate", ML_LATER = "Later", ML_DONE = "%d macros translated.", ML_TOO_LONG = "%d macros skipped: longer than 255 characters after translation.", ML_COMBAT = "Macros are translated after combat.", ML_LONG = "too long", ML_IMPORTED = "%d macro names translated to the game language.",
   PM_BACKUP_INFO = "Backups: before every import and every loaded profile or preset, the current state is saved as a backup. Only the last %d backups are kept; older ones are deleted automatically.",
   IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Class preset: key bindings + action bars", PRESET_CLASS = "Class presets", PRESET_ROLES = "Role presets (key bindings only)", PRESET_CONFIRM = "Load preset “%s”?\n\nKey bindings and action bars are changed (merge). A backup is created first.", CHECK_MISSING = "%s: %d of %d spells unknown to this character: %s", CHECK_OK = "%s: all %d spells known.", CHECK_HEAD = "Presets for %s (Icy Veins / Wowhead, TBC)",
@@ -68,6 +69,7 @@ LOCALES.enUS = {
 }
 
 LOCALES.deDE = {
+  ML_TITLE = "Makros übersetzen", ML_TEXT_SWITCH = "Die Spielsprache wurde von %s auf %s umgestellt. %d Makros verwenden noch %d Zauber- oder Gegenstandsnamen der alten Sprache und funktionieren nicht mehr. Jetzt übersetzen? Vorher wird eine Sicherung angelegt.", ML_TEXT = "%d Makros verwenden %d Zauber- oder Gegenstandsnamen einer anderen Spielsprache. Übersetzen? Vorher wird eine Sicherung angelegt.", ML_NONE = "Nichts zu übersetzen: Alle bekannten Namen passen bereits zur Spielsprache.", ML_NOTE = "Übersetzt werden nur Zauber- und Gegenstandsnamen. Spieler- und NPC-Namen sowie Chat-Text bleiben unverändert.", ML_UNRESOLVED = "Noch nicht übersetzt (Gegenstand nicht geladen – später erneut versuchen): %s", ML_TRANSLATE = "Übersetzen", ML_LATER = "Später", ML_DONE = "%d Makros übersetzt.", ML_TOO_LONG = "%d Makros übersprungen: nach der Übersetzung länger als 255 Zeichen.", ML_COMBAT = "Die Makros werden nach dem Kampf übersetzt.", ML_LONG = "zu lang", ML_IMPORTED = "%d Makronamen in die Spielsprache übersetzt.",
   PM_BACKUP_INFO = "Sicherungen: Vor jedem Import und jedem Laden eines Profils oder einer Vorlage wird der aktuelle Stand gesichert. Es werden nur die letzten %d Sicherungen aufbewahrt, ältere werden automatisch gelöscht.",
   IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Klassen-Vorlage: Tastenbelegung + Leisten", PRESET_CLASS = "Klassen-Vorlagen", PRESET_ROLES = "Rollen-Vorlagen (nur Tastenbelegung)", PRESET_CONFIRM = "Vorlage „%s“ laden?\n\nTastenbelegung und Leisten werden geändert (zusammenführen). Vorher wird eine Sicherung angelegt.", CHECK_MISSING = "%s: %d von %d Zaubern sind diesem Charakter unbekannt: %s", CHECK_OK = "%s: alle %d Zauber bekannt.", CHECK_HEAD = "Vorlagen für %s (Icy Veins / Wowhead, TBC)",
@@ -131,6 +133,7 @@ LOCALES.deDE = {
 }
 
 LOCALES.frFR = {
+  ML_TITLE = "Traduire les macros", ML_TEXT_SWITCH = "La langue du jeu est passée de %s à %s. %d macros utilisent encore %d noms de sorts ou d’objets de l’ancienne langue et ne fonctionnent plus. Les traduire maintenant ? Une sauvegarde est créée avant.", ML_TEXT = "%d macros utilisent %d noms de sorts ou d’objets d’une autre langue. Les traduire ? Une sauvegarde est créée avant.", ML_NONE = "Rien à traduire : tous les noms connus correspondent déjà à la langue du jeu.", ML_NOTE = "Seuls les noms de sorts et d’objets sont traduits. Les noms de joueurs et de PNJ et le texte de discussion restent inchangés.", ML_UNRESOLVED = "Pas encore traduit (objet non chargé – réessayez plus tard) : %s", ML_TRANSLATE = "Traduire", ML_LATER = "Plus tard", ML_DONE = "%d macros traduites.", ML_TOO_LONG = "%d macros ignorées : plus de 255 caractères après traduction.", ML_COMBAT = "Les macros seront traduites après le combat.", ML_LONG = "trop longue", ML_IMPORTED = "%d noms de macros traduits dans la langue du jeu.",
   PM_BACKUP_INFO = "Sauvegardes : avant chaque import et chaque chargement de profil ou de modèle, l’état actuel est sauvegardé. Seules les %d dernières sauvegardes sont conservées ; les plus anciennes sont supprimées automatiquement.",
   IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Modèle de classe : raccourcis + barres", PRESET_CLASS = "Modèles de classe", PRESET_ROLES = "Modèles de rôle (raccourcis seulement)", PRESET_CONFIRM = "Charger le modèle « %s » ?\n\nLes raccourcis et les barres sont modifiés (fusion). Une sauvegarde est créée avant.", CHECK_MISSING = "%s : %d sorts sur %d inconnus de ce personnage : %s", CHECK_OK = "%s : les %d sorts sont connus.", CHECK_HEAD = "Modèles pour %s (Icy Veins / Wowhead, TBC)",
@@ -188,6 +191,7 @@ LOCALES.frFR = {
 }
 
 LOCALES.esES = {
+  ML_TITLE = "Traducir macros", ML_TEXT_SWITCH = "El idioma del juego cambió de %s a %s. %d macros siguen usando %d nombres de hechizos u objetos del idioma anterior y ya no funcionan. ¿Traducirlas ahora? Antes se crea una copia de seguridad.", ML_TEXT = "%d macros usan %d nombres de hechizos u objetos de otro idioma. ¿Traducirlas? Antes se crea una copia de seguridad.", ML_NONE = "Nada que traducir: todos los nombres conocidos ya coinciden con el idioma del juego.", ML_NOTE = "Solo se traducen nombres de hechizos y objetos. Los nombres de jugadores y PNJ y el texto de chat no cambian.", ML_UNRESOLVED = "Aún sin traducir (objeto no cargado; inténtalo más tarde): %s", ML_TRANSLATE = "Traducir", ML_LATER = "Más tarde", ML_DONE = "%d macros traducidas.", ML_TOO_LONG = "%d macros omitidas: más de 255 caracteres tras la traducción.", ML_COMBAT = "Las macros se traducirán después del combate.", ML_LONG = "demasiado larga", ML_IMPORTED = "%d nombres de macros traducidos al idioma del juego.",
   PM_BACKUP_INFO = "Copias de seguridad: antes de cada importación y cada carga de perfil o plantilla se guarda el estado actual. Solo se conservan las últimas %d copias; las anteriores se borran automáticamente.",
   IO_BUTTON = "Importar / Exportar",
   SPEC_PRESET_SUB = "Plantilla de clase: asignaciones + barras", PRESET_CLASS = "Plantillas de clase", PRESET_ROLES = "Plantillas de rol (solo asignaciones)", PRESET_CONFIRM = "¿Cargar la plantilla «%s»?\n\nSe cambian asignaciones y barras (combinar). Antes se crea una copia de seguridad.", CHECK_MISSING = "%s: %d de %d hechizos desconocidos para este personaje: %s", CHECK_OK = "%s: los %d hechizos son conocidos.", CHECK_HEAD = "Plantillas para %s (Icy Veins / Wowhead, TBC)",
@@ -237,6 +241,7 @@ LOCALES.esES = {
 }
 
 LOCALES.itIT = {
+  ML_TITLE = "Traduci macro", ML_TEXT_SWITCH = "La lingua del gioco è passata da %s a %s. %d macro usano ancora %d nomi di incantesimi od oggetti della lingua precedente e non funzionano più. Tradurle ora? Prima viene creato un backup.", ML_TEXT = "%d macro usano %d nomi di incantesimi od oggetti di un’altra lingua. Tradurle? Prima viene creato un backup.", ML_NONE = "Niente da tradurre: tutti i nomi noti corrispondono già alla lingua del gioco.", ML_NOTE = "Vengono tradotti solo i nomi di incantesimi e oggetti. I nomi di giocatori e PNG e il testo della chat restano invariati.", ML_UNRESOLVED = "Non ancora tradotto (oggetto non caricato – riprova più tardi): %s", ML_TRANSLATE = "Traduci", ML_LATER = "Più tardi", ML_DONE = "%d macro tradotte.", ML_TOO_LONG = "%d macro saltate: più di 255 caratteri dopo la traduzione.", ML_COMBAT = "Le macro verranno tradotte dopo il combattimento.", ML_LONG = "troppo lunga", ML_IMPORTED = "%d nomi nelle macro tradotti nella lingua del gioco.",
   PM_BACKUP_INFO = "Backup: prima di ogni importazione e di ogni caricamento di profilo o modello viene salvato lo stato attuale. Vengono conservati solo gli ultimi %d backup; quelli più vecchi vengono eliminati automaticamente.",
   IO_BUTTON = "Importa / Esporta",
   SPEC_PRESET_SUB = "Modello di classe: assegnazioni + barre", PRESET_CLASS = "Modelli di classe", PRESET_ROLES = "Modelli di ruolo (solo assegnazioni)", PRESET_CONFIRM = "Caricare il modello «%s»?\n\nAssegnazioni e barre vengono modificate (unione). Prima viene creato un backup.", CHECK_MISSING = "%s: %d incantesimi su %d sconosciuti a questo personaggio: %s", CHECK_OK = "%s: tutti i %d incantesimi sono noti.", CHECK_HEAD = "Modelli per %s (Icy Veins / Wowhead, TBC)",
@@ -286,6 +291,7 @@ LOCALES.itIT = {
 }
 
 LOCALES.ptBR = {
+  ML_TITLE = "Traduzir macros", ML_TEXT_SWITCH = "O idioma do jogo mudou de %s para %s. %d macros ainda usam %d nomes de feitiços ou itens do idioma anterior e não funcionam mais. Traduzir agora? Antes é criado um backup.", ML_TEXT = "%d macros usam %d nomes de feitiços ou itens de outro idioma. Traduzir? Antes é criado um backup.", ML_NONE = "Nada para traduzir: todos os nomes conhecidos já correspondem ao idioma do jogo.", ML_NOTE = "Só nomes de feitiços e itens são traduzidos. Nomes de jogadores e PNJs e texto de chat não mudam.", ML_UNRESOLVED = "Ainda não traduzido (item não carregado – tente mais tarde): %s", ML_TRANSLATE = "Traduzir", ML_LATER = "Mais tarde", ML_DONE = "%d macros traduzidas.", ML_TOO_LONG = "%d macros ignoradas: mais de 255 caracteres após a tradução.", ML_COMBAT = "As macros serão traduzidas após o combate.", ML_LONG = "longa demais", ML_IMPORTED = "%d nomes de macros traduzidos para o idioma do jogo.",
   PM_BACKUP_INFO = "Backups: antes de cada importação e de cada perfil ou modelo carregado, o estado atual é salvo. Apenas os últimos %d backups são mantidos; os mais antigos são apagados automaticamente.",
   IO_BUTTON = "Importar / Exportar",
   SPEC_PRESET_SUB = "Modelo de classe: atribuições + barras", PRESET_CLASS = "Modelos de classe", PRESET_ROLES = "Modelos de função (só atribuições)", PRESET_CONFIRM = "Carregar o modelo “%s”?\n\nAtribuições e barras serão alteradas (mesclar). Antes é criado um backup.", CHECK_MISSING = "%s: %d de %d feitiços desconhecidos para este personagem: %s", CHECK_OK = "%s: todos os %d feitiços conhecidos.", CHECK_HEAD = "Modelos para %s (Icy Veins / Wowhead, TBC)",
@@ -335,6 +341,7 @@ LOCALES.ptBR = {
 }
 
 LOCALES.ruRU = {
+  ML_TITLE = "Перевод макросов", ML_TEXT_SWITCH = "Язык игры изменён с %s на %s. %d макросов всё ещё используют %d названий заклинаний или предметов на прежнем языке и больше не работают. Перевести сейчас? Сначала создаётся резервная копия.", ML_TEXT = "%d макросов используют %d названий заклинаний или предметов на другом языке. Перевести? Сначала создаётся резервная копия.", ML_NONE = "Нечего переводить: все известные названия уже соответствуют языку игры.", ML_NOTE = "Переводятся только названия заклинаний и предметов. Имена игроков и НИП, а также текст чата не меняются.", ML_UNRESOLVED = "Пока не переведено (предмет не загружен — попробуйте позже): %s", ML_TRANSLATE = "Перевести", ML_LATER = "Позже", ML_DONE = "Переведено макросов: %d.", ML_TOO_LONG = "Пропущено макросов: %d (после перевода длиннее 255 символов).", ML_COMBAT = "Макросы будут переведены после боя.", ML_LONG = "слишком длинный", ML_IMPORTED = "Переведено названий в макросах: %d.",
   PM_BACKUP_INFO = "Резервные копии: перед каждым импортом и каждой загрузкой профиля или шаблона текущее состояние сохраняется. Хранятся только последние %d копий, более старые удаляются автоматически.",
   IO_BUTTON = "Импорт / Экспорт",
   SPEC_PRESET_SUB = "Шаблон класса: назначения + панели", PRESET_CLASS = "Шаблоны классов", PRESET_ROLES = "Шаблоны ролей (только назначения)", PRESET_CONFIRM = "Загрузить шаблон «%s»?\n\nНазначения и панели будут изменены (объединение). Сначала создаётся резервная копия.", CHECK_MISSING = "%s: %d из %d заклинаний неизвестны персонажу: %s", CHECK_OK = "%s: все %d заклинаний известны.", CHECK_HEAD = "Шаблоны для %s (Icy Veins / Wowhead, TBC)",
@@ -384,6 +391,7 @@ LOCALES.ruRU = {
 }
 
 LOCALES.koKR = {
+  ML_TITLE = "매크로 번역", ML_TEXT_SWITCH = "게임 언어가 %s에서 %s(으)로 바뀌었습니다. 매크로 %d개가 이전 언어의 주문·아이템 이름 %d개를 사용하고 있어 더 이상 작동하지 않습니다. 지금 번역할까요? 먼저 백업이 만들어집니다.", ML_TEXT = "매크로 %d개가 다른 언어의 주문·아이템 이름 %d개를 사용합니다. 번역할까요? 먼저 백업이 만들어집니다.", ML_NONE = "번역할 것이 없습니다. 알려진 이름이 모두 게임 언어와 일치합니다.", ML_NOTE = "주문과 아이템 이름만 번역됩니다. 플레이어·NPC 이름과 채팅 문구는 그대로 남습니다.", ML_UNRESOLVED = "아직 번역되지 않음 (아이템 정보 미로드 – 나중에 다시 시도): %s", ML_TRANSLATE = "번역", ML_LATER = "나중에", ML_DONE = "매크로 %d개를 번역했습니다.", ML_TOO_LONG = "매크로 %d개 건너뜀: 번역 후 255자 초과.", ML_COMBAT = "전투가 끝나면 매크로를 번역합니다.", ML_LONG = "너무 김", ML_IMPORTED = "매크로 이름 %d개를 게임 언어로 번역했습니다.",
   PM_BACKUP_INFO = "백업: 가져오기 및 프로필·템플릿을 불러올 때마다 현재 상태가 백업됩니다. 최근 %d개의 백업만 보관되며, 이전 백업은 자동으로 삭제됩니다.",
   IO_BUTTON = "가져오기 / 내보내기",
   SPEC_PRESET_SUB = "직업 템플릿: 단축키 + 행동 단축바", PRESET_CLASS = "직업 템플릿", PRESET_ROLES = "역할 템플릿 (단축키만)", PRESET_CONFIRM = "“%s” 템플릿을 불러올까요?\n\n단축키와 행동 단축바가 변경됩니다(병합). 먼저 백업이 만들어집니다.", CHECK_MISSING = "%s: 주문 %d/%d개를 이 캐릭터가 모릅니다: %s", CHECK_OK = "%s: 주문 %d개 모두 알고 있습니다.", CHECK_HEAD = "%s 템플릿 (Icy Veins / Wowhead, TBC)",
@@ -428,6 +436,7 @@ LOCALES.koKR = {
 }
 
 LOCALES.zhCN = {
+  ML_TITLE = "翻译宏", ML_TEXT_SWITCH = "游戏语言已从%s切换为%s。%d 个宏仍在使用旧语言的 %d 个法术或物品名称，已无法使用。现在翻译吗？会先创建备份。", ML_TEXT = "%d 个宏使用了其他语言的 %d 个法术或物品名称。要翻译吗？会先创建备份。", ML_NONE = "无需翻译：所有已知名称都与游戏语言一致。", ML_NOTE = "只翻译法术和物品名称。玩家、NPC 名称和聊天文字保持不变。", ML_UNRESOLVED = "尚未翻译（物品数据未加载，请稍后再试）：%s", ML_TRANSLATE = "翻译", ML_LATER = "稍后", ML_DONE = "已翻译 %d 个宏。", ML_TOO_LONG = "跳过 %d 个宏：翻译后超过 255 个字符。", ML_COMBAT = "战斗结束后将翻译宏。", ML_LONG = "过长", ML_IMPORTED = "已将 %d 个宏名称翻译为游戏语言。",
   PM_BACKUP_INFO = "备份：每次导入以及加载配置或模板之前，都会备份当前状态。只保留最近 %d 个备份，较早的备份会自动删除。",
   IO_BUTTON = "导入 / 导出",
   SPEC_PRESET_SUB = "职业模板：按键 + 动作条", PRESET_CLASS = "职业模板", PRESET_ROLES = "职责模板（仅按键）", PRESET_CONFIRM = "加载模板“%s”？\n\n将修改按键和动作条（合并）。会先创建备份。", CHECK_MISSING = "%s：%d/%d 个法术此角色尚未学会：%s", CHECK_OK = "%s：%d 个法术全部已学会。", CHECK_HEAD = "%s 的模板（Icy Veins / Wowhead，TBC）",
@@ -471,6 +480,7 @@ LOCALES.zhCN = {
 }
 
 LOCALES.zhTW = {
+  ML_TITLE = "翻譯巨集", ML_TEXT_SWITCH = "遊戲語言已從%s切換為%s。%d 個巨集仍使用舊語言的 %d 個法術或物品名稱，已無法使用。現在翻譯嗎？會先建立備份。", ML_TEXT = "%d 個巨集使用了其他語言的 %d 個法術或物品名稱。要翻譯嗎？會先建立備份。", ML_NONE = "無需翻譯：所有已知名稱都與遊戲語言一致。", ML_NOTE = "只翻譯法術與物品名稱。玩家、NPC 名稱與聊天文字保持不變。", ML_UNRESOLVED = "尚未翻譯（物品資料未載入，請稍後再試）：%s", ML_TRANSLATE = "翻譯", ML_LATER = "稍後", ML_DONE = "已翻譯 %d 個巨集。", ML_TOO_LONG = "略過 %d 個巨集：翻譯後超過 255 個字元。", ML_COMBAT = "戰鬥結束後將翻譯巨集。", ML_LONG = "過長", ML_IMPORTED = "已將 %d 個巨集名稱翻譯為遊戲語言。",
   PM_BACKUP_INFO = "備份：每次匯入以及載入設定檔或範本之前，都會備份目前狀態。只保留最近 %d 個備份，較早的備份會自動刪除。",
   IO_BUTTON = "匯入 / 匯出",
   SPEC_PRESET_SUB = "職業範本：按鍵 + 快捷列", PRESET_CLASS = "職業範本", PRESET_ROLES = "職責範本（僅按鍵）", PRESET_CONFIRM = "載入範本「%s」？\n\n將修改按鍵與快捷列（合併）。會先建立備份。", CHECK_MISSING = "%s：%d/%d 個法術此角色尚未學會：%s", CHECK_OK = "%s：%d 個法術全部已學會。", CHECK_HEAD = "%s 的範本（Icy Veins / Wowhead，TBC）",

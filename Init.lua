@@ -130,6 +130,7 @@ SlashCmdList.CONFIGMANAGER = function(msg)
   elseif msg == "minimap" then ns.Dialogs.MinimapDiagnose(false)
   elseif msg == "minimapfix" then ns.Dialogs.MinimapDiagnose(true)
   elseif msg == "checkpresets" or msg == "presets" then ns.Dialogs.CheckPresets()
+  elseif msg == "translatemacros" or msg == "macros" or msg == "makros" then ns.Dialogs.TranslateMacros()
   else ns.Main.Toggle() end
 end
 
@@ -156,8 +157,10 @@ function handlers.PLAYER_LOGIN(self)
     end
     if ns.db.unseenErrors then U.Print(ns.L.ERRORS_PENDING) end
   end)
+  -- macro names: remember them per language, detect a language switch
+  schedule("macrolocale", 8, function() ns.MacroLocale.OnLogin() end)
   for _, e in ipairs({ "PLAYER_SPECIALIZATION_CHANGED", "ACTIVE_TALENT_GROUP_CHANGED", "CHARACTER_POINTS_CHANGED", "PLAYER_TALENT_UPDATE",
-    "UPDATE_BINDINGS", "ACTIONBAR_SLOT_CHANGED", "PLAYER_REGEN_ENABLED", "PLAYER_LEAVING_WORLD", "PLAYER_ENTERING_WORLD", "PLAYER_LOGOUT" }) do
+    "UPDATE_BINDINGS", "ACTIONBAR_SLOT_CHANGED", "PLAYER_REGEN_ENABLED", "PLAYER_LEAVING_WORLD", "PLAYER_ENTERING_WORLD", "PLAYER_LOGOUT", "UPDATE_MACROS" }) do
     pcall(self.RegisterEvent, self, e)
   end
 end
@@ -184,7 +187,18 @@ function handlers.ADDON_ACTION_FORBIDDEN(addon, fn)
   if addon == ADDON then logError("forbidden", "ADDON_ACTION_FORBIDDEN: " .. tostring(fn)) end
 end
 
-function handlers.PLAYER_REGEN_ENABLED() if ns.queuedSpec then handleSpecChange() end end
+function handlers.PLAYER_REGEN_ENABLED()
+  if ns.queuedSpec then handleSpecChange() end
+  if ns.pendingMacroPlan then local p = ns.pendingMacroPlan; ns.pendingMacroPlan = nil; ns.Dialogs.RunMacroTranslate(p) end
+end
+
+-- new or edited macros: remember their names (only while the language did not change)
+function handlers.UPDATE_MACROS()
+  if ns.leaving then return end
+  schedule("macrorecord", 3, function()
+    if ns.db.clientLocale == ns.MacroLocale.ClientLocale() then ns.MacroLocale.Record() end
+  end)
+end
 
 -- Loading screens and logout: the client clears the bars, nothing may be recorded then.
 function handlers.PLAYER_LEAVING_WORLD() ns.leaving = true; due.cache = nil end
