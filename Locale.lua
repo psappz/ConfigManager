@@ -5,6 +5,7 @@ ns = ns or {}
 local LOCALES = {}
 
 LOCALES.enUS = {
+  IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Class preset: key bindings + action bars", PRESET_CLASS = "Class presets", PRESET_ROLES = "Role presets (key bindings only)", PRESET_CONFIRM = "Load preset “%s”?\n\nKey bindings and action bars are changed (merge). A backup is created first.", CHECK_MISSING = "%s: %d of %d spells unknown to this character: %s", CHECK_OK = "%s: all %d spells known.", CHECK_HEAD = "Presets for %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Save bindings:", IMPORT_SET = "Key bindings are saved: %s", CONFIRM_TO_ACCOUNT = "Switch to account-wide bindings? The character-specific bindings of this character are discarded.",
   LOAD_SECTIONS = "Apply when loading a profile",
@@ -66,6 +67,7 @@ LOCALES.enUS = {
 }
 
 LOCALES.deDE = {
+  IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Klassen-Vorlage: Tastenbelegung + Leisten", PRESET_CLASS = "Klassen-Vorlagen", PRESET_ROLES = "Rollen-Vorlagen (nur Tastenbelegung)", PRESET_CONFIRM = "Vorlage „%s“ laden?\n\nTastenbelegung und Leisten werden geändert (zusammenführen). Vorher wird eine Sicherung angelegt.", CHECK_MISSING = "%s: %d von %d Zaubern sind diesem Charakter unbekannt: %s", CHECK_OK = "%s: alle %d Zauber bekannt.", CHECK_HEAD = "Vorlagen für %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Belegung speichern:", IMPORT_SET = "Tastenbelegung wird gespeichert: %s", CONFIRM_TO_ACCOUNT = "Zu kontoweiter Belegung wechseln? Die charakterspezifische Belegung dieses Charakters wird verworfen.",
   LOAD_SECTIONS = "Beim Laden eines Profils übernehmen",
@@ -127,6 +129,7 @@ LOCALES.deDE = {
 }
 
 LOCALES.frFR = {
+  IO_BUTTON = "Import / Export",
   SPEC_PRESET_SUB = "Modèle de classe : raccourcis + barres", PRESET_CLASS = "Modèles de classe", PRESET_ROLES = "Modèles de rôle (raccourcis seulement)", PRESET_CONFIRM = "Charger le modèle « %s » ?\n\nLes raccourcis et les barres sont modifiés (fusion). Une sauvegarde est créée avant.", CHECK_MISSING = "%s : %d sorts sur %d inconnus de ce personnage : %s", CHECK_OK = "%s : les %d sorts sont connus.", CHECK_HEAD = "Modèles pour %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Enregistrer :", IMPORT_SET = "Raccourcis enregistrés : %s", CONFIRM_TO_ACCOUNT = "Passer aux raccourcis du compte ? Les raccourcis propres à ce personnage seront supprimés.",
   LOAD_SECTIONS = "Appliquer au chargement d'un profil",
@@ -182,6 +185,7 @@ LOCALES.frFR = {
 }
 
 LOCALES.esES = {
+  IO_BUTTON = "Importar / Exportar",
   SPEC_PRESET_SUB = "Plantilla de clase: asignaciones + barras", PRESET_CLASS = "Plantillas de clase", PRESET_ROLES = "Plantillas de rol (solo asignaciones)", PRESET_CONFIRM = "¿Cargar la plantilla «%s»?\n\nSe cambian asignaciones y barras (combinar). Antes se crea una copia de seguridad.", CHECK_MISSING = "%s: %d de %d hechizos desconocidos para este personaje: %s", CHECK_OK = "%s: los %d hechizos son conocidos.", CHECK_HEAD = "Plantillas para %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Guardar asignaciones:", IMPORT_SET = "Las asignaciones se guardan: %s", CONFIRM_TO_ACCOUNT = "¿Cambiar a asignaciones de cuenta? Se descartarán las de este personaje.",
   LOAD_SECTIONS = "Aplicar al cargar un perfil",
@@ -229,6 +233,7 @@ LOCALES.esES = {
 }
 
 LOCALES.itIT = {
+  IO_BUTTON = "Importa / Esporta",
   SPEC_PRESET_SUB = "Modello di classe: assegnazioni + barre", PRESET_CLASS = "Modelli di classe", PRESET_ROLES = "Modelli di ruolo (solo assegnazioni)", PRESET_CONFIRM = "Caricare il modello «%s»?\n\nAssegnazioni e barre vengono modificate (unione). Prima viene creato un backup.", CHECK_MISSING = "%s: %d incantesimi su %d sconosciuti a questo personaggio: %s", CHECK_OK = "%s: tutti i %d incantesimi sono noti.", CHECK_HEAD = "Modelli per %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Salva assegnazioni:", IMPORT_SET = "Le assegnazioni vengono salvate: %s", CONFIRM_TO_ACCOUNT = "Passare alle assegnazioni dell'account? Quelle di questo personaggio verranno scartate.",
   LOAD_SECTIONS = "Applica al caricamento di un profilo",
@@ -276,6 +281,7 @@ LOCALES.itIT = {
 }
 
 LOCALES.ptBR = {
+  IO_BUTTON = "Importar / Exportar",
   SPEC_PRESET_SUB = "Modelo de classe: atribuições + barras", PRESET_CLASS = "Modelos de classe", PRESET_ROLES = "Modelos de função (só atribuições)", PRESET_CONFIRM = "Carregar o modelo “%s”?\n\nAtribuições e barras serão alteradas (mesclar). Antes é criado um backup.", CHECK_MISSING = "%s: %d de %d feitiços desconhecidos para este personagem: %s", CHECK_OK = "%s: todos os %d feitiços conhecidos.", CHECK_HEAD = "Modelos para %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Salvar atribuições:", IMPORT_SET = "As atribuições são salvas: %s", CONFIRM_TO_ACCOUNT = "Mudar para atribuições da conta? As deste personagem serão descartadas.",
   LOAD_SECTIONS = "Aplicar ao carregar um perfil",
@@ -323,6 +329,7 @@ LOCALES.ptBR = {
 }
 
 LOCALES.ruRU = {
+  IO_BUTTON = "Импорт / Экспорт",
   SPEC_PRESET_SUB = "Шаблон класса: назначения + панели", PRESET_CLASS = "Шаблоны классов", PRESET_ROLES = "Шаблоны ролей (только назначения)", PRESET_CONFIRM = "Загрузить шаблон «%s»?\n\nНазначения и панели будут изменены (объединение). Сначала создаётся резервная копия.", CHECK_MISSING = "%s: %d из %d заклинаний неизвестны персонажу: %s", CHECK_OK = "%s: все %d заклинаний известны.", CHECK_HEAD = "Шаблоны для %s (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "Сохранять назначения:", IMPORT_SET = "Назначения сохраняются: %s", CONFIRM_TO_ACCOUNT = "Перейти на назначения учётной записи? Назначения этого персонажа будут удалены.",
   LOAD_SECTIONS = "Применять при загрузке профиля",
@@ -370,6 +377,7 @@ LOCALES.ruRU = {
 }
 
 LOCALES.koKR = {
+  IO_BUTTON = "가져오기 / 내보내기",
   SPEC_PRESET_SUB = "직업 템플릿: 단축키 + 행동 단축바", PRESET_CLASS = "직업 템플릿", PRESET_ROLES = "역할 템플릿 (단축키만)", PRESET_CONFIRM = "“%s” 템플릿을 불러올까요?\n\n단축키와 행동 단축바가 변경됩니다(병합). 먼저 백업이 만들어집니다.", CHECK_MISSING = "%s: 주문 %d/%d개를 이 캐릭터가 모릅니다: %s", CHECK_OK = "%s: 주문 %d개 모두 알고 있습니다.", CHECK_HEAD = "%s 템플릿 (Icy Veins / Wowhead, TBC)",
   SAVE_IN = "단축키 저장:", IMPORT_SET = "단축키 저장 위치: %s", CONFIRM_TO_ACCOUNT = "계정 공통 단축키로 바꿀까요? 이 캐릭터의 단축키는 삭제됩니다.",
   LOAD_SECTIONS = "프로필 불러올 때 적용",
@@ -412,6 +420,7 @@ LOCALES.koKR = {
 }
 
 LOCALES.zhCN = {
+  IO_BUTTON = "导入 / 导出",
   SPEC_PRESET_SUB = "职业模板：按键 + 动作条", PRESET_CLASS = "职业模板", PRESET_ROLES = "职责模板（仅按键）", PRESET_CONFIRM = "加载模板“%s”？\n\n将修改按键和动作条（合并）。会先创建备份。", CHECK_MISSING = "%s：%d/%d 个法术此角色尚未学会：%s", CHECK_OK = "%s：%d 个法术全部已学会。", CHECK_HEAD = "%s 的模板（Icy Veins / Wowhead，TBC）",
   SAVE_IN = "保存按键：", IMPORT_SET = "按键绑定保存为：%s", CONFIRM_TO_ACCOUNT = "切换为账号通用绑定？此角色的专用绑定将被丢弃。",
   LOAD_SECTIONS = "加载配置时应用",
@@ -453,6 +462,7 @@ LOCALES.zhCN = {
 }
 
 LOCALES.zhTW = {
+  IO_BUTTON = "匯入 / 匯出",
   SPEC_PRESET_SUB = "職業範本：按鍵 + 快捷列", PRESET_CLASS = "職業範本", PRESET_ROLES = "職責範本（僅按鍵）", PRESET_CONFIRM = "載入範本「%s」？\n\n將修改按鍵與快捷列（合併）。會先建立備份。", CHECK_MISSING = "%s：%d/%d 個法術此角色尚未學會：%s", CHECK_OK = "%s：%d 個法術全部已學會。", CHECK_HEAD = "%s 的範本（Icy Veins / Wowhead，TBC）",
   SAVE_IN = "儲存按鍵：", IMPORT_SET = "按鍵綁定儲存為：%s", CONFIRM_TO_ACCOUNT = "切換為帳號共用綁定？此角色的專用綁定將被捨棄。",
   LOAD_SECTIONS = "載入設定檔時套用",

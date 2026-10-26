@@ -75,11 +75,12 @@ function M.Create()
   gi:SetTexture("Interface\\Icons\\INV_Misc_Gear_01"); gi:SetTexCoord(0.08, 0.92, 0.08, 0.92)
   gear.tip = L.SETTINGS
   gear:SetScript("OnClick", function() ns.Dialogs.ToggleSettings() end)
-  local exp = W.Button(hdr, L.EXPORT, 120, 32, "primary"); exp:SetPoint("RIGHT", gear, "LEFT", -8, 0)
-  exp:SetScript("OnClick", function() ns.Dialogs.OpenIO("export") end)
-  local imp = W.Button(hdr, L.IMPORT, 112, 32); imp:SetPoint("RIGHT", exp, "LEFT", -6, 0)
-  imp:SetScript("OnClick", function() ns.Dialogs.OpenIO("import") end)
-  local pre = W.Button(hdr, L.PRESETS, 100, 32); pre:SetPoint("RIGHT", imp, "LEFT", -6, 0)
+  -- one button: export and import share one dialog
+  local io = W.Button(hdr, L.IO_BUTTON, 180, 32, "primary"); io:SetPoint("RIGHT", gear, "LEFT", -8, 0)
+  io:SetWidth(math.max(180, (io.text:GetStringWidth() or 0) + 36))
+  io:SetScript("OnClick", function() ns.Dialogs.OpenIO() end)
+  M.ioButton = io
+  local pre = W.Button(hdr, L.PRESETS, 100, 32); pre:SetPoint("RIGHT", io, "LEFT", -6, 0)
   pre:SetScript("OnClick", function(self) ns.Dialogs.PresetMenu(self) end)
   local prof = W.Button(hdr, "", 230, 38); prof:SetPoint("RIGHT", pre, "LEFT", -10, 0)
   prof.text:Hide()
