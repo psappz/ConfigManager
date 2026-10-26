@@ -20,7 +20,7 @@ end
 function DL.OpenProfileManager()
   local f = DL.pm
   if not f then
-    f = DL.Dialog("ConfigManagerProfileFrame", 820, 730, L.PM_TITLE)
+    f = DL.Dialog("ConfigManagerProfileFrame", 820, 780, L.PM_TITLE)
     DL.pm = f
     f.selected, f.offset = {}, 0
     local sortLab = W.Text(f, 11, C.muted); sortLab:SetPoint("TOPLEFT", 26, -66); sortLab:SetText(L.SORT_BY:upper())
@@ -75,6 +75,10 @@ function DL.OpenProfileManager()
       end)
       f.rows[i] = r
     end
+    -- backup retention, so nobody relies on older backups
+    f.backupInfo = W.Text(f, 11, C.muted); f.backupInfo:SetPoint("TOPLEFT", box, "BOTTOMLEFT", 2, -12)
+    f.backupInfo:SetPoint("RIGHT", box, "RIGHT", -2, 0); f.backupInfo:SetWordWrap(true)
+    f.backupInfo:SetText(L.PM_BACKUP_INFO:format(D.MAX_BACKUPS))
     f.count = W.Text(f, 12, C.muted); f.count:SetPoint("BOTTOMLEFT", 28, 30)
     local close = W.Button(f, L.CLOSE, 110, 34); close:SetPoint("BOTTOMRIGHT", -26, 20)
     close:SetScript("OnClick", function() f:Hide() end)

@@ -719,13 +719,15 @@ function D.FindClassProfile(class, exceptKey)
   return best
 end
 
+D.MAX_BACKUPS = 5
+
 function D.Backup()
   local key = "backup" .. (ns.db.nextId or 1)
   ns.db.nextId = (ns.db.nextId or 1) + 1
-  -- keep the five most recent backups
+  -- keep the most recent backups (the new one included)
   local backups = {}
   for k, p in pairs(ns.db.profiles) do if k:find("^backup") then backups[#backups + 1] = { k = k, s = p.saved or "" } end end
   table.sort(backups, function(a, b) return a.s > b.s end)
-  for i = 5, #backups do ns.db.profiles[backups[i].k] = nil end
+  for i = D.MAX_BACKUPS, #backups do ns.db.profiles[backups[i].k] = nil end
   return D.SaveProfile(key, ns.L.BACKUP_NAME:format(U.Timestamp())), key
 end
