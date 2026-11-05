@@ -3,7 +3,7 @@
 ## 0.9.2
 
 ### Improved
-- **Less memory churn.** The automatic backup of the current spec (bindings, action bars, macros, settings, chat) was rebuilt after every binding or action bar event. It is now rebuilt only when bindings, action bars or macros have really changed. In a test the addon dropped from about 27 MB (mostly uncollected garbage) to a steady 1–2 MB, which means less work for the garbage collector and fewer micro stutters.
+- **Less memory churn.** The automatic backup of the current spec (bindings, action bars, macros, settings, chat) was rebuilt after every binding or action bar event. It is now rebuilt only when bindings, action bars or macros have really changed. Measured before the change: about 27 MB reported, of which only 1.3 MB remained after a garbage collection. Less garbage means less work for the garbage collector and fewer micro stutters.
 
 ## 0.9.1
 
