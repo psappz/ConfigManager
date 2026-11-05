@@ -56,11 +56,16 @@ ns.Schedule = schedule
 -- Last stable state of the current spec; written to the old spec's profile on a
 -- spec switch, because the client swaps the action bars before the switch event.
 ---------------------------------------------------------------------------
-function ns.RefreshCache()
+function ns.RefreshCache(force)
   if ns.leaving or InCombatLockdown() then return end
   local info = D.PlayerSpec()
   local key = D.SpecKey(info)
   if not key then return end
+  force = force == true or ns.cacheForce
+  -- skip the full snapshot when bindings, bars and macros are unchanged (avoids memory churn)
+  local fp = D.Fingerprint()
+  if not force and ns.cache and ns.cache.specKey == key and ns.cacheFp == fp then return end
+  ns.cacheForce, ns.cacheFp = nil, fp
   ns.cache = { specKey = key, name = D.SpecLabel(info), data = D.Snapshot() }
   if ns.db.autosave and ns.db.profiles[key] then
     D.SaveProfile(key, ns.cache.name, ns.cache.data)
@@ -68,6 +73,7 @@ function ns.RefreshCache()
 end
 
 function ns.OnStateSaved()
+  ns.cacheForce = true
   schedule("cache", 0.5, ns.RefreshCache)
 end
 
@@ -149,7 +155,7 @@ function handlers.PLAYER_LOGIN(self)
   ns.Dialogs.HookBlizzard()
   ns.lastSpec = D.SpecKey()
   schedule("login", 5, function()
-    ns.RefreshCache()
+    ns.RefreshCache(true)
     if D.KeyboardChosen() then
       checkPrompt(D.PlayerSpec())
     else

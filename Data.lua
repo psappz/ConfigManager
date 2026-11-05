@@ -210,6 +210,32 @@ local function macroLimits()
   return MAX_ACCOUNT_MACROS or 120, MAX_CHARACTER_MACROS or 18
 end
 
+-- Cheap fingerprint of bindings, action bars and macros. Building a full snapshot creates a lot of
+-- short-lived tables (bindings, 180 slots, macro parsing, settings, chat); the cache is only rebuilt
+-- when this fingerprint changes.
+function D.Fingerprint()
+  local t, n = {}, 0
+  local nb = GetNumBindings and GetNumBindings() or 0
+  for i = 1, nb do
+    local ok, cmd, _, k1, k2 = pcall(GetBinding, i)
+    if ok and k1 then n = n + 1; t[n] = tostring(cmd) .. "=" .. tostring(k1) .. "," .. tostring(k2) end
+  end
+  if GetActionInfo then
+    for slot = 1, 180 do
+      local ok, atype, id, sub = pcall(GetActionInfo, slot)
+      if ok and atype then n = n + 1; t[n] = slot .. atype .. tostring(id) .. tostring(sub) end
+    end
+  end
+  if GetMacroInfo then
+    local maxAcc, maxChar = macroLimits()
+    for i = 1, maxAcc + maxChar do
+      local ok, name, icon, body = pcall(GetMacroInfo, i)
+      if ok and name then n = n + 1; t[n] = i .. name .. tostring(icon) .. (body or "") end
+    end
+  end
+  return table.concat(t, "\n")
+end
+
 function D.ReadMacros()
   local list = {}
   if not GetMacroInfo then return list end
