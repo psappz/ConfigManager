@@ -108,6 +108,9 @@ function M.Create()
   local discard = W.Button(foot, L.DISCARD, 110, 32); discard:SetPoint("RIGHT", apply, "LEFT", -8, 0)
   discard:SetScript("OnClick", function() D.Discard(); M.Refresh() end)
   M.applyBtn, M.discardBtn = apply, discard
+  local getMeta = (C_AddOns and C_AddOns.GetAddOnMetadata) or GetAddOnMetadata
+  M.versionText = W.Text(foot, 10, C.muted); M.versionText:SetPoint("RIGHT", discard, "LEFT", -16, 0)
+  M.versionText:SetText("v" .. (getMeta and getMeta("ConfigManager", "Version") or "?"))
 
   M.BuildKeyboardView()
   M.BuildDetail()

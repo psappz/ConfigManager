@@ -1,5 +1,10 @@
 # ConfigManager
 
+## 1.0.4
+
+### Look
+- The version number is shown at the bottom of the main window.
+
 ## 1.0.3
 
 ### New
