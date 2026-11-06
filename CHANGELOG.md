@@ -1,5 +1,10 @@
 # ConfigManager
 
+## 1.0.3
+
+### New
+- **Manager family bar** in the settings is clickable: opens the other installed Manager addons.
+
 ## 1.0.2
 
 ### New
