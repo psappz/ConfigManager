@@ -1,5 +1,14 @@
 # ConfigManager
 
+## 1.0.2
+
+### New
+- **Edit Mode layout** as a new section of export, import and profiles. ConfigManager uses Blizzard's own layout string (the same as Edit Mode's Import/Export) and imports it as a new account layout – it never stores frame positions itself and leaves the data of Edit Mode extensions alone. Not applied when a profile is loaded on a spec switch (off by default there). Clients without Edit Mode skip it.
+- Manager family line in the settings.
+
+### Look
+- Buttons grow with their (translated) text; own scrollbar in the import/export text field instead of Blizzard's.
+
 ## 0.9.2
 
 ### Improved

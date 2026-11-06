@@ -3,7 +3,7 @@
 ## Notes: Copy key bindings, action bars, macros, game and chat settings between all WoW versions.
 ## Notes-deDE: Tastenbelegung, Leisten, Makros, Spiel- und Chat-Einstellungen zwischen allen WoW-Versionen kopieren.
 ## Author: psappz
-## Version: 0.9.2
+## Version: 1.0.2
 ## X-Curse-Project-ID: 1760102
 ## AddonCompartmentFunc: ConfigManager_OnAddonCompartmentClick
 ## AddonCompartmentFuncOnEnter: ConfigManager_OnAddonCompartmentEnter
@@ -25,6 +25,8 @@ Data.lua
 MacroLocale.lua
 Settings.lua
 Chat.lua
+EditMode.lua
+Family.lua
 Presets.lua
 UI_Widgets.lua
 UI_Main.lua

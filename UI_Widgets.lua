@@ -50,6 +50,13 @@ function W.Button(parent, text, w, h, style)
   b:SetSize(w or 110, h or 32)
   b.text = W.Text(b, 12, nil, "CENTER")
   b.text:SetPoint("CENTER")
+  -- translated labels differ in length: the button grows so the text never touches the border
+  local setText = b.text.SetText
+  function b.text:SetText(t)
+    setText(self, t)
+    local need = math.ceil((self:GetStringWidth() or 0) + 24)
+    if need > b:GetWidth() then b:SetWidth(need) end
+  end
   b.text:SetText(text or "")
   b.style = style or "default"
   function b:Refresh()
@@ -143,8 +150,22 @@ end
 -- Multi-line edit box in a scroll frame.
 function W.MultiEdit(parent)
   local holder = W.Frame(parent, { 0.059, 0.055, 0.071 }, C.border)
-  local sf = CreateFrame("ScrollFrame", nil, holder, "UIPanelScrollFrameTemplate")
-  sf:SetPoint("TOPLEFT", 8, -8); sf:SetPoint("BOTTOMRIGHT", -28, 8)
+  -- plain scroll frame with ConfigManager's own scrollbar (no Blizzard scrollbar template)
+  local sf = CreateFrame("ScrollFrame", nil, holder)
+  sf:SetPoint("TOPLEFT", 8, -8); sf:SetPoint("BOTTOMRIGHT", -22, 8)
+  local bar = W.ScrollBar(holder, function(off) sf:SetVerticalScroll(off) end)
+  bar:SetPoint("TOPRIGHT", -6, -8); bar:SetPoint("BOTTOMRIGHT", -6, 8)
+  local function sync()
+    local h = sf:GetHeight() or 0
+    bar:SetRange(math.floor((sf:GetVerticalScrollRange() or 0) + h), math.floor(h), math.floor(sf:GetVerticalScroll() or 0))
+  end
+  sf:SetScript("OnScrollRangeChanged", sync)
+  sf:SetScript("OnVerticalScroll", sync)
+  sf:EnableMouseWheel(true)
+  sf:SetScript("OnMouseWheel", function(self, delta)
+    local max = self:GetVerticalScrollRange() or 0
+    self:SetVerticalScroll(math.max(0, math.min(max, (self:GetVerticalScroll() or 0) - delta * 36)))
+  end)
   local e = CreateFrame("EditBox", nil, sf)
   e:SetMultiLine(true); e:SetAutoFocus(false); e:SetMaxLetters(0)
   e:SetFont("Fonts\\ARIALN.TTF", 12, ""); e:SetTextColor(C.text[1], C.text[2], C.text[3])
@@ -152,6 +173,12 @@ function W.MultiEdit(parent)
   sf:SetScrollChild(e)
   sf:SetScript("OnSizeChanged", function(self, w) e:SetWidth(math.max(50, w)) end)
   e:SetScript("OnEscapePressed", e.ClearFocus)
+  -- keep the cursor visible while typing
+  e:SetScript("OnCursorChanged", function(_, _, y, _, h)
+    local top, view, cur = -y, sf:GetHeight() or 0, sf:GetVerticalScroll() or 0
+    if top < cur then sf:SetVerticalScroll(top)
+    elseif top + h > cur + view then sf:SetVerticalScroll(math.min(sf:GetVerticalScrollRange() or 0, top + h - view)) end
+  end)
   holder:EnableMouse(true)
   holder:SetScript("OnMouseDown", function() e:SetFocus() end)
   holder.edit, holder.scroll = e, sf

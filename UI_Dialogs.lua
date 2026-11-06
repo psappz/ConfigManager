@@ -52,7 +52,7 @@ DL.ApplyData = applyData
 -- Import / Export
 ---------------------------------------------------------------------------
 local SECTION_LABELS = { binds = "INC_BINDS", bars = "INC_BARS", macros = "INC_MACROS", controls = "INC_CONTROLS",
-  barset = "INC_BARSET", interface = "INC_INTERFACE", chat = "INC_CHAT" }
+  barset = "INC_BARSET", interface = "INC_INTERFACE", chat = "INC_CHAT", editmode = "INC_EDITMODE" }
 
 -- 2-column grid of section checkboxes bound to db[key][section]
 local function sectionGrid(parent, anchor, key, onChange, cols, colW)
@@ -279,6 +279,8 @@ function DL.ToggleSettings()
     local kbb = W.Button(f, L.KB_OPEN, 220, 30); kbb:SetPoint("TOPLEFT", col2, -290)
     kbb:SetScript("OnClick", function() DL.ShowKeyboardPrompt() end)
     local note = W.Text(f, 11, C.muted); note:SetPoint("BOTTOMLEFT", 26, 24); note:SetText(L.RELOAD_LANG)
+    f.family = W.Text(f, 12, C.text); f.family:SetPoint("BOTTOMLEFT", 26, 70)
+    local url = W.Text(f, 11, C.muted); url:SetPoint("BOTTOMLEFT", 26, 52); url:SetText(ns.Family.URL)
     local done = W.Button(f, "OK", 110, 34, "primary"); done:SetPoint("BOTTOMRIGHT", -24, 18)
     done:SetScript("OnClick", function() f:Hide() end)
   end
@@ -286,6 +288,7 @@ function DL.ToggleSettings()
   f:SetScale(ns.db.scale or 0.9)
   for _, k in ipairs({ "lang", "layout", "size", "mouse", "remap", "scale" }) do f[k]:Refresh() end
   f.mm:Refresh(); f.c2:Refresh(); f.c3:Refresh(); f.frow:Refresh()
+  f.family:SetText(ns.Family.Line(L.FAMILY))
   f:Show()
 end
 

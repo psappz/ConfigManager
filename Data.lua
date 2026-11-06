@@ -22,6 +22,14 @@ function D.InitDB()
   for k, v in pairs(DEFAULTS) do
     if ConfigManagerDB[k] == nil then ConfigManagerDB[k] = U.CopyTable(v) end
   end
+  -- 1.0.2: Edit Mode layouts are exported/imported by default, but never applied on a profile load
+  -- (spec switches would change the layout every time)
+  for _, k in ipairs({ "sections", "importSections" }) do
+    if type(ConfigManagerDB[k]) == "table" and ConfigManagerDB[k].editmode == nil then ConfigManagerDB[k].editmode = true end
+  end
+  if type(ConfigManagerDB.profileSections) == "table" and ConfigManagerDB.profileSections.editmode == nil then
+    ConfigManagerDB.profileSections.editmode = false
+  end
   ConfigManagerCharDB = ConfigManagerCharDB or {}
   ConfigManagerCharDB.asked = ConfigManagerCharDB.asked or {}
   ns.db, ns.cdb = ConfigManagerDB, ConfigManagerCharDB
@@ -330,7 +338,7 @@ end
 ---------------------------------------------------------------------------
 -- Snapshot / export data
 ---------------------------------------------------------------------------
-D.SECTIONS = { "binds", "bars", "macros", "controls", "barset", "interface", "chat" }
+D.SECTIONS = { "binds", "bars", "macros", "controls", "barset", "interface", "chat", "editmode" }
 
 function D.AllSections()
   local t = {}
@@ -405,6 +413,7 @@ function D.Snapshot(opts)
   if sec.macros then data.macros = D.ReadMacros() end
   data.settings = ns.Settings.Read(sec)
   if sec.chat then data.chat = ns.Chat.Read() end
+  if sec.editmode and ns.EditMode then data.editmode = ns.EditMode.Read() end
   return data
 end
 
@@ -588,6 +597,10 @@ function D.Apply(data, opts)
   if sec.chat and data.chat then
     local a2, m2 = ns.Chat.Apply(data.chat)
     stats.chat, stats.missing = a2, stats.missing + m2
+  end
+  if sec.editmode and data.editmode and ns.EditMode then
+    local a3, m3 = ns.EditMode.Apply(data.editmode)
+    stats.editmode, stats.missing = a3, stats.missing + m3
   end
   ns.pending, ns.changed = 0, {}
   return stats
