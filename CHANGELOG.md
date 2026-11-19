@@ -1,5 +1,9 @@
 # ConfigManager
 
+## 1.0.5
+
+- In-game addon list: the addon now has a category, so it is grouped with similar addons (translated into the six interface languages).
+
 ## 1.0.4
 
 ### Look
